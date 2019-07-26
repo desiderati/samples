@@ -1,0 +1,19 @@
+<html ng-app="QRCodeApp">
+    <head>
+        <title>QR Code Generator</title>
+        <link rel="stylesheet" href="css/lib/bootstrap.css"/>
+        <link rel="shortcut icon" href="favicon.ico" />
+    </head>
+    <body ng-controller="QRCodeController as ctrl">
+        <script src="js/lib/jquery.js"></script>
+        <script src="js/lib/bootstrap.js"></script>
+        <script src="js/lib/angular.js"></script>
+        <script src="js/app.js"></script>
+        <script src="js/controller.js"></script>
+
+        <div class="jumbotron text-center">
+            <button type="button" ng-click="ctrl.generate()">Generate QR Code</button>
+            <div id="qrCodeImage"></div>
+        </div>
+    </body>
+</html>

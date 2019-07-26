@@ -1,0 +1,48 @@
+<!--
+  ~ Copyright (c) 2019 - Felipe Desiderati ALL RIGHTS RESERVED.
+  ~
+  ~ This software is protected by international copyright laws and cannot be
+  ~ used, copied, stored or distributed without prior authorization.
+  -->
+<div class="card card-body bg-light lead">Track Listing</div>
+
+<form class="form-horizontal my-3" name="trackListingForm">
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label text-right" for="filterByTrackname">Filter by Name</label>
+    <div class="col-sm-7">
+      <input class="form-control" type="text" id="filterByTrackname" name="filterByTrackname"
+             title="Filter by Trackname" [formControl]="filterByTracknameInput"/>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-sm-7 offset-sm-2">
+      <button class="btn btn-primary" type="button" (click)="filter()">Filter</button>
+      <span>Leave empty to retrieve all!</span>
+    </div>
+  </div>
+</form>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>ID.</th>
+    <th>Track Name</th>
+    <th>Author</th>
+    <th>Duration</th>
+    <th width="20%"></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let track of tracks">
+    <td>{{track.id}}</td>
+    <td>{{track.trackname}}</td>
+    <td>{{track.author}}</td>
+    <td>{{track.duration}}</td>
+    <td>
+      <button type="button" (click)="update(track.id)">Update</button>
+      <button type="button" (click)="remove(track.id)">Remove</button>
+    </td>
+  </tr>
+  </tbody>
+</table>

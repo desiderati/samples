@@ -1,0 +1,69 @@
+<!--
+  ~ Copyright (c) 2019 - Felipe Desiderati ALL RIGHTS RESERVED.
+  ~
+  ~ This software is protected by international copyright laws and cannot be
+  ~ used, copied, stored or distributed without prior authorization.
+  -->
+<div class="card card-body bg-light lead">Track Registration Form</div>
+
+<form class="form-horizontal my-3" (ngSubmit)="submit()" #trackRegistrationForm="ngForm">
+  <input type="hidden" [(ngModel)]="track.id" id="id" name="id"/>
+
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label text-right" for="trackname">Name</label>
+    <div class="col-sm-7">
+      <input class="form-control" type="text" id="trackname" name="trackname" title="Trackname" required
+             [(ngModel)]="track.trackname" #trackname="ngModel"/>
+      <!--(Valid: {{trackname.valid}}, Invalid: {{trackname.invalid}}, Pristine: {{trackname.pristine}}, Dirty: {{trackname.dirty}}, Touched: {{trackname.touched}})-->
+      <div class="alert alert-danger"
+           *ngIf="trackname.invalid && (trackname.dirty || trackname.touched) && trackname.errors.required">
+        This is a required field
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label text-right" for="author">Author</label>
+    <div class="col-sm-7">
+      <input class="form-control" type="text" id="author" name="author" title="Author" required minlength="3"
+             [(ngModel)]="track.author" #author="ngModel"/>
+      <div class="alert alert-danger"
+           *ngIf="author.invalid && (author.dirty || author.touched) && author.errors.required">
+        This is a required field
+      </div>
+      <div class="alert alert-danger"
+           *ngIf="author.invalid && (author.dirty || author.touched) && author.errors.minlength">
+        Minimum length required is 3
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label text-right" for="duration">Duration</label>
+    <div class="col-sm-3">
+      <input class="form-control" type="number" id="duration" name="duration" title="Duration" placeholder="In Seconds"
+             required min="1" [(ngModel)]="track.duration" #duration="ngModel"/>
+      <div class="alert alert-danger"
+           *ngIf="duration.invalid && (duration.dirty || duration.touched) && duration.errors.required">
+        This is a required field
+      </div>
+    </div>
+  </div>
+
+  <!-- Show the messages in #errors -->
+  <div id="errorsContainer" class="form-group row">
+    <div class="col-sm-7 offset-sm-2">
+      <ul id="errors"></ul>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-sm-7 offset-sm-2">
+      <input class="btn btn-primary" type="submit" value="{{!track.id ? 'Add' : 'Update'}}"
+             [disabled]="trackRegistrationForm.form.invalid">
+      <button class="btn" type="button" (click)="reset()"
+              [disabled]="trackRegistrationForm.form.pristine">Reset
+      </button>
+    </div>
+  </div>
+</form>

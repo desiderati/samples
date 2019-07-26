@@ -1,0 +1,24 @@
+/*
+ * Copyright (c) 2019 - Felipe Desiderati ALL RIGHTS RESERVED.
+ *
+ * This software is protected by international copyright laws and cannot be
+ * used, copied, stored or distributed without prior authorization.
+ */
+
+/* Simple message styles customization */
+#errors {
+  border-left: 5px solid #a94442;
+  padding-left: 15px;
+}
+
+#errors li {
+  list-style-type: none;
+}
+
+#errors li:before {
+  content: '\b7\a0';
+}
+
+#errorsContainer {
+  display: none;
+}

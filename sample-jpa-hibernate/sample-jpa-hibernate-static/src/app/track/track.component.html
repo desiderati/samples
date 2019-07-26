@@ -1,0 +1,12 @@
+<!--
+  ~ Copyright (c) 2019 - Felipe Desiderati ALL RIGHTS RESERVED.
+  ~
+  ~ This software is protected by international copyright laws and cannot be
+  ~ used, copied, stored or distributed without prior authorization.
+  -->
+<app-track-registration #trackRegistration
+                        (trackCreatedUpdatedDeletedEvent)="trackListing.fetchAllTracks()"></app-track-registration>
+
+<app-track-listing #trackListing
+                   (trackUpdateEvent)="trackRegistration.configureTrack($event)"
+                   (trackRemoveEvent)="trackRegistration.deleteTrack($event)"></app-track-listing>

@@ -1,0 +1,103 @@
+<html ng-app="TrackApp">
+    <head>
+        <title>sample-jpa-hibernate</title>
+        <link rel="stylesheet" href="css/lib/bootstrap.css"/>
+        <link rel="stylesheet" href="css/errors.css"/>
+        <link rel="shortcut icon" href="favicon.ico" />
+    </head>
+    <body ng-controller="TrackController as ctrl">
+        <script src="js/lib/jquery.js"></script>
+        <script src="js/lib/bootstrap.js"></script>
+        <script src="js/lib/angular.js"></script>
+        <script src="js/app.js"></script>
+        <script src="js/service.js"></script>
+        <script src="js/controller.js"></script>
+
+        <div class="well lead">Track Registration Form</div>
+
+        <form class="form-horizontal" ng-submit="ctrl.submit()" name="trackForm">
+            <input type="hidden" ng-model="ctrl.track.id" />
+
+            <div class="form-group row">
+                <label class="control-label col-sm-2">Name</label>
+                <div class="col-sm-5">
+                    <input class="form-control" type="text" ng-model="ctrl.track.trackname" name="trackname" title="trackname" required/>
+                    <span ng-show="trackForm.trackname.$dirty && trackForm.trackname.$error.required">This is a required field</span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="control-label col-sm-2">Author</label>
+                <div class="col-sm-5">
+                    <input class="form-control" type="text" ng-model="ctrl.track.author" name="author" title="author" required ng-minlength="3"/>
+                    <span ng-show="trackForm.author.$dirty && trackForm.author.$error.required">This is a required field</span>
+                    <span ng-show="trackForm.author.$dirty && trackForm.author.$error.minlength">Minimum length required is 3</span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="control-label col-sm-2">Duration</label>
+                <div class="col-sm-2">
+                    <input class="form-control" type="number" ng-model="ctrl.track.duration" name="duration" placeholder="In Seconds" required min="1"/>
+                    <span ng-show="trackForm.duration.$dirty && trackForm.duration.$error.required">This is a required field</span>
+                </div>
+            </div>
+
+            <!-- Show the messages in #errors -->
+            <div id="errorsContainer" class="form-group row">
+                <div class="col-sm-offset-2 col-sm-5">
+                    <ul id="errors"></ul>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-offset-2 col-sm-5">
+                    <input class="btn btn-primary" type="submit" value="{{!ctrl.track.id ? 'Add' : 'Update'}}" ng-disabled="trackForm.$invalid">
+                    <button class="btn" type="button" ng-click="ctrl.reset()" ng-disabled="trackForm.$pristine">Reset</button>
+                </div>
+            </div>
+        </form>
+
+        <div class="well lead">Track Listing</div>
+
+        <form class="form-horizontal" name="filterForm">
+            <div class="form-group row">
+                <label class="control-label col-sm-2">Filter by Name</label>
+                <div class="col-sm-5">
+                    <input class="form-control" type="text" ng-model="ctrl.filterByTrackname" name="filterByTrackname" title="filterByTrackname"/>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-offset-2 col-sm-5">
+                    <button class="btn btn-primary" type="button" ng-click="ctrl.filter()">Filter</button>
+                    <span>Leave empty to retrieve all!</span>
+                </div>
+            </div>
+        </form>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID.</th>
+                    <th>Track Name</th>
+                    <th>Author</th>
+                    <th>Duration</th>
+                    <th width="20%"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="track in ctrl.tracks">
+                    <td><span ng-bind="track.id"></span></td>
+                    <td><span ng-bind="track.trackname"></span></td>
+                    <td><span ng-bind="track.author"></span></td>
+                    <td><span ng-bind="track.duration"></span></td>
+                    <td>
+                        <button type="button" ng-click="ctrl.edit(track.id)">Edit</button>
+                        <button type="button" ng-click="ctrl.remove(track.id)">Remove</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>
