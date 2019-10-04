@@ -12,7 +12,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 @CustomSpringBootApplication(componentScan = {"br.tech.desiderati.sample", "br.tech.desiderati.common"})
 public class WebApplication {
 
-    private static final String EXTERNAL_PROPERTIES = "/opt/app/config/sample/atmosphere-server.properties";
+    private static final String EXTERNAL_PROPERTIES = "/opt/desiderati-java-app/config/samples/atmosphere-server.properties";
 
     public static void main(String[] args) {
         new SpringApplicationBuilder(WebApplication.class)

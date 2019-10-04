@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
     <parent>
@@ -9,7 +10,7 @@
         <relativePath>../../commons/common-starter</relativePath>
     </parent>
     <groupId>br.tech.desiderati.sample</groupId>
-    <artifactId>sample-mongodb</artifactId>
+    <artifactId>sample-storage</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
@@ -21,20 +22,15 @@
         </dependency>
         <dependency>
             <groupId>br.tech.desiderati.common</groupId>
-            <artifactId>common-data-mongodb</artifactId>
+            <artifactId>common-test</artifactId>
             <version>${project.parent.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>br.tech.desiderati.common</groupId>
-            <artifactId>common-scanner</artifactId>
-            <version>${project.parent.version}</version>
+            <scope>test</scope>
         </dependency>
 
-        <!-- Fake MongoDB -->
+        <!-- PostgreSQL -->
         <dependency>
-            <groupId>de.flapdoodle.embed</groupId>
-            <artifactId>de.flapdoodle.embed.mongo</artifactId>
-            <scope>provided</scope>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
         </dependency>
     </dependencies>
 
