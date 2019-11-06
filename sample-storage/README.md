@@ -35,14 +35,14 @@ $ java -Xms256m -Xmx512m -jar target/sample-storage-1.0.0-SNAPSHOT-exec.war
 ```
 $ id -u ${USER}
 
-$ docker run -p 9090:9090 -e LOCAL_USER_ID={id} desiderati/sample-storage:latest 
+$ docker run -it -p 9090:9090 --rm -e LOCAL_USER_ID={id} desiderati/sample-storage:latest 
 ```
 
 ### Example
 ```
 $ id -u ${USER}
 1000
-$ docker run -p 9090:9090 -e LOCAL_USER_ID=1000 desiderati/sample-storage:latest 
+$ docker run -it -p 9090:9090 --rm -e LOCAL_USER_ID=1000 desiderati/sample-storage:latest 
 ```
 
 ## C) Building the project 
