@@ -24,3 +24,21 @@
 button {
   margin-right: 3px;
 }
+
+/* Simple message styles customization */
+#errors {
+    border-left: 5px solid #a94442;
+    padding-left: 15px;
+}
+
+#errors li {
+    list-style-type: none;
+}
+
+#errors li:before {
+    content: '\b7\a0';
+}
+
+#errorsContainer {
+    display: none;
+}
