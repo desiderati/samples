@@ -21,7 +21,7 @@ package br.tech.desiderati.sample.jpa_hibernate;
 import br.tech.desiderati.common.configuration.annotation.CustomSpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 
-@CustomSpringBootApplication(componentScan = {"br.tech.desiderati.sample", "br.tech.desiderati.common"})
+@CustomSpringBootApplication
 public class WebApplication {
 
     private static final String EXTERNAL_PROPERTIES = "/opt/desiderati-java-app/config/samples/jpa-hibernate-server.properties";

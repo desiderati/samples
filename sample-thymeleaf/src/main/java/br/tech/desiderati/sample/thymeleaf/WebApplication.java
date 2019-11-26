@@ -21,7 +21,7 @@ package br.tech.desiderati.sample.thymeleaf;
 import br.tech.desiderati.common.configuration.annotation.CustomSpringBootApplication;
 import org.springframework.boot.SpringApplication;
 
-@CustomSpringBootApplication(componentScan = {"br.tech.desiderati.sample", "br.tech.desiderati.common"})
+@CustomSpringBootApplication
 public class WebApplication {
 
     public static void main(String[] args) {
