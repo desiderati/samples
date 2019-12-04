@@ -27,10 +27,15 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.io.File;
 
+/**
+ * I could have used a Composite Primary Key, but I decided to keep this way for simplicity.
+ *
+ * @see EmbeddedId
+ */
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@EqualsAndHashCode(of = {"fileId", "side"})
+@EqualsAndHashCode(of = {"fileId", "side"}, callSuper = true)
 
 @Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE) // Needed by the Builder!!!
@@ -40,11 +45,6 @@ import java.io.File;
     uniqueConstraints = @UniqueConstraint(columnNames = {"fileId", "side"}),
     indexes = @Index(columnList = "sha1")
 )
-/**
- * I could have used a Composite Primary Key, but I decided to keep this way for simplicity.
- *
- * @see EmbeddedId
- */
 public class FileMetadata extends AbstractPersistable<Long> {
 
     public enum SIDE {
