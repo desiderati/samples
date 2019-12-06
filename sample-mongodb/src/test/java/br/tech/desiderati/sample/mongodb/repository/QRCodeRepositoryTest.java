@@ -41,6 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 class QRCodeRepositoryTest {
 
     @Autowired
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     private QRCodeRepository qrCodeRepository;
 
     private UUID id;
