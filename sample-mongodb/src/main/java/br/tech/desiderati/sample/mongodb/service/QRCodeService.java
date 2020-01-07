@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 - Felipe Desiderati
+ * Copyright (c) 2020 - Felipe Desiderati
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
  * associated documentation files (the "Software"), to deal in the Software without restriction,
@@ -18,8 +18,8 @@
  */
 package br.tech.desiderati.sample.mongodb.service;
 
-import br.tech.desiderati.common.scanner.QRCode;
-import br.tech.desiderati.common.scanner.QRCodeBuilder;
+import io.herd.common.scanner.QRCode;
+import io.herd.common.scanner.QRCodeBuilder;
 import br.tech.desiderati.sample.mongodb.repository.QRCodeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

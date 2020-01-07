@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 - Felipe Desiderati
+ * Copyright (c) 2020 - Felipe Desiderati
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
  * associated documentation files (the "Software"), to deal in the Software without restriction,
@@ -18,8 +18,8 @@
  */
 package br.tech.desiderati.sample.storage.service;
 
-import br.tech.desiderati.common.exception.IllegalArgumentApplicationException;
-import br.tech.desiderati.common.exception.ResourceNotFoundApplicationException;
+import io.herd.common.exception.IllegalArgumentApplicationException;
+import io.herd.common.exception.ResourceNotFoundApplicationException;
 import br.tech.desiderati.sample.storage.configuration.StorageProperties;
 import br.tech.desiderati.sample.storage.domain.Diff;
 import br.tech.desiderati.sample.storage.domain.FileMetadata;
@@ -45,8 +45,8 @@ import java.nio.file.*;
 import java.security.DigestOutputStream;
 import java.security.MessageDigest;
 
-import static br.tech.desiderati.common.exception.ThrowingConsumer.uncheckedConsumer;
-import static br.tech.desiderati.common.exception.ThrowingRunnable.uncheckedRunnable;
+import static io.herd.common.exception.ThrowingConsumer.uncheckedConsumer;
+import static io.herd.common.exception.ThrowingRunnable.uncheckedRunnable;
 
 @Slf4j
 @Service

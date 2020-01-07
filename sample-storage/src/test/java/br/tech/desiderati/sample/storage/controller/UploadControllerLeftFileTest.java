@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 - Felipe Desiderati
+ * Copyright (c) 2020 - Felipe Desiderati
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
  * associated documentation files (the "Software"), to deal in the Software without restriction,
@@ -18,7 +18,7 @@
  */
 package br.tech.desiderati.sample.storage.controller;
 
-import br.tech.desiderati.common.exception.ValidationResponseExceptionDTO;
+import io.herd.common.exception.ValidationResponseExceptionDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.web.servlet.MvcResult;

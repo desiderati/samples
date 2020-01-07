@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 - Felipe Desiderati
+ * Copyright (c) 2020 - Felipe Desiderati
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
  * associated documentation files (the "Software"), to deal in the Software without restriction,
@@ -18,7 +18,7 @@
  */
 package br.tech.desiderati.sample.storage.service;
 
-import br.tech.desiderati.common.test.MockitoExtension;
+import io.herd.common.test.MockitoExtension;
 import br.tech.desiderati.sample.storage.Fixtures;
 import br.tech.desiderati.sample.storage.repository.FileMetadataRepository;
 import lombok.extern.slf4j.Slf4j;
