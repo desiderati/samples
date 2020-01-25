@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 - Felipe Desiderati
+ * Copyright (c) 2020 - Felipe Desiderati
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
  * associated documentation files (the "Software"), to deal in the Software without restriction,
@@ -43,23 +43,20 @@ public class ThymeleafController {
     public String templatesTemplateAgainst(@PathVariable String message) {
         Context ctx = new Context();
         ctx.setVariable("message", message);
-        String content = templateEngine.process("[(#{greeting(${message})})]", ctx);
-        return content;
+        return templateEngine.process("[(#{greeting(${message})})]", ctx);
     }
 
     @GetMapping("/templates-html/{message}")
     public String templatesHtmlTemplateAgainst(@PathVariable String message) {
         Context ctx = new Context();
         ctx.setVariable("message", message);
-        String content = templateEngine.process("html/mail-template", ctx);
-        return content;
+        return templateEngine.process("html/mail-template", ctx);
     }
 
     @GetMapping("/templates-text/{message}")
     public String templatesTextTemplateAgainst(@PathVariable String message) {
         Context ctx = new Context();
         ctx.setVariable("message", message);
-        String content = templateEngine.process("text/mail-template", ctx);
-        return content;
+        return templateEngine.process("text/mail-template", ctx);
     }
 }
