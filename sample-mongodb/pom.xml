@@ -24,7 +24,7 @@
     <parent>
         <groupId>io.herd.common</groupId>
         <artifactId>common-starter</artifactId>
-        <version>2.1.11</version>
+        <version>2.1.12</version>
         <!--suppress MavenModelInspection-->
         <relativePath>../../commons/common-starter</relativePath>
     </parent>
@@ -37,17 +37,14 @@
         <dependency>
             <groupId>io.herd.common</groupId>
             <artifactId>common</artifactId>
-            <version>${project.parent.version}</version>
         </dependency>
         <dependency>
             <groupId>io.herd.common</groupId>
             <artifactId>common-data-mongodb</artifactId>
-            <version>${project.parent.version}</version>
         </dependency>
         <dependency>
             <groupId>io.herd.common</groupId>
             <artifactId>common-scanner</artifactId>
-            <version>${project.parent.version}</version>
         </dependency>
 
         <!-- Fake MongoDB -->
