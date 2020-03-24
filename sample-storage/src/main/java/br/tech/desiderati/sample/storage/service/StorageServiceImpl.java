@@ -18,13 +18,13 @@
  */
 package br.tech.desiderati.sample.storage.service;
 
-import io.herd.common.exception.IllegalArgumentApplicationException;
-import io.herd.common.exception.ResourceNotFoundApplicationException;
 import br.tech.desiderati.sample.storage.configuration.StorageProperties;
 import br.tech.desiderati.sample.storage.domain.Diff;
 import br.tech.desiderati.sample.storage.domain.FileMetadata;
 import br.tech.desiderati.sample.storage.domain.Offset;
 import br.tech.desiderati.sample.storage.repository.FileMetadataRepository;
+import io.herd.common.exception.IllegalArgumentApplicationException;
+import io.herd.common.exception.ResourceNotFoundApplicationException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Hex;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,8 +45,8 @@ import java.nio.file.*;
 import java.security.DigestOutputStream;
 import java.security.MessageDigest;
 
-import static io.herd.common.exception.ThrowingConsumer.uncheckedConsumer;
-import static io.herd.common.exception.ThrowingRunnable.uncheckedRunnable;
+import static io.herd.common.exception.ThrowingConsumer.silently;
+import static io.herd.common.exception.ThrowingRunnable.silently;
 
 @Slf4j
 @Service
@@ -132,12 +132,12 @@ public class StorageServiceImpl implements StorageService {
 
         fileMetadataRepository.findFirstFileMetadaWithSameSha1ButDiffFileIdOrSide(sha1, fileMetadata.getFileId(), fileMetadata.getSide())
             .ifPresentOrElse(
-                uncheckedConsumer(sha1FileMetadata -> {
+                silently(sha1FileMetadata -> {
                     // If file is duplicated, don't stores it. Just use the same reference. (Save space on disk)
                     fileMetadata.replaceLocalFilenameWith(sha1FileMetadata);
                     Files.deleteIfExists(tmpLocalFilePath);
                 }),
-                uncheckedRunnable(() -> {
+                silently(() -> {
                     // Moves from temp folder to the destination folter.
                     Path localFilePath = rootLocation.resolve(fileMetadata.getLocalFilename());
                     Files.createDirectories(localFilePath.getParent());
