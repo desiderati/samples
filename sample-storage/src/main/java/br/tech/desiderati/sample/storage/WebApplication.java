@@ -21,9 +21,6 @@ package br.tech.desiderati.sample.storage;
 import io.herd.common.configuration.annotation.CustomSpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 
-/**
- * Não há necessidade de colocar o atributo ComponentScan, já que os pacotes da aplicação são os padrões.
- */
 @CustomSpringBootApplication
 public class WebApplication {
 
