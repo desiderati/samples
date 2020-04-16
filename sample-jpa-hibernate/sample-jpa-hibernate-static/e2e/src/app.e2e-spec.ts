@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 - Felipe Desiderati
+ * Copyright (c) 2020 - Felipe Desiderati
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
  * associated documentation files (the "Software"), to deal in the Software without restriction,
@@ -20,14 +20,14 @@ import {AppPage} from './app.po';
 
 describe('workspace-project App', () => {
 
-  let page: AppPage;
+    let page: AppPage;
 
-  beforeEach(() => {
-    page = new AppPage();
-  });
+    beforeEach(() => {
+        page = new AppPage();
+    });
 
-  it('should display welcome message', () => {
-    page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Welcome to sample-jpa-hibernate-static!');
-  });
+    it('should display welcome message', () => {
+        page.navigateTo();
+        expect(page.getParagraphText()).toEqual('Welcome to sample-jpa-hibernate-static!');
+    });
 });

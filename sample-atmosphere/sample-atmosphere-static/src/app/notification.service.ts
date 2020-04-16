@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 - Felipe Desiderati
+ * Copyright (c) 2020 - Felipe Desiderati
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
  * associated documentation files (the "Software"), to deal in the Software without restriction,
@@ -31,9 +31,14 @@ export class NotificationService {
 
         // Mandatory parameters.
         url: '',
-        notificationCallback: (msg: string) => {},
-        statusCallback: (msg: string) => {},
-        subscribeOnTimeout: (request: any) => {},
+        notificationCallback: (msg: string) => {
+        },
+
+        statusCallback: (msg: string) => {
+        },
+
+        subscribeOnTimeout: (request: any) => {
+        },
 
         // Default parameters.
         contentType: 'application/json',
@@ -52,6 +57,7 @@ export class NotificationService {
 
             // Carry the UUID. This is required if you want to call
             // subscribe(request) again.
+            // noinspection TypeScriptUnresolvedVariable
             this.uuid = response.request.uuid;
         },
 
@@ -62,6 +68,7 @@ export class NotificationService {
         },
 
         onMessage(response): (response) => void {
+            // noinspection TypeScriptUnresolvedVariable
             const message = response.responseBody;
             let json = null;
             try {
@@ -88,7 +95,7 @@ export class NotificationService {
         onTransportFailure(errorMsg, request) {
             request.fallbackTransport = 'long-polling';  // Always forcing long-polling!
             const msg = 'Sorry, but it wasn\'t possible to establish a connection using ' + request.transport + '! ' +
-              'Falling back to ' + request.fallbackTransport + '.';
+                'Falling back to ' + request.fallbackTransport + '.';
             console.log(msg);
             this.statusCallback(msg);
         },
@@ -138,8 +145,8 @@ export class NotificationService {
 
             } else {
                 throw new Error('First argument must be a valid JSON Object containing the request parameters and ' +
-                   'second argument must be a valid (Notification) callback function! Or...  First argument must be ' +
-                   'a valid (Notification) callback function and second argument must be a valid (Status) callback function!');
+                    'second argument must be a valid (Notification) callback function! Or...  First argument must be ' +
+                    'a valid (Notification) callback function and second argument must be a valid (Status) callback function!');
             }
         }
 
@@ -147,8 +154,8 @@ export class NotificationService {
             const validArguments = Util.isJson(args[0]) && $.isFunction(args[1]) && $.isFunction(args[2]);
             if (!validArguments) {
                 throw new Error('First argument must be a valid JSON Object containing the request parameters and ' +
-                   'second argument must be a valid (Notification) callback function and third argument must be ' +
-                  'a valid (Status) callback function!');
+                    'second argument must be a valid (Notification) callback function and third argument must be ' +
+                    'a valid (Status) callback function!');
             }
 
             params = args[0];
@@ -198,7 +205,7 @@ export class NotificationService {
 
     push(msg: string) {
         this.subscription.push(JSON.stringify({
-           message: msg
+            message: msg
         }));
     }
 

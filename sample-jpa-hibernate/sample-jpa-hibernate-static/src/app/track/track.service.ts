@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 - Felipe Desiderati
+ * Copyright (c) 2020 - Felipe Desiderati
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
  * associated documentation files (the "Software"), to deal in the Software without restriction,
@@ -29,44 +29,44 @@ import {environment} from '../../environments/environment';
 const apiUrl = environment.apiUrl;
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class TrackService {
 
-  private apiUrl = apiUrl + 'track/';
+    private apiUrl = apiUrl + 'track/';
 
-  constructor(private http: HttpClient) {
-  }
+    constructor(private http: HttpClient) {
+    }
 
-  fetchAllTracks() {
-    return this.http.get(this.apiUrl).pipe(
-      catchError(this.handleError('fetching all tracks')));
-  }
+    fetchAllTracks() {
+        return this.http.get(this.apiUrl).pipe(
+            catchError(this.handleError('fetching all tracks')));
+    }
 
-  fetchTrackByName(trackname: string) {
-    return this.http.get(this.apiUrl + trackname).pipe(
-      catchError(this.handleError('fetching track by name')));
-  }
+    fetchTrackByName(trackname: string) {
+        return this.http.get(this.apiUrl + trackname).pipe(
+            catchError(this.handleError('fetching track by name')));
+    }
 
-  createTrack(track: Track) {
-    return this.http.post(this.apiUrl, track).pipe(
-      catchError(this.handleError('creating track')));
-  }
+    createTrack(track: Track) {
+        return this.http.post(this.apiUrl, track).pipe(
+            catchError(this.handleError('creating track')));
+    }
 
-  updateTrack(track: Track, id: number) {
-    return this.http.put(this.apiUrl + id, track).pipe(
-      catchError(this.handleError('updating track')));
-  }
+    updateTrack(track: Track, id: number) {
+        return this.http.put(this.apiUrl + id, track).pipe(
+            catchError(this.handleError('updating track')));
+    }
 
-  deleteTrack(id: number) {
-    return this.http.delete(this.apiUrl + id).pipe(
-      catchError(this.handleError('deleting track')));
-  }
+    deleteTrack(id: number) {
+        return this.http.delete(this.apiUrl + id).pipe(
+            catchError(this.handleError('deleting track')));
+    }
 
-  private handleError(errorMessage: String) {
-    return (errorResponse: HttpErrorResponse) => {
-      console.error('TrackService::Error while ' + errorMessage + '!', errorResponse.error);
-      return throwError(errorResponse);
-    };
-  }
+    private handleError(errorMessage: String) {
+        return (errorResponse: HttpErrorResponse) => {
+            console.error('TrackService::Error while ' + errorMessage + '!', errorResponse.error);
+            return throwError(errorResponse);
+        };
+    }
 }

@@ -23,13 +23,10 @@ import br.tech.desiderati.sample.jpa_hibernate.controller.dto.TrackDTO;
 import br.tech.desiderati.sample.jpa_hibernate.domain.Track;
 import br.tech.desiderati.sample.jpa_hibernate.service.TrackService;
 import lombok.extern.slf4j.Slf4j;
+import org.jetbrains.annotations.NotNull;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
@@ -53,23 +50,20 @@ public class TrackController {
         this.modelMapper = modelMapper;
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @GetMapping
     public List<TrackDTO> fetchAllTracks() {
         List<Track> tracks = trackService.findAllTracks();
-        if (tracks.isEmpty()) {
-            return Collections.emptyList();
-        }
-
-        List<TrackDTO> trackDTOs = new ArrayList<>();
-        for (Track track : tracks) {
-            trackDTOs.add(modelMapper.map(track, TrackDTO.class));
-        }
-        return trackDTOs;
+        return getTrackDTOS(tracks);
     }
 
-    @RequestMapping(value = "/{trackname}", method = RequestMethod.GET)
+    @GetMapping(value = "/{trackname}")
     public List<TrackDTO> fetchTrackByName(@PathVariable("trackname") String trackname) {
         List<Track> tracks = trackService.findByName(trackname);
+        return getTrackDTOS(tracks);
+    }
+
+    @NotNull
+    private List<TrackDTO> getTrackDTOS(List<Track> tracks) {
         if (tracks.isEmpty()) {
             return Collections.emptyList();
         }
@@ -81,13 +75,14 @@ public class TrackController {
         return trackDTOs;
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+
+    @PostMapping
     public void createTrack(@RequestBody @Valid TrackDTO trackDTO) {
         log.info("Creating Track " + trackDTO.getTrackname());
         trackService.saveTrack(modelMapper.map(trackDTO, Track.class));
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    @PutMapping(value = "/{id}")
     public TrackDTO updateTrack(@PathVariable("id") Long id, @RequestBody @Valid TrackDTO trackDTO) {
         log.info("Updating Track with id " + id);
 
@@ -102,7 +97,7 @@ public class TrackController {
         return modelMapper.map(currentTrack, TrackDTO.class);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @DeleteMapping(value = "/{id}")
     public void deleteTrack(@PathVariable("id") long id) {
         log.info("Fetching & Deleting Track with id " + id);
 

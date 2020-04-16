@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 - Felipe Desiderati
+ * Copyright (c) 2020 - Felipe Desiderati
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
  * associated documentation files (the "Software"), to deal in the Software without restriction,
@@ -23,29 +23,29 @@
 const {SpecReporter} = require('jasmine-spec-reporter');
 
 exports.config = {
-  allScriptsTimeout: 11000,
-  specs: [
-    './src/**/*.e2e-spec.ts'
-  ],
+    allScriptsTimeout: 11000,
+    specs: [
+        './src/**/*.e2e-spec.ts'
+    ],
 
-  capabilities: {
-    'browserName': 'chrome'
-  },
+    capabilities: {
+        'browserName': 'chrome'
+    },
 
-  directConnect: true,
-  baseUrl: 'http://localhost:4200/',
-  framework: 'jasmine',
-  jasmineNodeOpts: {
-    showColors: true,
-    defaultTimeoutInterval: 30000,
-    print: function () {
+    directConnect: true,
+    baseUrl: 'http://localhost:4200/',
+    framework: 'jasmine',
+    jasmineNodeOpts: {
+        showColors: true,
+        defaultTimeoutInterval: 30000,
+        print: function () {
+        }
+    },
+
+    onPrepare() {
+        require('ts-node').register({
+            project: require('path').join(__dirname, './tsconfig.e2e.json')
+        });
+        jasmine.getEnv().addReporter(new SpecReporter({spec: {displayStacktrace: true}}));
     }
-  },
-
-  onPrepare() {
-    require('ts-node').register({
-      project: require('path').join(__dirname, './tsconfig.e2e.json')
-    });
-    jasmine.getEnv().addReporter(new SpecReporter({spec: {displayStacktrace: true}}));
-  }
 };

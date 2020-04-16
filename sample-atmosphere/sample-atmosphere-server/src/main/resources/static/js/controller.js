@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 - Felipe Desiderati
+ * Copyright (c) 2020 - Felipe Desiderati
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
  * associated documentation files (the "Software"), to deal in the Software without restriction,
@@ -62,12 +62,12 @@ App.controller('AtmosphereController', ['$scope',
                 return;
             }
 
-            subscription.push(socket.util.stringifyJSON({
+            subscription.push(JSON.stringify({
                 message: self.notification.message
             }));
         };
 
-        self.printMessage = function(message) {
+        self.printMessage = function (message) {
             $('#notificationContainer').show();
             $('<li/>').html(message).appendTo('#notificationBoard');
         };
@@ -104,7 +104,7 @@ App.controller('AtmosphereController', ['$scope',
                 let message = response.responseBody;
                 let json = null;
                 try {
-                    json = socket.util.parseJSON(message);
+                    json = JSON.parse(message);
                 } catch (e) {
                     console.log("This doesn't look like a valid JSON: ", message);
                     return;

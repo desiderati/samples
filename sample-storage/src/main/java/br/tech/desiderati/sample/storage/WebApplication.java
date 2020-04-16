@@ -18,17 +18,13 @@
  */
 package br.tech.desiderati.sample.storage;
 
-import io.herd.common.configuration.annotation.CustomSpringBootApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 
-@CustomSpringBootApplication
+@SpringBootApplication
 public class WebApplication {
 
-    private static final String EXTERNAL_PROPERTIES = "/opt/desiderati-java-app/config/samples/storage.properties";
-
     public static void main(String[] args) {
-        new SpringApplicationBuilder(WebApplication.class)
-            .properties("spring.config.location=file:" + EXTERNAL_PROPERTIES)
-            .run(args);
+        new SpringApplicationBuilder(WebApplication.class).run(args);
     }
 }

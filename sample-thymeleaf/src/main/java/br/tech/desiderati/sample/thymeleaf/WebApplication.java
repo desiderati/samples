@@ -18,10 +18,10 @@
  */
 package br.tech.desiderati.sample.thymeleaf;
 
-import io.herd.common.configuration.annotation.CustomSpringBootApplication;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@CustomSpringBootApplication
+@SpringBootApplication
 public class WebApplication {
 
     public static void main(String[] args) {

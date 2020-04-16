@@ -1,5 +1,5 @@
 <!--
-  ~ Copyright (c) 2019 - Felipe Desiderati
+  ~ Copyright (c) 2020 - Felipe Desiderati
   ~
   ~ Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
   ~ associated documentation files (the "Software"), to deal in the Software without restriction,
@@ -19,42 +19,43 @@
 <div class="card card-body bg-light lead">Track Listing</div>
 
 <form class="form-horizontal my-3" name="trackListingForm">
-  <div class="form-group row">
-    <label class="col-sm-2 col-form-label text-right" for="filterByTrackname">Filter by Name</label>
-    <div class="col-sm-7">
-      <input class="form-control" type="text" id="filterByTrackname" name="filterByTrackname"
-             title="Filter by Trackname" [formControl]="filterByTracknameInput"/>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label text-right" for="filterByTrackname">Filter by Name</label>
+        <div class="col-sm-7">
+            <input class="form-control" type="text" id="filterByTrackname" name="filterByTrackname"
+                   title="Filter by Trackname" [formControl]="filterByTracknameInput"/>
+        </div>
     </div>
-  </div>
 
-  <div class="form-group row">
-    <div class="col-sm-7 offset-sm-2">
-      <button class="btn btn-primary" type="button" (click)="filter()">Filter</button>
-      <span>Leave empty to retrieve all!</span>
+    <div class="form-group row">
+        <div class="col-sm-7 offset-sm-2">
+            <button class="btn btn-primary" type="button" (click)="filter()">Filter</button>
+            <span>Leave empty to retrieve all!</span>
+        </div>
     </div>
-  </div>
 </form>
 
 <table class="table table-striped">
-  <thead>
-  <tr>
-    <th>ID.</th>
-    <th>Track Name</th>
-    <th>Author</th>
-    <th>Duration</th>
-    <th width="20%"></th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let track of tracks">
-    <td>{{track.id}}</td>
-    <td>{{track.trackname}}</td>
-    <td>{{track.author}}</td>
-    <td>{{track.duration}}</td>
-    <td>
-      <button type="button" (click)="update(track.id)">Update</button>
-      <button type="button" (click)="remove(track.id)">Remove</button>
-    </td>
-  </tr>
-  </tbody>
+    <caption>Track List</caption>
+    <thead>
+        <tr>
+            <th id="th-track-id">ID.</th>
+            <th id="th-track-name">Track Name</th>
+            <th id="th-track-author">Author</th>
+            <th id="th-track-column">Duration</th>
+            <th id="th-track-actions" style="width: 20%"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let track of tracks">
+            <td>{{track.id}}</td>
+            <td>{{track.trackname}}</td>
+            <td>{{track.author}}</td>
+            <td>{{track.duration}}</td>
+            <td>
+                <button type="button" (click)="update(track.id)">Update</button>
+                <button type="button" (click)="remove(track.id)">Remove</button>
+            </td>
+        </tr>
+    </tbody>
 </table>

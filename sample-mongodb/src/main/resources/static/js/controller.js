@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 - Felipe Desiderati
+ * Copyright (c) 2020 - Felipe Desiderati
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
  * associated documentation files (the "Software"), to deal in the Software without restriction,
@@ -21,12 +21,12 @@
 App.controller('QRCodeController', [
     function() {
 
-        var self = this;
+        let self = this;
 
         self.generate = function() {
             console.log("Generating QR Code...");
             $("#qrCodeImage").html(
-                "<img src='" + document.location.toString() + "api/v1/qrcode/generate?t=" + new Date().getTime() +  "'/>");
+                "<img alt='QR Code' src='" + document.location.toString() + "api/v1/qrcode/generate?t=" + new Date().getTime() +  "'/>");
             console.log("QR Code Generated!");
         };
     }]

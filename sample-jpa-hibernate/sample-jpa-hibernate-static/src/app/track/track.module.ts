@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 - Felipe Desiderati
+ * Copyright (c) 2020 - Felipe Desiderati
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
  * associated documentation files (the "Software"), to deal in the Software without restriction,
@@ -25,20 +25,20 @@ import {TrackListingComponent} from './track-listing/track-listing.component';
 import {TrackComponent} from './track.component';
 
 @NgModule({
-  declarations: [
-    TrackComponent,
-    TrackRegistrationComponent,
-    TrackListingComponent
-  ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-  ],
-  exports: [
-    TrackComponent,
-    TrackRegistrationComponent,
-    TrackListingComponent]
+    declarations: [
+        TrackComponent,
+        TrackRegistrationComponent,
+        TrackListingComponent
+    ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+    ],
+    exports: [
+        TrackComponent,
+        TrackRegistrationComponent,
+        TrackListingComponent]
 })
 export class TrackModule {
 }

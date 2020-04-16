@@ -216,7 +216,6 @@ public class StorageServiceImpl implements StorageService {
 
             if (diffOffset != null) {
                 diff.getOffsets().add(diffOffset);
-                diffOffset = null;
             }
             return diff;
         }

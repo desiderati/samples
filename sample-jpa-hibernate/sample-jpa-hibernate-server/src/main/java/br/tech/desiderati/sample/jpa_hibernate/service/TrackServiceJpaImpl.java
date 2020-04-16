@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 - Felipe Desiderati
+ * Copyright (c) 2020 - Felipe Desiderati
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
  * associated documentation files (the "Software"), to deal in the Software without restriction,
@@ -51,25 +51,19 @@ public class TrackServiceJpaImpl implements TrackService {
 
     @Override
     public Track findById(Long id) {
-        Track track = entityManager.find(Track.class, id);
-        return track;
+        return entityManager.find(Track.class, id);
     }
 
     @Override
     @SuppressWarnings("unchecked")
     public List<Track> findByName(String trackname) {
-        List<Track> tracksFound =
-            entityManager.createQuery("SELECT t FROM Track t WHERE t.trackname LIKE :trackname")
-                .setParameter("trackname", "%" + trackname + "%").getResultList();
-        return tracksFound;
+        return entityManager.createQuery("SELECT t FROM Track t WHERE t.trackname LIKE :trackname")
+            .setParameter("trackname", "%" + trackname + "%").getResultList();
     }
 
     @Override
     @SuppressWarnings("unchecked")
     public List<Track> findAllTracks() {
-        List<Track> tracksFound =
-            entityManager.createQuery("SELECT t FROM Track t ORDER BY t.trackname ASC")
-                .getResultList();
-        return tracksFound;
+        return entityManager.createQuery("SELECT t FROM Track t ORDER BY t.trackname ASC").getResultList();
     }
 }

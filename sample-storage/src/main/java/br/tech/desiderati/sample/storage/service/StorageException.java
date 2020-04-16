@@ -20,12 +20,7 @@ package br.tech.desiderati.sample.storage.service;
 
 import io.herd.common.exception.ApplicationException;
 
-@SuppressWarnings("squid:MaximumInheritanceDepth")
 public class StorageException extends ApplicationException {
-
-    public StorageException(String message) {
-        super(message);
-    }
 
     public StorageException(String message, Throwable cause) {
         super(message, cause);

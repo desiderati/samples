@@ -32,6 +32,8 @@ import org.thymeleaf.context.Context;
 @RequestMapping("/v1/thymeleaf")
 public class ThymeleafController {
 
+    private static final String MESSAGE = "message";
+
     private final TemplateEngine templateEngine;
 
     @Autowired
@@ -42,21 +44,21 @@ public class ThymeleafController {
     @GetMapping("/templates/{message}")
     public String templatesTemplateAgainst(@PathVariable String message) {
         Context ctx = new Context();
-        ctx.setVariable("message", message);
+        ctx.setVariable(MESSAGE, message);
         return templateEngine.process("[(#{greeting(${message})})]", ctx);
     }
 
     @GetMapping("/templates-html/{message}")
     public String templatesHtmlTemplateAgainst(@PathVariable String message) {
         Context ctx = new Context();
-        ctx.setVariable("message", message);
+        ctx.setVariable(MESSAGE, message);
         return templateEngine.process("html/mail-template", ctx);
     }
 
     @GetMapping("/templates-text/{message}")
     public String templatesTextTemplateAgainst(@PathVariable String message) {
         Context ctx = new Context();
-        ctx.setVariable("message", message);
+        ctx.setVariable(MESSAGE, message);
         return templateEngine.process("text/mail-template", ctx);
     }
 }

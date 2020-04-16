@@ -40,12 +40,12 @@ class UploadControllerRightFileTest extends AbstractUploadControllerTest {
                 post(API_BASE_PATH + "/v1/diff/abc/right")
                     .contentType("application/txt")
                     .content(""))
-                .andExpect(status().isInternalServerError())
+                .andExpect(status().isBadRequest())
                 .andReturn();
 
         ValidationResponseExceptionDTO responseExceptionDTO =
             mapper.readValue(result.getResponse().getContentAsString(), ValidationResponseExceptionDTO.class);
-        assertEquals("http_error_500", responseExceptionDTO.getErrorCode());
+        assertEquals("http_error_400", responseExceptionDTO.getErrorCode());
     }
 
     @Test
@@ -88,13 +88,12 @@ class UploadControllerRightFileTest extends AbstractUploadControllerTest {
 
     @Test
     void uploadRightFileShouldReturnBadRequestBecauseFileAlreadyUploaded() throws Exception {
-        MvcResult result =
-            mockMvc.perform(
-                post(API_BASE_PATH + "/v1/diff/1/right")
-                    .contentType("application/txt")
-                    .content("123456"))
-                .andExpect(status().isOk())
-                .andReturn();
+        mockMvc.perform(
+            post(API_BASE_PATH + "/v1/diff/1/right")
+                .contentType("application/txt")
+                .content("123456"))
+            .andExpect(status().isOk())
+            .andReturn();
 
         MvcResult secondResult =
             mockMvc.perform(
@@ -111,23 +110,21 @@ class UploadControllerRightFileTest extends AbstractUploadControllerTest {
 
     @Test
     void uploadRightFileShouldReturnSuccessEvenIfEmptyContent() throws Exception {
-        MvcResult result =
-            mockMvc.perform(
-                post(API_BASE_PATH + "/v1/diff/2/right")
-                    .contentType("application/txt")
-                    .content(""))
-                .andExpect(status().isOk())
-                .andReturn();
+        mockMvc.perform(
+            post(API_BASE_PATH + "/v1/diff/2/right")
+                .contentType("application/txt")
+                .content(""))
+            .andExpect(status().isOk())
+            .andReturn();
     }
 
     @Test
     void uploadRightFileShouldReturnSuccess() throws Exception {
-        MvcResult result =
-            mockMvc.perform(
-                post(API_BASE_PATH + "/v1/diff/3/right")
-                    .contentType("application/txt")
-                    .content("123456"))
-                .andExpect(status().isOk())
-                .andReturn();
+        mockMvc.perform(
+            post(API_BASE_PATH + "/v1/diff/3/right")
+                .contentType("application/txt")
+                .content("123456"))
+            .andExpect(status().isOk())
+            .andReturn();
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 - Felipe Desiderati
+ * Copyright (c) 2020 - Felipe Desiderati
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
  * associated documentation files (the "Software"), to deal in the Software without restriction,
@@ -48,12 +48,12 @@ export class AppComponent implements OnDestroy {
 
     static printMessage(message) {
         $('#notificationContainer').show();
-        $('<div/>', {class : 'alert alert-success'}).text(message).appendTo('#notificationBoard');
+        $('<div/>', {class: 'alert alert-success'}).text(message).appendTo('#notificationBoard');
     }
 
     static printErrorMessage(message) {
         $('#notificationContainer').show();
-        $('<div/>', {class : 'alert alert-warning'}).text(message).appendTo('#notificationBoard');
+        $('<div/>', {class: 'alert alert-warning'}).text(message).appendTo('#notificationBoard');
     }
 
     initialize() {

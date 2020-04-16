@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 - Felipe Desiderati
+ * Copyright (c) 2020 - Felipe Desiderati
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
  * associated documentation files (the "Software"), to deal in the Software without restriction,
@@ -18,15 +18,15 @@
  */
 export class Track {
 
-  id: number;
-  trackname: string;
-  author: string;
-  duration: string;
+    id: number;
+    trackname: string;
+    author: string;
+    duration: string;
 
-  constructor(id: number, trackname: string, author: string, duration: string) {
-    this.id = id;
-    this.trackname = trackname;
-    this.author = author;
-    this.duration = duration;
-  }
+    constructor(id: number, trackname: string, author: string, duration: string) {
+        this.id = id;
+        this.trackname = trackname;
+        this.author = author;
+        this.duration = duration;
+    }
 }

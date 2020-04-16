@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 - Felipe Desiderati
+ * Copyright (c) 2020 - Felipe Desiderati
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
  * associated documentation files (the "Software"), to deal in the Software without restriction,
@@ -63,7 +63,7 @@ App.controller('TrackController', [
                 /** @namespace errResponse.data.validationMessages */
                 function (errResponse) {
                     console.error('Error while creating Track.');
-                    if (typeof(errResponse.data.validationMessages) !== 'undefined') {
+                    if (typeof (errResponse.data.validationMessages) !== 'undefined') {
                         self.addValidationErrorMessages(errResponse.data.validationMessages);
                     } else {
                         self.addErrorMessage(errResponse.data.message);
@@ -80,7 +80,7 @@ App.controller('TrackController', [
                 /** @namespace errResponse.data.validationMessages */
                 function (errResponse) {
                     console.error('Error while updating Track.');
-                    if (typeof(errResponse.data.validationMessages) !== 'undefined') {
+                    if (typeof (errResponse.data.validationMessages) !== 'undefined') {
                         self.addValidationErrorMessages(errResponse.data.validationMessages);
                     } else {
                         self.addErrorMessage(errResponse.data.message);
@@ -132,8 +132,7 @@ App.controller('TrackController', [
             if (self.track.id === null) {
                 console.log('Saving new Track', self.track);
                 self.createTrack(self.track);
-            }
-            else {
+            } else {
                 self.updateTrack(self.track, self.track.id);
                 console.log('Track updated with id: ', self.track.id);
             }
@@ -155,8 +154,7 @@ App.controller('TrackController', [
         self.filter = function () {
             if (self.filterByTrackname === null) {
                 self.fetchAllTracks();
-            }
-            else {
+            } else {
                 self.fetchTrackByName(self.filterByTrackname);
             }
         };

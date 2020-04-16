@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 - Felipe Desiderati
+ * Copyright (c) 2020 - Felipe Desiderati
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
  * associated documentation files (the "Software"), to deal in the Software without restriction,
@@ -21,10 +21,10 @@ import {TestBed} from '@angular/core/testing';
 import {TrackService} from './track.service';
 
 describe('TrackService', () => {
-  beforeEach(() => TestBed.configureTestingModule({}));
+    beforeEach(() => TestBed.configureTestingModule({}));
 
-  it('should be created', () => {
-    const service: TrackService = TestBed.get(TrackService);
-    expect(service).toBeTruthy();
-  });
+    it('should be created', () => {
+        const service: TrackService = TestBed.get(TrackService);
+        expect(service).toBeTruthy();
+    });
 });
