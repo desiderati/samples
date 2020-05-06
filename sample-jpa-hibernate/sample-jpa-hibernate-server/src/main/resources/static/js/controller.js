@@ -57,36 +57,21 @@ App.controller('TrackController', [
         };
 
         self.createTrack = function (track) {
-            TrackService.createTrack(track).then(
-                function () {
-                    self.fetchAllTracks();
-                    self.reset();
-                },
-                function (errResponse) {
-                    self.handleErrorResponse(errResponse, 'Error while creating Track.');
-                }
-            );
+            // Executar o método responsável pela criação da Track, que está presente no serviço TrackService.
+            // Lembrar de, após criar a Track no servidor, recarregar a listagem com as Tracks atuais, chamando
+            // o método self.fetchAllTracks();
         };
 
         self.updateTrack = function (track, id) {
-            TrackService.updateTrack(track, id).then(
-                function () {
-                    self.fetchAllTracks();
-                    self.reset();
-                },
-                function (errResponse) {
-                    self.handleErrorResponse(errResponse, 'Error while updating Track.');
-                }
-            );
+            // Executar o método responsável pela alteração da Track, que está presente no serviço TrackService.
+            // Lembrar de, após alterar a Track no servidor, recarregar a listagem com as Tracks atuais, chamando
+            // o método self.fetchAllTracks();
         };
 
         self.deleteTrack = function (id) {
-            TrackService.deleteTrack(id).then(
-                self.fetchAllTracks,
-                function () {
-                    console.error('Error while deleting Track.');
-                }
-            );
+            // Executar o método responsável pela exclusão da Track, que está presente no serviço TrackService.
+            // Lembrar de, após excluir a Track no servidor, recarregar a listagem com as Tracks atuais, chamando
+            // o método self.fetchAllTracks();
         };
 
         // Form Operations

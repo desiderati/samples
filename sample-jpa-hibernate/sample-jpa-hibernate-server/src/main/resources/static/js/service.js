@@ -19,65 +19,34 @@
 'use strict';
 
 App.factory('TrackService', ['$http', '$q', function ($http, $q) {
+
+    let apiUrl = document.location.toString() + 'api/v1/track/';
+
+    // Lembrar que estamos usando a versão 1.5 do Angular e que o componente $http ainda lida com Promises.
     return {
         fetchAllTracks: function () {
-            return $http.get(document.location.toString() + 'api/v1/track/').then(
-                function (response) {
-                    return response.data;
-                },
-                function (errResponse) {
-                    console.error('Error while fetching Tracks.');
-                    return $q.reject(errResponse);
-                }
-            );
+            let fetchAllTracksApiUrl = document.location.toString() + 'api/v1/track/';
+            return null;
         },
 
         fetchTrackByName: function (trackName) {
-            return $http.get(document.location.toString() + 'api/v1/track/' + trackName).then(
-                function (response) {
-                    return response.data;
-                },
-                function (errResponse) {
-                    console.error('Error while fetching Tracks.');
-                    return $q.reject(errResponse);
-                }
-            );
+            let fetchTrackByNameApiUrl = document.location.toString() + 'api/v1/track/' + trackName;
+            return null;
         },
 
         createTrack: function (track) {
-            return $http.post(document.location.toString() + 'api/v1/track/', track).then(
-                function (response) {
-                    return response.data;
-                },
-                function (errResponse) {
-                    console.error('Error while creating Track.');
-                    return $q.reject(errResponse);
-                }
-            );
+            let createTrackApiUrl = document.location.toString() + 'api/v1/track/';
+            return null;
         },
 
         updateTrack: function (track, id) {
-            return $http.put(document.location.toString() + 'api/v1/track/' + id, track).then(
-                function (response) {
-                    return response.data;
-                },
-                function (errResponse) {
-                    console.error('Error while updating Track.');
-                    return $q.reject(errResponse);
-                }
-            );
+            let updateTrackApiUrl = document.location.toString() + 'api/v1/track/' + id;
+            return null;
         },
 
         deleteTrack: function (id) {
-            return $http.delete(document.location.toString() + 'api/v1/track/' + id).then(
-                function (response) {
-                    return response.data;
-                },
-                function (errResponse) {
-                    console.error('Error while deleting Track.');
-                    return $q.reject(errResponse);
-                }
-            );
+            let deleteTrackApiUrl = document.location.toString() + 'api/v1/track/' + id;
+            return null;
         }
     };
 }]);

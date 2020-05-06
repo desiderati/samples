@@ -39,28 +39,28 @@ export class TrackService {
     }
 
     fetchAllTracks() {
-        return this.http.get(this.apiUrl).pipe(
-            catchError(this.handleError('fetching all tracks')));
+        // Usando agora o Angular 6, como seria feito este método?
+        return null;
     }
 
     fetchTrackByName(trackName: string) {
-        return this.http.get(this.apiUrl + trackName).pipe(
-            catchError(this.handleError('fetching track by name')));
+        // Usando agora o Angular 6, como seria feito este método?
+        return null;
     }
 
     createTrack(track: Track) {
-        return this.http.post(this.apiUrl, track).pipe(
-            catchError(this.handleError('creating track')));
+        // Usando agora o Angular 6, como seria feito este método?
+        return null;
     }
 
     updateTrack(track: Track, id: number) {
-        return this.http.put(this.apiUrl + id, track).pipe(
-            catchError(this.handleError('updating track')));
+        // Usando agora o Angular 6, como seria feito este método?
+        return null;
     }
 
     deleteTrack(id: number) {
-        return this.http.delete(this.apiUrl + id).pipe(
-            catchError(this.handleError('deleting track')));
+        // Usando agora o Angular 6, como seria feito este método?
+        return null;
     }
 
     private handleError(errorMessage: String) {

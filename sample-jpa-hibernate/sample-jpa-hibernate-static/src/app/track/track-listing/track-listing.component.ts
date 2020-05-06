@@ -44,17 +44,13 @@ export class TrackListingComponent implements OnInit {
     }
 
     fetchAllTracks() {
-        this.trackService.fetchAllTracks().subscribe(
-            (response: Track[]) => {
-                this.tracks = response;
-            });
+        // Executar o método responsável pela consulta de todas as Tracks, que está presente no serviço TrackService.
+        // Após a consulta, preenhcer o Array de Tracks com as informações retornadas pelo serviço.
     }
 
     fetchTrackByName(trackName: string) {
-        this.trackService.fetchTrackByName(trackName).subscribe(
-            (response: Track[]) => {
-                this.tracks = response;
-            });
+        // Executar o método responsável pela consulta das Tracks por nome, que está presente no serviço TrackService.
+        // Após a consulta, preenhcer o Array de Tracks com as informações retornadas pelo serviço.
     }
 
     filter() {

@@ -107,16 +107,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="track in ctrl.tracks">
-                    <td><span ng-bind="track.id"></span></td>
-                    <td><span ng-bind="track.trackName"></span></td>
-                    <td><span ng-bind="track.author"></span></td>
-                    <td><span ng-bind="track.duration"></span></td>
-                    <td>
-                        <button type="button" ng-click="ctrl.edit(track.id)">Update</button>
-                        <button type="button" ng-click="ctrl.remove(track.id)">Remove</button>
-                    </td>
-                </tr>
+            <!-- Imprimir as informações de cada Track por linha. As Tracks estão armazenadas em 'ctrl.tracks'. -->
             </tbody>
         </table>
     </body>
