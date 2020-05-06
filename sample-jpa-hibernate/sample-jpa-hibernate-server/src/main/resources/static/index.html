@@ -1,4 +1,23 @@
-<html ng-app="TrackApp">
+<!--
+  ~ Copyright (c) 2020 - Felipe Desiderati
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
+  ~ associated documentation files (the "Software"), to deal in the Software without restriction,
+  ~ including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
+  ~ and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so,
+  ~ subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in all copies or substantial
+  ~ portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
+  ~ LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+  ~ IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+  ~ WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+  ~ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+  -->
+<!DOCTYPE html>
+<html lang="en" ng-app="TrackApp">
     <head>
         <title>sample-jpa-hibernate</title>
         <link rel="stylesheet" href="css/lib/bootstrap.css"/>
@@ -19,17 +38,17 @@
             <input type="hidden" ng-model="ctrl.track.id" />
 
             <div class="form-group row">
-                <label class="control-label col-sm-2">Name</label>
+                <label class="control-label col-sm-2">Track Name</label>
                 <div class="col-sm-5">
-                    <input class="form-control" type="text" ng-model="ctrl.track.trackname" name="trackname" title="trackname" required/>
-                    <span ng-show="trackForm.trackname.$dirty && trackForm.trackname.$error.required">This is a required field</span>
+                    <input class="form-control" type="text" ng-model="ctrl.track.trackName" name="trackName" title="Track Name" required/>
+                    <span ng-show="trackForm.trackName.$dirty && trackForm.trackName.$error.required">This is a required field</span>
                 </div>
             </div>
 
             <div class="form-group row">
                 <label class="control-label col-sm-2">Author</label>
                 <div class="col-sm-5">
-                    <input class="form-control" type="text" ng-model="ctrl.track.author" name="author" title="author" required ng-minlength="3"/>
+                    <input class="form-control" type="text" ng-model="ctrl.track.author" name="author" title="Author" required ng-minlength="3"/>
                     <span ng-show="trackForm.author.$dirty && trackForm.author.$error.required">This is a required field</span>
                     <span ng-show="trackForm.author.$dirty && trackForm.author.$error.minlength">Minimum length required is 3</span>
                 </div>
@@ -38,7 +57,8 @@
             <div class="form-group row">
                 <label class="control-label col-sm-2">Duration</label>
                 <div class="col-sm-2">
-                    <input class="form-control" type="number" ng-model="ctrl.track.duration" name="duration" placeholder="In Seconds" required min="1"/>
+                    <!--suppress HtmlFormInputWithoutLabel-->
+                    <input class="form-control" type="number" ng-model="ctrl.track.duration" name="duration" title="Duration" placeholder="In Seconds" required min="1"/>
                     <span ng-show="trackForm.duration.$dirty && trackForm.duration.$error.required">This is a required field</span>
                 </div>
             </div>
@@ -62,9 +82,9 @@
 
         <form class="form-horizontal" name="filterForm">
             <div class="form-group row">
-                <label class="control-label col-sm-2">Filter by Name</label>
+                <label class="control-label col-sm-2">Filter by Track Name</label>
                 <div class="col-sm-5">
-                    <input class="form-control" type="text" ng-model="ctrl.filterByTrackname" name="filterByTrackname" title="filterByTrackname"/>
+                    <input class="form-control" type="text" ng-model="ctrl.filterByTrackName" name="filterByTrackName" title="Filter By Track Name"/>
                 </div>
             </div>
 
@@ -79,21 +99,21 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>ID.</th>
-                    <th>Track Name</th>
-                    <th>Author</th>
-                    <th>Duration</th>
-                    <th width="20%"></th>
+                    <th id="th-track-id">ID.</th>
+                    <th id="th-track-name">Track Name</th>
+                    <th id="th-track-author">Author</th>
+                    <th id="th-track-column">Duration</th>
+                    <th id="th-track-actions" style="width: 20%">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="track in ctrl.tracks">
                     <td><span ng-bind="track.id"></span></td>
-                    <td><span ng-bind="track.trackname"></span></td>
+                    <td><span ng-bind="track.trackName"></span></td>
                     <td><span ng-bind="track.author"></span></td>
                     <td><span ng-bind="track.duration"></span></td>
                     <td>
-                        <button type="button" ng-click="ctrl.edit(track.id)">Edit</button>
+                        <button type="button" ng-click="ctrl.edit(track.id)">Update</button>
                         <button type="button" ng-click="ctrl.remove(track.id)">Remove</button>
                     </td>
                 </tr>

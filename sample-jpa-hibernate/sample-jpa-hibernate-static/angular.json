@@ -1,158 +1,158 @@
 {
-  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1,
-  "newProjectRoot": "projects",
-  "projects": {
-    "sample-jpa-hibernate-static": {
-      "root": "",
-      "sourceRoot": "src",
-      "projectType": "application",
-      "prefix": "app",
-      "schematics": {
-        "@schematics/angular:component": {
-          "inlineTemplate": true
-        }
-      },
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:browser",
-          "options": {
-            "outputPath": "dist/sample-jpa-hibernate-static",
-            "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "src/tsconfig.app.json",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "node_modules/bootstrap/scss/bootstrap.scss",
-              "src/styles.css"
-            ],
-            "scripts": [
-              "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/popper.js/dist/umd/popper.min.js",
-              "node_modules/bootstrap/dist/js/bootstrap.min.js"
-            ]
-          },
-          "configurations": {
-            "development": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.dev.ts"
+    "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+    "version": 1,
+    "newProjectRoot": "projects",
+    "projects": {
+        "sample-jpa-hibernate-static": {
+            "root": "",
+            "sourceRoot": "src",
+            "projectType": "application",
+            "prefix": "app",
+            "schematics": {
+                "@schematics/angular:component": {
+                    "inlineTemplate": true
                 }
-              ],
-              "outputPath": "dist/sample-jpa-hibernate-static/dev",
-              "baseHref": "/sample/jpa-hibernate/static/"
             },
-            "quality-assurance": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.qa.ts"
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "options": {
+                        "outputPath": "dist/sample-jpa-hibernate-static",
+                        "index": "src/index.html",
+                        "main": "src/main.ts",
+                        "polyfills": "src/polyfills.ts",
+                        "tsConfig": "src/tsconfig.app.json",
+                        "assets": [
+                            "src/favicon.ico",
+                            "src/assets"
+                        ],
+                        "styles": [
+                            "node_modules/bootstrap/scss/bootstrap.scss",
+                            "src/styles.css"
+                        ],
+                        "scripts": [
+                            "node_modules/jquery/dist/jquery.min.js",
+                            "node_modules/popper.js/dist/umd/popper.min.js",
+                            "node_modules/bootstrap/dist/js/bootstrap.min.js"
+                        ]
+                    },
+                    "configurations": {
+                        "development": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "src/environments/environment.ts",
+                                    "with": "src/environments/environment.dev.ts"
+                                }
+                            ],
+                            "outputPath": "dist/sample-jpa-hibernate-static/dev",
+                            "baseHref": "/sample/jpa-hibernate/static/"
+                        },
+                        "quality-assurance": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "src/environments/environment.ts",
+                                    "with": "src/environments/environment.qa.ts"
+                                }
+                            ],
+                            "outputPath": "dist/sample-jpa-hibernate-static/qa",
+                            "baseHref": "/sample/jpa-hibernate/static/"
+                        },
+                        "production": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "src/environments/environment.ts",
+                                    "with": "src/environments/environment.prod.ts"
+                                }
+                            ],
+                            "outputPath": "dist/sample-jpa-hibernate-static/prod",
+                            "baseHref": "/jpa-hibernate/static/",
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "aot": true,
+                            "extractLicenses": true,
+                            "vendorChunk": false,
+                            "buildOptimizer": true
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                        "browserTarget": "sample-jpa-hibernate-static:build"
+                    },
+                    "configurations": {
+                        "production": {
+                            "browserTarget": "sample-jpa-hibernate-static:build:production"
+                        }
+                    }
+                },
+                "extract-i18n": {
+                    "builder": "@angular-devkit/build-angular:extract-i18n",
+                    "options": {
+                        "browserTarget": "sample-jpa-hibernate-static:build"
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "src/test.ts",
+                        "polyfills": "src/polyfills.ts",
+                        "tsConfig": "src/tsconfig.spec.json",
+                        "karmaConfig": "src/karma.conf.js",
+                        "assets": [
+                            "src/favicon.ico",
+                            "src/assets"
+                        ],
+                        "styles": [
+                            "src/styles.css"
+                        ],
+                        "scripts": []
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "src/tsconfig.app.json",
+                            "src/tsconfig.spec.json"
+                        ],
+                        "exclude": [
+                            "**/node_modules/**"
+                        ]
+                    }
                 }
-              ],
-              "outputPath": "dist/sample-jpa-hibernate-static/qa",
-              "baseHref": "/sample/jpa-hibernate/static/"
-            },
-            "production": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+            }
+        },
+        "sample-jpa-hibernate-static-e2e": {
+            "root": "e2e/",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@angular-devkit/build-angular:protractor",
+                    "options": {
+                        "protractorConfig": "e2e/protractor.conf.js",
+                        "devServerTarget": "sample-jpa-hibernate-static:serve"
+                    },
+                    "configurations": {
+                        "production": {
+                            "devServerTarget": "sample-jpa-hibernate-static:serve:production"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": "e2e/tsconfig.e2e.json",
+                        "exclude": [
+                            "**/node_modules/**"
+                        ]
+                    }
                 }
-              ],
-              "outputPath": "dist/sample-jpa-hibernate-static/prod",
-              "baseHref": "/jpa-hibernate/static/",
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true
             }
-          }
-        },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "browserTarget": "sample-jpa-hibernate-static:build"
-          },
-          "configurations": {
-            "production": {
-              "browserTarget": "sample-jpa-hibernate-static:build:production"
-            }
-          }
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "sample-jpa-hibernate-static:build"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "src/tsconfig.spec.json",
-            "karmaConfig": "src/karma.conf.js",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.css"
-            ],
-            "scripts": []
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "src/tsconfig.app.json",
-              "src/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
         }
-      }
     },
-    "sample-jpa-hibernate-static-e2e": {
-      "root": "e2e/",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
-          "options": {
-            "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "sample-jpa-hibernate-static:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "sample-jpa-hibernate-static:serve:production"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": "e2e/tsconfig.e2e.json",
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
-    }
-  },
-  "defaultProject": "sample-jpa-hibernate-static"
+    "defaultProject": "sample-jpa-hibernate-static"
 }

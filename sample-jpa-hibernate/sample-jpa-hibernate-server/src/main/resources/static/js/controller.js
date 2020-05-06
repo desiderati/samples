@@ -1,3 +1,21 @@
+/*
+ * Copyright (c) 2020 - Felipe Desiderati
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
+ * associated documentation files (the "Software"), to deal in the Software without restriction,
+ * including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so,
+ * subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial
+ * portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
+ * LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+ * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+ * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
 'use strict';
 
 App.controller('TrackController', [
@@ -9,7 +27,7 @@ App.controller('TrackController', [
 
         self.track = {
             id: null,
-            trackname: null,
+            trackName: null,
             author: null,
             duration: null
         };
@@ -23,17 +41,19 @@ App.controller('TrackController', [
                 },
                 function () {
                     console.error('Error while fetching Tracks.');
-                });
+                }
+            );
         };
 
-        self.fetchTrackByName = function (trackname) {
-            TrackService.fetchTrackByName(trackname).then(
+        self.fetchTrackByName = function (trackName) {
+            TrackService.fetchTrackByName(trackName).then(
                 function (response) {
                     self.tracks = response;
                 },
                 function () {
                     console.error('Error while fetching Tracks.');
-                });
+                }
+            );
         };
 
         self.createTrack = function (track) {
@@ -42,15 +62,10 @@ App.controller('TrackController', [
                     self.fetchAllTracks();
                     self.reset();
                 },
-                /** @namespace errResponse.data.validationMessages */
                 function (errResponse) {
-                    console.error('Error while creating Track.');
-                    if (typeof(errResponse.data.validationMessages) !== 'undefined') {
-                        self.addValidationErrorMessages(errResponse.data.validationMessages);
-                    } else {
-                        self.addErrorMessage(errResponse.data.message);
-                    }
-                });
+                    self.handleErrorResponse(errResponse, 'Error while creating Track.');
+                }
+            );
         };
 
         self.updateTrack = function (track, id) {
@@ -59,15 +74,10 @@ App.controller('TrackController', [
                     self.fetchAllTracks();
                     self.reset();
                 },
-                /** @namespace errResponse.data.validationMessages */
                 function (errResponse) {
-                    console.error('Error while updating Track.');
-                    if (typeof(errResponse.data.validationMessages) !== 'undefined') {
-                        self.addValidationErrorMessages(errResponse.data.validationMessages);
-                    } else {
-                        self.addErrorMessage(errResponse.data.message);
-                    }
-                });
+                    self.handleErrorResponse(errResponse, 'Error while updating Track.');
+                }
+            );
         };
 
         self.deleteTrack = function (id) {
@@ -75,10 +85,21 @@ App.controller('TrackController', [
                 self.fetchAllTracks,
                 function () {
                     console.error('Error while deleting Track.');
-                });
+                }
+            );
         };
 
         // Form Operations
+
+        /** @namespace errResponse.data.validationMessages */
+        self.handleErrorResponse = function (errResponse, errMsg) {
+            console.error(errMsg);
+            if (typeof (errResponse.data.validationMessages) !== 'undefined') {
+                self.addValidationErrorMessages(errResponse.data.validationMessages);
+            } else {
+                self.addErrorMessage(errResponse.data.message);
+            }
+        };
 
         self.addErrorMessage = function (message) {
             $('#errorsContainer').show();
@@ -114,8 +135,7 @@ App.controller('TrackController', [
             if (self.track.id === null) {
                 console.log('Saving new Track', self.track);
                 self.createTrack(self.track);
-            }
-            else {
+            } else {
                 self.updateTrack(self.track, self.track.id);
                 console.log('Track updated with id: ', self.track.id);
             }
@@ -124,7 +144,7 @@ App.controller('TrackController', [
         self.reset = function () {
             self.track = {
                 id: null,
-                trackname: null,
+                trackName: null,
                 author: null,
                 duration: null
             };
@@ -135,11 +155,10 @@ App.controller('TrackController', [
         // Grid Operations
 
         self.filter = function () {
-            if (self.filterByTrackname === null) {
+            if (self.filterByTrackName === null) {
                 self.fetchAllTracks();
-            }
-            else {
-                self.fetchTrackByName(self.filterByTrackname);
+            } else {
+                self.fetchTrackByName(self.filterByTrackName);
             }
         };
 

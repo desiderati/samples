@@ -1,8 +1,20 @@
 /*
- * Copyright (c) 2019 - Felipe Desiderati ALL RIGHTS RESERVED.
+ * Copyright (c) 2020 - Felipe Desiderati
  *
- * This software is protected by international copyright laws and cannot be
- * used, copied, stored or distributed without prior authorization.
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
+ * associated documentation files (the "Software"), to deal in the Software without restriction,
+ * including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so,
+ * subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial
+ * portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
+ * LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+ * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+ * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 import {Util} from './util';
 
@@ -19,9 +31,14 @@ export class NotificationService {
 
         // Mandatory parameters.
         url: '',
-        notificationCallback: (msg: string) => {},
-        statusCallback: (msg: string) => {},
-        subscribeOnTimeout: (request: any) => {},
+        notificationCallback: (msg: string) => {
+        },
+
+        statusCallback: (msg: string) => {
+        },
+
+        subscribeOnTimeout: (request: any) => {
+        },
 
         // Default parameters.
         contentType: 'application/json',
@@ -40,6 +57,7 @@ export class NotificationService {
 
             // Carry the UUID. This is required if you want to call
             // subscribe(request) again.
+            // noinspection TypeScriptUnresolvedVariable
             this.uuid = response.request.uuid;
         },
 
@@ -50,6 +68,7 @@ export class NotificationService {
         },
 
         onMessage(response): (response) => void {
+            // noinspection TypeScriptUnresolvedVariable
             const message = response.responseBody;
             let json = null;
             try {
@@ -76,7 +95,7 @@ export class NotificationService {
         onTransportFailure(errorMsg, request) {
             request.fallbackTransport = 'long-polling';  // Always forcing long-polling!
             const msg = 'Sorry, but it wasn\'t possible to establish a connection using ' + request.transport + '! ' +
-              'Falling back to ' + request.fallbackTransport + '.';
+                'Falling back to ' + request.fallbackTransport + '.';
             console.log(msg);
             this.statusCallback(msg);
         },
@@ -126,8 +145,8 @@ export class NotificationService {
 
             } else {
                 throw new Error('First argument must be a valid JSON Object containing the request parameters and ' +
-                   'second argument must be a valid (Notification) callback function! Or...  First argument must be ' +
-                   'a valid (Notification) callback function and second argument must be a valid (Status) callback function!');
+                    'second argument must be a valid (Notification) callback function! Or...  First argument must be ' +
+                    'a valid (Notification) callback function and second argument must be a valid (Status) callback function!');
             }
         }
 
@@ -135,8 +154,8 @@ export class NotificationService {
             const validArguments = Util.isJson(args[0]) && $.isFunction(args[1]) && $.isFunction(args[2]);
             if (!validArguments) {
                 throw new Error('First argument must be a valid JSON Object containing the request parameters and ' +
-                   'second argument must be a valid (Notification) callback function and third argument must be ' +
-                  'a valid (Status) callback function!');
+                    'second argument must be a valid (Notification) callback function and third argument must be ' +
+                    'a valid (Status) callback function!');
             }
 
             params = args[0];
@@ -186,7 +205,7 @@ export class NotificationService {
 
     push(msg: string) {
         this.subscription.push(JSON.stringify({
-           message: msg
+            message: msg
         }));
     }
 
