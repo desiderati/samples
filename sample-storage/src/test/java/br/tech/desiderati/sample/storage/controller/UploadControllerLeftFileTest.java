@@ -60,7 +60,7 @@ class UploadControllerLeftFileTest extends AbstractUploadControllerTest {
 
         ValidationResponseExceptionDTO responseExceptionDTO =
             mapper.readValue(result.getResponse().getContentAsString(), ValidationResponseExceptionDTO.class);
-        assertEquals("validation_error_msg", responseExceptionDTO.getErrorCode());
+        assertEquals("DefaultValidation.message", responseExceptionDTO.getErrorCode());
 
         String[] validationMessages = responseExceptionDTO.getValidationMessages();
         assertEquals(1, validationMessages.length);
@@ -79,7 +79,7 @@ class UploadControllerLeftFileTest extends AbstractUploadControllerTest {
 
         ValidationResponseExceptionDTO responseExceptionDTO =
             mapper.readValue(result.getResponse().getContentAsString(), ValidationResponseExceptionDTO.class);
-        assertEquals("validation_error_msg", responseExceptionDTO.getErrorCode());
+        assertEquals("DefaultValidation.message", responseExceptionDTO.getErrorCode());
 
         String[] validationMessages = responseExceptionDTO.getValidationMessages();
         assertEquals(1, validationMessages.length);
