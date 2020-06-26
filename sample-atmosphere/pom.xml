@@ -24,7 +24,7 @@
     <parent>
         <groupId>io.herd.common</groupId>
         <artifactId>common-parent-info</artifactId>
-        <version>2.3.14</version>
+        <version>2.3.15</version>
         <relativePath>../../commons/common-parent-info</relativePath>
     </parent>
     <groupId>br.tech.desiderati.sample</groupId>
