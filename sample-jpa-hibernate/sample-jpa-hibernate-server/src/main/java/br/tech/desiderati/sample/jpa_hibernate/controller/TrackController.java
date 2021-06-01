@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 - Felipe Desiderati
+ * Copyright (c) 2021 - Felipe Desiderati
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
  * associated documentation files (the "Software"), to deal in the Software without restriction,
@@ -18,10 +18,10 @@
  */
 package br.tech.desiderati.sample.jpa_hibernate.controller;
 
-import io.herd.common.exception.NotFoundRestApiException;
 import br.tech.desiderati.sample.jpa_hibernate.controller.dto.TrackDTO;
 import br.tech.desiderati.sample.jpa_hibernate.domain.Track;
 import br.tech.desiderati.sample.jpa_hibernate.service.TrackService;
+import io.herd.common.exception.NotFoundRestApiException;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 import org.modelmapper.ModelMapper;
@@ -42,7 +42,7 @@ public class TrackController {
     @Resource(name = "trackServiceJpa")
     private final TrackService trackService;
 
-    private ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
 
     @Autowired
     public TrackController(TrackService trackService, ModelMapper modelMapper) {

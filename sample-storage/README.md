@@ -28,7 +28,7 @@ $ cd samples/sample-storage
 
 $ mvn clean install
 
-$ java -Xms256m -Xmx512m -jar target/sample-storage-1.0.0-SNAPSHOT-exec.war
+$ java -Xms256m -Xmx512m -jar target/sample-storage-0.0.1-SNAPSHOT-exec.war
 ```
 
 ## B) Running the project using Docker Image

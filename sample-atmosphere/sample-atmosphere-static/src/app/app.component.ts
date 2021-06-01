@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 - Felipe Desiderati
+ * Copyright (c) 2021 - Felipe Desiderati
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
  * associated documentation files (the "Software"), to deal in the Software without restriction,
@@ -16,13 +16,13 @@
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-import {Component, OnDestroy, ViewChild} from '@angular/core';
-import {NgForm} from '@angular/forms';
+import { Component, OnDestroy, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
-import {Notification} from './notification';
-import {NotificationService} from './notification.service';
+import { Notification } from './notification';
+import { NotificationService } from './notification.service';
 
-import {environment} from '../environments/environment';
+import { environment } from '../environments/environment';
 
 import * as $ from 'jquery';
 
@@ -37,8 +37,8 @@ export class AppComponent implements OnDestroy {
 
     notification = new Notification('desiderati', 'Testing message sending via Angular!');
 
-    private notificationSerive: NotificationService = new NotificationService(
-        AppComponent.printMessage, AppComponent.printErrorMessage);
+    private notificationService: NotificationService =
+        new NotificationService(AppComponent.printMessage, AppComponent.printErrorMessage);
 
     @ViewChild('atmosphereInitializationForm', {static: false}) atmosphereInitializationForm: NgForm;
     @ViewChild('atmosphereForm', {static: false}) atmosphereForm: NgForm;
@@ -57,19 +57,19 @@ export class AppComponent implements OnDestroy {
     }
 
     initialize() {
-        this.notificationSerive.subscribe(apiUrl + 'samples_notification/' + this.notification.user);
+        this.notificationService.subscribe(apiUrl + 'samples_notification/' + this.notification.user);
     }
 
     sendMessage() {
         console.log('Sending message \'' + this.notification.message + '\' to server!');
-        if (!this.notificationSerive.isInitialized()) {
+        if (!this.notificationService.isInitialized()) {
             AppComponent.printErrorMessage('Notification Service not initialized!');
             return;
         }
-        this.notificationSerive.push(this.notification.message);
+        this.notificationService.push(this.notification.message);
     }
 
     ngOnDestroy(): void {
-        this.notificationSerive.unsubscribe();
+        this.notificationService.unsubscribe();
     }
 }

@@ -31,7 +31,7 @@ RUN set -eux \
 
 # Copy application.
 RUN mkdir -p /opt/desiderati-java-app/
-COPY target/sample-storage-1.0.0-SNAPSHOT-exec.war /opt/desiderati-java-app/app.jar
+COPY target/sample-storage-0.0.1-SNAPSHOT-exec.war /opt/desiderati-java-app/app.jar
 
 ENV JAVA_XMS 256m
 ENV JAVA_XMX 512m
