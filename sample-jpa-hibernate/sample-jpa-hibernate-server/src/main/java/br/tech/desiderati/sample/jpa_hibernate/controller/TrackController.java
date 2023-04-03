@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 - Felipe Desiderati
+ * Copyright (c) 2023 - Felipe Desiderati
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
  * associated documentation files (the "Software"), to deal in the Software without restriction,
@@ -21,15 +21,15 @@ package br.tech.desiderati.sample.jpa_hibernate.controller;
 import br.tech.desiderati.sample.jpa_hibernate.controller.dto.TrackDTO;
 import br.tech.desiderati.sample.jpa_hibernate.domain.Track;
 import br.tech.desiderati.sample.jpa_hibernate.service.TrackService;
-import io.herd.common.exception.NotFoundRestApiException;
+import io.herd.common.web.exception.NotFoundRestApiException;
+import jakarta.annotation.Resource;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
-import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

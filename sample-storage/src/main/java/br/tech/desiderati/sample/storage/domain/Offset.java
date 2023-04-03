@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 - Felipe Desiderati
+ * Copyright (c) 2023 - Felipe Desiderati
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
  * associated documentation files (the "Software"), to deal in the Software without restriction,
@@ -18,7 +18,10 @@
  */
 package br.tech.desiderati.sample.storage.domain;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 @Getter
 @NoArgsConstructor
@@ -26,6 +29,7 @@ import lombok.*;
 public class Offset {
 
     @NonNull
+    @SuppressWarnings("NullableProblems")
     private long position;
     private long length = 1L;
 

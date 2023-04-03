@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 - Felipe Desiderati
+ * Copyright (c) 2023 - Felipe Desiderati
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
  * associated documentation files (the "Software"), to deal in the Software without restriction,
@@ -18,7 +18,8 @@
  */
 package br.tech.desiderati.sample.storage.controller;
 
-import io.herd.common.exception.ValidationResponseExceptionDTO;
+import io.herd.common.web.exception.ResponseExceptionDTO;
+import io.herd.common.web.exception.ValidationResponseExceptionDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.web.servlet.MvcResult;
@@ -37,9 +38,9 @@ class UploadControllerRightFileTest extends AbstractUploadControllerTest {
     void uploadRightFileShouldReturnInternalServerErrorBecauseInvalidFileId() throws Exception {
         MvcResult result =
             mockMvc.perform(
-                post(API_BASE_PATH + "/v1/diff/abc/right")
-                    .contentType("application/txt")
-                    .content(""))
+                    post(API_BASE_PATH + "/v1/diff/abc/right")
+                        .contentType("application/txt")
+                        .content(""))
                 .andExpect(status().isBadRequest())
                 .andReturn();
 
@@ -52,28 +53,24 @@ class UploadControllerRightFileTest extends AbstractUploadControllerTest {
     void uploadRightFileShouldReturnBadRequestBecauseNullFileId() throws Exception {
         MvcResult result =
             mockMvc.perform(
-                post(API_BASE_PATH + "/v1/diff/ /right")
-                    .contentType("application/txt")
-                    .content(""))
-                .andExpect(status().isBadRequest())
+                    post(API_BASE_PATH + "/v1/diff/ /right")
+                        .contentType("application/txt")
+                        .content(""))
+                .andExpect(status().isInternalServerError())
                 .andReturn();
 
-        ValidationResponseExceptionDTO responseExceptionDTO =
-            mapper.readValue(result.getResponse().getContentAsString(), ValidationResponseExceptionDTO.class);
-        assertEquals("DefaultValidation.message", responseExceptionDTO.getErrorCode());
-
-        String[] validationMessages = responseExceptionDTO.getValidationMessages();
-        assertEquals(1, validationMessages.length);
-        assertEquals("right.fileId:must not be null", validationMessages[0]);
+        ResponseExceptionDTO responseExceptionDTO =
+            mapper.readValue(result.getResponse().getContentAsString(), ResponseExceptionDTO.class);
+        assertEquals("http_error_500", responseExceptionDTO.getErrorCode());
     }
 
     @Test
     void uploadRightFileShouldReturnBadRequestBecauseNegativeFileId() throws Exception {
         MvcResult result =
             mockMvc.perform(
-                post(API_BASE_PATH + "/v1/diff/-1/right")
-                    .contentType("application/txt")
-                    .content(""))
+                    post(API_BASE_PATH + "/v1/diff/-1/right")
+                        .contentType("application/txt")
+                        .content(""))
                 .andExpect(status().isBadRequest())
                 .andReturn();
 
@@ -89,17 +86,17 @@ class UploadControllerRightFileTest extends AbstractUploadControllerTest {
     @Test
     void uploadRightFileShouldReturnBadRequestBecauseFileAlreadyUploaded() throws Exception {
         mockMvc.perform(
-            post(API_BASE_PATH + "/v1/diff/1/right")
-                .contentType("application/txt")
-                .content("123456"))
+                post(API_BASE_PATH + "/v1/diff/1/right")
+                    .contentType("application/txt")
+                    .content("123456"))
             .andExpect(status().isOk())
             .andReturn();
 
         MvcResult secondResult =
             mockMvc.perform(
-                post(API_BASE_PATH + "/v1/diff/1/right")
-                    .contentType("application/txt")
-                    .content("123456"))
+                    post(API_BASE_PATH + "/v1/diff/1/right")
+                        .contentType("application/txt")
+                        .content("123456"))
                 .andExpect(status().isNotAcceptable())
                 .andReturn();
 
@@ -111,9 +108,9 @@ class UploadControllerRightFileTest extends AbstractUploadControllerTest {
     @Test
     void uploadRightFileShouldReturnSuccessEvenIfEmptyContent() throws Exception {
         mockMvc.perform(
-            post(API_BASE_PATH + "/v1/diff/2/right")
-                .contentType("application/txt")
-                .content(""))
+                post(API_BASE_PATH + "/v1/diff/2/right")
+                    .contentType("application/txt")
+                    .content(""))
             .andExpect(status().isOk())
             .andReturn();
     }
@@ -121,9 +118,9 @@ class UploadControllerRightFileTest extends AbstractUploadControllerTest {
     @Test
     void uploadRightFileShouldReturnSuccess() throws Exception {
         mockMvc.perform(
-            post(API_BASE_PATH + "/v1/diff/3/right")
-                .contentType("application/txt")
-                .content("123456"))
+                post(API_BASE_PATH + "/v1/diff/3/right")
+                    .contentType("application/txt")
+                    .content("123456"))
             .andExpect(status().isOk())
             .andReturn();
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 - Felipe Desiderati
+ * Copyright (c) 2023 - Felipe Desiderati
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
  * associated documentation files (the "Software"), to deal in the Software without restriction,
@@ -16,24 +16,24 @@
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
-import {throwError} from 'rxjs';
-import {catchError} from 'rxjs/operators';
+import { throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
-import {Track} from './track';
+import { Track } from './track';
 
-import {environment} from '../../environments/environment';
+import { environment } from '../../environments/environment';
 
 const apiUrl = environment.apiUrl;
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class TrackService {
 
-    private apiUrl = apiUrl + 'track/';
+    private apiUrl = apiUrl + 'track';
 
     constructor(private http: HttpClient) {
     }
@@ -44,8 +44,12 @@ export class TrackService {
     }
 
     fetchTrackByName(trackName: string) {
-        return this.http.get(this.apiUrl + trackName).pipe(
-            catchError(this.handleError('fetching track by name')));
+        if (!!trackName) {
+            return this.http.get(this.apiUrl + '/' + trackName).pipe(
+                catchError(this.handleError('fetching track by name')));
+        } else {
+            this.fetchAllTracks();
+        }
     }
 
     createTrack(track: Track) {
@@ -54,12 +58,12 @@ export class TrackService {
     }
 
     updateTrack(track: Track, id: number) {
-        return this.http.put(this.apiUrl + id, track).pipe(
+        return this.http.put(this.apiUrl + '/' + id, track).pipe(
             catchError(this.handleError('updating track')));
     }
 
     deleteTrack(id: number) {
-        return this.http.delete(this.apiUrl + id).pipe(
+        return this.http.delete(this.apiUrl + '/' + id).pipe(
             catchError(this.handleError('deleting track')));
     }
 

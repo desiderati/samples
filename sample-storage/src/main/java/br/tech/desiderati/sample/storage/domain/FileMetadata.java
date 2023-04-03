@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 - Felipe Desiderati
+ * Copyright (c) 2023 - Felipe Desiderati
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
  * associated documentation files (the "Software"), to deal in the Software without restriction,
@@ -18,13 +18,13 @@
  */
 package br.tech.desiderati.sample.storage.domain;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
 import java.io.File;
 
 /**
@@ -35,6 +35,7 @@ import java.io.File;
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@SuppressWarnings({"com.haulmont.jpb.LombokEqualsAndHashCodeInspection", "JpaDataSourceORMInspection"})
 @EqualsAndHashCode(of = {"fileId", "side"}, callSuper = true)
 
 @Builder

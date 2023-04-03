@@ -1,0 +1,27 @@
+### [Atmosphere] Publica uma notificação à todos os clientes.
+POST {{url}}/sample-atmosphere/{{path}}/broadcast
+Content-Type: application/json
+
+{
+  "message": "Teste de envio à todos os clientes!"
+}
+
+
+### [Atmosphere] Publica uma notificação a um cliente específico.
+POST {{url}}/sample-atmosphere/{{path}}/broadcast
+Content-Type: application/json
+
+{
+  "broadcastId": "/samples_notification/desiderati",
+  "message": "Teste de envio a um cliente específico!"
+}
+
+
+### [Atmosphere] Publica uma notificação a um recurso específico.
+POST {{url}}/sample-atmosphere/{{path}}/broadcast
+Content-Type: application/json
+
+{
+  "resourceId": "51277cc6-5147-4838-84df-b868e7076e0f",
+  "message": "Teste de envio a um recurso específico!"
+}

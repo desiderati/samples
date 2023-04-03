@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 - Felipe Desiderati
+ * Copyright (c) 2023 - Felipe Desiderati
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
  * associated documentation files (the "Software"), to deal in the Software without restriction,
@@ -24,17 +24,17 @@ import br.tech.desiderati.sample.storage.domain.FileMetadata;
 import br.tech.desiderati.sample.storage.domain.Offset;
 import br.tech.desiderati.sample.storage.repository.FileMetadataRepository;
 import io.herd.common.exception.IllegalArgumentApplicationException;
-import io.herd.common.exception.ResourceNotFoundApplicationException;
+import io.herd.common.web.exception.ResourceNotFoundApplicationException;
+import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Hex;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
-import javax.transaction.Transactional;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -45,8 +45,8 @@ import java.nio.file.*;
 import java.security.DigestOutputStream;
 import java.security.MessageDigest;
 
-import static io.herd.common.exception.ThrowingConsumer.silently;
-import static io.herd.common.exception.ThrowingRunnable.silently;
+import static io.herd.common.web.exception.ThrowingConsumer.silently;
+import static io.herd.common.web.exception.ThrowingRunnable.silently;
 
 @Slf4j
 @Service
@@ -110,13 +110,16 @@ public class StorageServiceImpl implements StorageService {
     /**
      * Here is another point of improvement.
      * <br>
-     * Regardless of whether or not an equal file already exists, we save the file on disk.
-     * Subsequently, after calculating SHA1, I verify if there is a file (same content but with different Id)
+     * Regardless of whether an equal file already exists, we save the file on disk.
+     * Subsequently, after calculating SHA1, I verify if there is a file (same content but with different ID)
      * already written to disk. If so, I removed the newly created file (physically) and associated
      * the metadata with the existing one.
      */
-    private void writeFileAndValidateDuplicates(FileMetadata fileMetadata, InputStream inputStream,
-                                                MessageDigest digest) throws IOException {
+    private void writeFileAndValidateDuplicates(
+        FileMetadata fileMetadata,
+        InputStream inputStream,
+        MessageDigest digest
+    ) throws IOException {
 
         // Creates temp folder if not exists!
         Path tmpLocalFilePath = rootLocation.resolve(fileMetadata.getTempFilename());
@@ -130,25 +133,31 @@ public class StorageServiceImpl implements StorageService {
         String sha1 = writeFile(inputStream, outputStream, digest);
         fileMetadata.setSha1(sha1);
 
-        fileMetadataRepository.findFirstFileMetadaWithSameSha1ButDiffFileIdOrSide(sha1, fileMetadata.getFileId(), fileMetadata.getSide())
-            .ifPresentOrElse(
-                silently(sha1FileMetadata -> {
-                    // If file is duplicated, don't stores it. Just use the same reference. (Save space on disk)
-                    fileMetadata.replaceLocalFilenameWith(sha1FileMetadata);
-                    Files.deleteIfExists(tmpLocalFilePath);
-                }),
-                silently(() -> {
-                    // Moves from temp folder to the destination folter.
-                    Path localFilePath = rootLocation.resolve(fileMetadata.getLocalFilename());
-                    Files.createDirectories(localFilePath.getParent());
-                    Files.move(tmpLocalFilePath, localFilePath, StandardCopyOption.REPLACE_EXISTING);
-                }));
+        fileMetadataRepository.findFirstFileMetadaWithSameSha1ButDiffFileIdOrSide(
+            sha1,
+            fileMetadata.getFileId(),
+            fileMetadata.getSide()
+        ).ifPresentOrElse(
+            silently(sha1FileMetadata -> {
+                // If file is duplicated, don't store it. Just use the same reference. (Save space on disk)
+                fileMetadata.replaceLocalFilenameWith(sha1FileMetadata);
+                Files.deleteIfExists(tmpLocalFilePath);
+            }),
+            silently(() -> {
+                // Moves from temp folder to the destination folter.
+                Path localFilePath = rootLocation.resolve(fileMetadata.getLocalFilename());
+                Files.createDirectories(localFilePath.getParent());
+                Files.move(tmpLocalFilePath, localFilePath, StandardCopyOption.REPLACE_EXISTING);
+            }));
 
         fileMetadata.setCompleted(true);
     }
 
-    private String writeFile(InputStream inputStream, OutputStream outputStream,
-                             MessageDigest digest) throws IOException {
+    private String writeFile(
+        InputStream inputStream,
+        OutputStream outputStream,
+        MessageDigest digest
+    ) throws IOException {
 
         try (DigestOutputStream digestOutputStream = new DigestOutputStream(outputStream, digest)) {
             byte[] buffer = new byte[BUFFER_SIZE];
@@ -185,8 +194,11 @@ public class StorageServiceImpl implements StorageService {
         Path leftFilePath = rootLocation.resolve(leftFileMetadata.getLocalFilename());
         Path rigthFilePath = rootLocation.resolve(rightFileMetadata.getLocalFilename());
 
-        try (FileChannel leftChannel = new RandomAccessFile(leftFilePath.toFile(), "r").getChannel();
-             FileChannel rightChannel = new RandomAccessFile(rigthFilePath.toFile(), "r").getChannel()) {
+        try (RandomAccessFile leftRaf = new RandomAccessFile(leftFilePath.toFile(), "r");
+             RandomAccessFile rightRaf = new RandomAccessFile(rigthFilePath.toFile(), "r")
+        ) {
+            FileChannel leftChannel = leftRaf.getChannel();
+            FileChannel rightChannel = rightRaf.getChannel();
 
             if (leftChannel.size() != rightChannel.size()) {
                 diff.setDiffSize(true);

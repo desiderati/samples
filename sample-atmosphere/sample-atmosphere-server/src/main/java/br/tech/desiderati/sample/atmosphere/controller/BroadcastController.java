@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 - Felipe Desiderati
+ * Copyright (c) 2023 - Felipe Desiderati
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
  * associated documentation files (the "Software"), to deal in the Software without restriction,
@@ -18,12 +18,14 @@
  */
 package br.tech.desiderati.sample.atmosphere.controller;
 
-import io.herd.common.notification.NotificationService;
 import br.tech.desiderati.sample.atmosphere.controller.dto.BroadcastDTO;
+import io.herd.common.web.notification.NotificationService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/v1/broadcast")
@@ -47,4 +49,3 @@ public class BroadcastController {
         }
     }
 }
-

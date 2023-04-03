@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ~ Copyright (c) 2021 - Felipe Desiderati
+  ~ Copyright (c) 2023 - Felipe Desiderati
   ~
   ~ Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
   ~ associated documentation files (the "Software"), to deal in the Software without restriction,
@@ -23,24 +23,19 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>io.herd.common</groupId>
-        <artifactId>common-starter</artifactId>
-        <version>2.3.21</version>
+        <artifactId>common-starter-web</artifactId>
+        <version>3.0.0.RELEASE</version>
         <!--suppress MavenModelInspection-->
-        <relativePath>../../commons/common-starter</relativePath>
+        <relativePath>../../commons/common-starter-web</relativePath>
     </parent>
     <groupId>br.tech.desiderati.sample</groupId>
     <artifactId>sample-storage</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
 
     <dependencies>
         <dependency>
             <groupId>io.herd.common</groupId>
-            <artifactId>common</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.herd.common</groupId>
-            <artifactId>common-security</artifactId>
+            <artifactId>common-data-jpa</artifactId>
         </dependency>
         <dependency>
             <groupId>io.herd.common</groupId>

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 - Felipe Desiderati
+ * Copyright (c) 2023 - Felipe Desiderati
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
  * associated documentation files (the "Software"), to deal in the Software without restriction,
@@ -19,9 +19,9 @@
 package br.tech.desiderati.sample.jpa_hibernate.service;
 
 import br.tech.desiderati.sample.jpa_hibernate.domain.Track;
+import jakarta.validation.Valid;
 import org.springframework.validation.annotation.Validated;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @Validated

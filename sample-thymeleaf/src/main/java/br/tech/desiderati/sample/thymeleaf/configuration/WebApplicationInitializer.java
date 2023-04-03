@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 - Felipe Desiderati
+ * Copyright (c) 2023 - Felipe Desiderati
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
  * associated documentation files (the "Software"), to deal in the Software without restriction,
@@ -18,8 +18,8 @@
  */
 package br.tech.desiderati.sample.thymeleaf.configuration;
 
-import io.herd.common.configuration.AbstractWebApplicationInitializer;
 import br.tech.desiderati.sample.thymeleaf.WebApplication;
+import io.herd.common.web.configuration.AbstractWebApplicationInitializer;
 
 public class WebApplicationInitializer extends AbstractWebApplicationInitializer {
 

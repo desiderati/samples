@@ -1,0 +1,18 @@
+### [Storage] Add file to left side
+POST {{url}}/sample-storage/{{path}}/diff/1/left
+Content-Type: application/pdf
+
+< postman-body.png
+
+
+### [Storage] Add file to rigth side
+POST {{url}}/sample-storage/{{path}}/diff/1/right
+Content-Type: application/pdf
+
+< postman-body.png
+
+
+### [Storage] Compare both sides
+GET {{url}}/sample-storage/{{path}}/diff/1
+Content-Type: application/pdf
+

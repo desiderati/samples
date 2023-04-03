@@ -1,0 +1,11 @@
+### [Thymeleaf] Processa template
+GET {{url}}/sample-thymeleaf/{{path}}/thymeleaf/templates/Felipe
+
+
+### [Thymeleaf] Processa template de texto
+GET {{url}}/sample-thymeleaf/{{path}}/thymeleaf/templates-text/Felipe
+
+
+### [Thymeleaf] Processa template de HTML
+GET {{url}}/sample-thymeleaf/{{path}}/thymeleaf/templates-html/Felipe
+

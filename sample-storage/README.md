@@ -1,13 +1,13 @@
 # sample-storage
 
 Please, this is not a scalable solution, since it handles files directly. If I wanted a scalable application, 
-probably I would used Firebase or AWS S3. It is just a sample application that I've created to see how to handle file 
+probably I would use Firebase or AWS S3. It is just a sample application that I've created to see how to handle file 
 upload within Spring Boot.
 
 ## Prerequisites
 
-* JDK 11
-* Apache Maven 3.6.0
+* JDK 17
+* Apache Maven 3.9.1
 
 ## Dependencies 
 
