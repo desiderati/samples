@@ -57,7 +57,7 @@ export class AppComponent implements OnDestroy {
     }
 
     initialize() {
-        this.notificationService.subscribe(apiUrl + 'samples_notification/' + this.notification.user);
+        this.notificationService.subscribe(apiUrl + 'samples-notification/' + this.notification.user);
     }
 
     sendMessage() {

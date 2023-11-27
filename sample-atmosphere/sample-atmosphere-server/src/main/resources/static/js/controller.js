@@ -41,7 +41,7 @@
         }
 
         atmosphereRequest = new AtmosphereRequest(
-          document.location.toString() + 'samples_notification/' + self.notification.user,
+          document.location.toString() + 'samples-notification/' + self.notification.user,
           subscription,
           function(msg) {
             self.printMessage(msg);

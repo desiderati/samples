@@ -12,7 +12,7 @@ POST {{url}}/sample-atmosphere/{{path}}/broadcast
 Content-Type: application/json
 
 {
-  "broadcastId": "/samples_notification/desiderati",
+  "broadcastId": "desiderati",
   "message": "Teste de envio a um cliente específico!"
 }
 
@@ -22,6 +22,6 @@ POST {{url}}/sample-atmosphere/{{path}}/broadcast
 Content-Type: application/json
 
 {
-  "resourceId": "51277cc6-5147-4838-84df-b868e7076e0f",
+  "resourceId": "574d2545-48f4-4e57-8da9-e938317cafb2",
   "message": "Teste de envio a um recurso específico!"
 }
