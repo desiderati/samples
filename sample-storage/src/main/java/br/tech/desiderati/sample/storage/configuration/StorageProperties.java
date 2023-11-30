@@ -28,7 +28,7 @@ import org.springframework.stereotype.Component;
 @Setter
 @Component
 @PropertySource("classpath:storage.properties")
-@ConfigurationProperties(prefix = "storage")
+@ConfigurationProperties("storage")
 public class StorageProperties {
 
     private String rootLocation;

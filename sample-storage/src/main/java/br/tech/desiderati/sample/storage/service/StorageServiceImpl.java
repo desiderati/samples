@@ -175,15 +175,11 @@ public class StorageServiceImpl implements StorageService {
     public Diff diff(@Positive @NotNull Long fileId) throws IOException {
         FileMetadata leftFileMetadata =
             fileMetadataRepository.findFirstByFileIdAndSide(fileId, FileMetadata.SIDE.LEFT)
-                .orElseThrow(() -> {
-                    throw new ResourceNotFoundApplicationException("left_side_not_found_excpetion");
-                });
+                .orElseThrow(() -> new ResourceNotFoundApplicationException("left_side_not_found_excpetion"));
 
         FileMetadata rightFileMetadata =
             fileMetadataRepository.findFirstByFileIdAndSide(fileId, FileMetadata.SIDE.RIGTH)
-                .orElseThrow(() -> {
-                    throw new ResourceNotFoundApplicationException("right_side_not_found_excpetion");
-                });
+                .orElseThrow(() -> new ResourceNotFoundApplicationException("right_side_not_found_excpetion"));
 
         Diff diff = new Diff();
         if (leftFileMetadata.getSha1().equalsIgnoreCase(rightFileMetadata.getSha1())) {

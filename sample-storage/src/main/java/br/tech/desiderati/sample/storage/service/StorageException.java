@@ -20,7 +20,12 @@ package br.tech.desiderati.sample.storage.service;
 
 import io.herd.common.exception.ApplicationException;
 
+import java.io.Serial;
+
 public class StorageException extends ApplicationException {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     public StorageException(String message, Throwable cause) {
         super(message, cause);
