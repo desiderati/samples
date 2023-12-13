@@ -21,7 +21,7 @@ package br.tech.desiderati.sample.jpa_hibernate.controller;
 import br.tech.desiderati.sample.jpa_hibernate.controller.dto.TrackDTO;
 import br.tech.desiderati.sample.jpa_hibernate.domain.Track;
 import br.tech.desiderati.sample.jpa_hibernate.service.TrackService;
-import io.herd.common.web.exception.NotFoundRestApiException;
+import io.herd.common.web.rest.exception.NotFoundRestApiException;
 import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;

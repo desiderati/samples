@@ -18,8 +18,8 @@
  */
 package br.tech.desiderati.sample.storage.controller;
 
-import io.herd.common.web.exception.ResponseExceptionDTO;
-import io.herd.common.web.exception.ValidationResponseExceptionDTO;
+import io.herd.common.web.rest.exception.ResponseExceptionDTO;
+import io.herd.common.web.rest.exception.ValidationResponseExceptionDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.web.servlet.MvcResult;

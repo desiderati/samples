@@ -21,7 +21,7 @@ package br.tech.desiderati.sample.storage.service;
 import br.tech.desiderati.sample.storage.Fixtures;
 import br.tech.desiderati.sample.storage.domain.Diff;
 import br.tech.desiderati.sample.storage.domain.FileMetadata;
-import io.herd.common.web.exception.ResourceNotFoundApplicationException;
+import io.herd.common.exception.ResourceNotFoundApplicationException;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 

@@ -24,7 +24,7 @@ import br.tech.desiderati.sample.storage.domain.FileMetadata;
 import br.tech.desiderati.sample.storage.domain.Offset;
 import br.tech.desiderati.sample.storage.repository.FileMetadataRepository;
 import io.herd.common.exception.IllegalArgumentApplicationException;
-import io.herd.common.web.exception.ResourceNotFoundApplicationException;
+import io.herd.common.exception.ResourceNotFoundApplicationException;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -45,8 +45,8 @@ import java.nio.file.*;
 import java.security.DigestOutputStream;
 import java.security.MessageDigest;
 
-import static io.herd.common.web.exception.ThrowingConsumer.silently;
-import static io.herd.common.web.exception.ThrowingRunnable.silently;
+import static io.herd.common.exception.ThrowingConsumer.silently;
+import static io.herd.common.exception.ThrowingRunnable.silently;
 
 @Slf4j
 @Service
