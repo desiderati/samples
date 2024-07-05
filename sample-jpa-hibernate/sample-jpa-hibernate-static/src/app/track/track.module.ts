@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 - Felipe Desiderati
+ * Copyright (c) 2024 - Felipe Desiderati
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
  * associated documentation files (the "Software"), to deal in the Software without restriction,
@@ -16,13 +16,13 @@
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
-import { TrackRegistrationComponent } from './track-registration/track-registration.component';
-import { TrackListingComponent } from './track-listing/track-listing.component';
-import { TrackComponent } from './track.component';
+import {TrackRegistrationComponent} from './track-registration/track-registration.component';
+import {TrackListingComponent} from './track-listing/track-listing.component';
+import {TrackComponent} from './track.component';
 
 @NgModule({
     declarations: [

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 - Felipe Desiderati
+ * Copyright (c) 2024 - Felipe Desiderati
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
  * associated documentation files (the "Software"), to deal in the Software without restriction,
@@ -24,6 +24,7 @@ import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import org.springframework.validation.annotation.Validated;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -33,6 +34,9 @@ import java.io.InputStream;
  * breaking the SOLID Principles. In specific, the Single Responsibility Principle. Although
  * it is a simple example, I decided to maintain both methods together.
  */
+
+// Without the @Validated annotation, Spring will not interpolate the error message.
+@Validated
 public interface StorageService {
 
     @Transactional

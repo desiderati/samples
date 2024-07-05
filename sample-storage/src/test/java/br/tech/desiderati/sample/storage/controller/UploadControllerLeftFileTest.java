@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 - Felipe Desiderati
+ * Copyright (c) 2024 - Felipe Desiderati
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
  * associated documentation files (the "Software"), to deal in the Software without restriction,
@@ -56,12 +56,12 @@ class UploadControllerLeftFileTest extends AbstractUploadControllerTest {
                     post(API_BASE_PATH + "/v1/diff/ /left")
                         .contentType("application/txt")
                         .content(""))
-                .andExpect(status().isInternalServerError())
+                .andExpect(status().isBadRequest())
                 .andReturn();
 
         ResponseExceptionDTO responseExceptionDTO =
             mapper.readValue(result.getResponse().getContentAsString(), ResponseExceptionDTO.class);
-        assertEquals("http_error_500", responseExceptionDTO.getErrorCode());
+        assertEquals("http_error_400", responseExceptionDTO.getErrorCode());
     }
 
     @Test
@@ -102,7 +102,7 @@ class UploadControllerLeftFileTest extends AbstractUploadControllerTest {
 
         ValidationResponseExceptionDTO responseExceptionDTO =
             mapper.readValue(secondResult.getResponse().getContentAsString(), ValidationResponseExceptionDTO.class);
-        assertEquals("file_already_uploaded_excpetion", responseExceptionDTO.getErrorCode());
+        assertEquals("file_already_uploaded_exception", responseExceptionDTO.getErrorCode());
     }
 
     @Test

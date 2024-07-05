@@ -1,0 +1,11 @@
+services:
+  hsqldb:
+    image: datagrip/hsqldb:2.3.4
+    container_name: hsqldb
+    ports:
+      - "9001:9001"
+    environment:
+      - HSQLDB_DATABASE_NAME=hsqldb
+      - HSQLDB_DATABASE_ALIAS=hsqldb
+      - HSQLDB_DATABASE_USER=sa
+      - HSQLDB_DATABASE_PASSWORD=

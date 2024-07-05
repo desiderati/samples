@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ~ Copyright (c) 2023 - Felipe Desiderati
+  ~ Copyright (c) 2024 - Felipe Desiderati
   ~
   ~ Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
   ~ associated documentation files (the "Software"), to deal in the Software without restriction,
@@ -23,30 +23,18 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>io.herd.common</groupId>
-        <artifactId>common-parent-openapi-client</artifactId>
-        <version>3.3.0.RC1</version>
-        <relativePath>../../../commons/common-parent-openapi-client</relativePath>
+        <artifactId>common-parent</artifactId>
+        <version>3.3.0.RC3</version>
+        <relativePath>../../../commons/common-parent</relativePath>
     </parent>
     <groupId>br.tech.desiderati.sample</groupId>
     <artifactId>sample-atmosphere-client</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
-    <properties>
-        <openapi.thin-server.disabled>false</openapi.thin-server.disabled>
-        <openapi.thin-server.start-class>br.tech.desiderati.sample.atmosphere.WebApplication</openapi.thin-server.start-class>
-
-        <openapi.json-file.download.disabled>false</openapi.json-file.download.disabled>
-        <openapi.json-file.download.api-docs-path>sample-atmosphere/api-docs</openapi.json-file.download.api-docs-path>
-        <openapi.json-file>openapi-client.json</openapi.json-file>
-
-        <openapi.generation.disabled>false</openapi.generation.disabled>
-    </properties>
-
     <dependencies>
         <dependency>
-            <groupId>br.tech.desiderati.sample</groupId>
-            <artifactId>sample-atmosphere-server</artifactId>
-            <version>${project.version}</version>
+            <groupId>io.herd.common</groupId>
+            <artifactId>common-web-notification-client</artifactId>
         </dependency>
     </dependencies>
 

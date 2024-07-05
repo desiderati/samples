@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 - Felipe Desiderati
+ * Copyright (c) 2024 - Felipe Desiderati
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
  * associated documentation files (the "Software"), to deal in the Software without restriction,
@@ -16,28 +16,30 @@
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-import { Util } from './util';
+import {Util} from './util';
 
 import * as Atmosphere from 'atmosphere.js';
-import * as $ from 'jquery';
 
 export class NotificationService {
 
     private socket: typeof Atmosphere = Atmosphere;
     private subscription = null;
 
-    // noinspection JSUnusedGlobalSymbols,JSUnusedLocalSymbols
+    // noinspection JSUnusedGlobalSymbols
     private atmosphereRequest = {
 
         // Mandatory parameters.
         url: '',
         notificationCallback: (msg: string) => {
+            console.log(msg);
         },
 
         statusCallback: (msg: string) => {
+            console.error(msg);
         },
 
         subscribeOnTimeout: (request: any) => {
+            this.subscription = this.socket.subscribe(request);
         },
 
         // Default parameters.
@@ -57,18 +59,16 @@ export class NotificationService {
 
             // Carry the UUID. This is required if you want to call
             // subscribe(request) again.
-            // noinspection TypeScriptUnresolvedVariable
             this.uuid = response.request.uuid;
         },
 
-        onReopen(request, response) {
+        onReopen(_, response) {
             const msg = 'Atmosphere reconnected using ' + response.transport + '!';
             console.log(msg);
             this.statusCallback(msg);
         },
 
         onMessage(response): (response) => void {
-            // noinspection TypeScriptUnresolvedVariable
             const message = response.responseBody;
             let json = null;
             try {
@@ -78,7 +78,7 @@ export class NotificationService {
                 return;
             }
 
-            this.notificationCallback(json.message);
+            this.notificationCallback(json.payload);
         },
 
         onClose() {
@@ -93,6 +93,8 @@ export class NotificationService {
         },
 
         onTransportFailure(errorMsg, request) {
+            console.warn(errorMsg);
+
             request.fallbackTransport = 'long-polling';  // Always forcing long-polling!
             const msg = 'Sorry, but it wasn\'t possible to establish a connection using ' + request.transport + '! ' +
                 'Falling back to ' + request.fallbackTransport + '.';
@@ -127,7 +129,7 @@ export class NotificationService {
         let statusCallback;
 
         if (args.length === 1) {
-            if (!$.isFunction(args[0])) {
+            if (typeof args[0] !== 'function') {
                 throw new Error('Argument must be a valid (Notification) callback function!');
             }
 
@@ -135,11 +137,11 @@ export class NotificationService {
         }
 
         if (args.length === 2) {
-            if (Util.isJson(args[0]) && $.isFunction(args[1])) {
+            if (Util.isJson(args[0]) && typeof args[1] === 'function') {
                 params = args[0];
                 notificationCallback = args[1];
 
-            } else if ($.isFunction(args[0]) && $.isFunction(args[1])) {
+            } else if (typeof args[0] === 'function' && typeof args[1] === 'function') {
                 notificationCallback = args[0];
                 statusCallback = args[1];
 
@@ -151,7 +153,7 @@ export class NotificationService {
         }
 
         if (args.length === 3) {
-            const validArguments = Util.isJson(args[0]) && $.isFunction(args[1]) && $.isFunction(args[2]);
+            const validArguments = Util.isJson(args[0]) && typeof args[1] === 'function' && typeof args[2] === 'function';
             if (!validArguments) {
                 throw new Error('First argument must be a valid JSON Object containing the request parameters and ' +
                     'second argument must be a valid (Notification) callback function and third argument must be ' +
@@ -193,19 +195,16 @@ export class NotificationService {
 
         this.atmosphereRequest.url = url;
         this.subscription = this.socket.subscribe(this.atmosphereRequest);
-        this.atmosphereRequest.subscribeOnTimeout = (request: any) => {
-            this.subscription = this.socket.subscribe(request);
-        };
     }
 
     unsubscribe() {
-        this.socket.unsubscribeUrl(this.atmosphereRequest.url);
+        this.socket.unsubscribe();
         this.subscription = null;
     }
 
     push(msg: string) {
         this.subscription.push(JSON.stringify({
-            message: msg
+            payload: msg
         }));
     }
 

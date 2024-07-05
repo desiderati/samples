@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 - Felipe Desiderati
+ * Copyright (c) 2024 - Felipe Desiderati
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
  * associated documentation files (the "Software"), to deal in the Software without restriction,
@@ -33,14 +33,22 @@ public interface FileMetadataRepository extends JpaRepository<FileMetadata, UUID
     Optional<FileMetadata> findFirstByFileIdAndSide(Long fileId, FileMetadata.SIDE side);
 
     @Query("SELECT fm FROM FileMetadata fm WHERE fm.sha1 = ?1 AND (fm.fileId <> ?2 OR fm.side <> ?3)")
-    List<FileMetadata> findAllFileMetadaWithSameSha1ButDiffFileIdOrSide(String sha1, Long fileId, FileMetadata.SIDE side);
+    List<FileMetadata> findAllFileMetadataWithSameSha1ButDiffFileIdOrSide(
+        String sha1,
+        Long fileId,
+        FileMetadata.SIDE side
+    );
 
-    default Optional<FileMetadata> findFirstFileMetadaWithSameSha1ButDiffFileIdOrSide(String sha1, Long fileId, FileMetadata.SIDE side) {
-        List<FileMetadata> all = findAllFileMetadaWithSameSha1ButDiffFileIdOrSide(sha1, fileId, side);
+    default Optional<FileMetadata> findFirstFileMetadataWithSameSha1ButDiffFileIdOrSide(
+        String sha1,
+        Long fileId,
+        FileMetadata.SIDE side
+    ) {
+        List<FileMetadata> all = findAllFileMetadataWithSameSha1ButDiffFileIdOrSide(sha1, fileId, side);
         if (all == null || all.isEmpty()) {
             return Optional.empty();
         } else {
-            return Optional.of(all.get(0));
+            return Optional.of(all.getFirst());
         }
     }
 }

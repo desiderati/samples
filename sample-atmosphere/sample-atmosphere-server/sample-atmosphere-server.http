@@ -3,7 +3,7 @@ POST {{url}}/sample-atmosphere/{{path}}/broadcast
 Content-Type: application/json
 
 {
-  "message": "Teste de envio à todos os clientes!"
+  "payload": "Teste de envio à todos os clientes!"
 }
 
 
@@ -13,7 +13,7 @@ Content-Type: application/json
 
 {
   "broadcastId": "desiderati",
-  "message": "Teste de envio a um cliente específico!"
+  "payload": "Teste de envio a um cliente específico!"
 }
 
 
@@ -22,6 +22,6 @@ POST {{url}}/sample-atmosphere/{{path}}/broadcast
 Content-Type: application/json
 
 {
-  "resourceId": "574d2545-48f4-4e57-8da9-e938317cafb2",
-  "message": "Teste de envio a um recurso específico!"
+  "resourceId": "ffcd9064-837b-437e-b4cf-c199f792b628",
+  "payload": "Teste de envio a um recurso específico!"
 }

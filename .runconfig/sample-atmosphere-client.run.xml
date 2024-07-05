@@ -1,0 +1,9 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="sample-atmosphere-client" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="br.tech.desiderati.sample.atmosphere.SampleAtmosphereClient" />
+    <module name="sample-atmosphere-client" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

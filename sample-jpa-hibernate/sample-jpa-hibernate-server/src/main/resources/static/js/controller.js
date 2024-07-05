@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 - Felipe Desiderati
+ * Copyright (c) 2024 - Felipe Desiderati
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
  * associated documentation files (the "Software"), to deal in the Software without restriction,
@@ -16,13 +16,14 @@
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-(function(app) {
+(function (app) {
   'use strict';
 
   app.controller('TrackController', [
     '$scope',
     'TrackService',
-    function($scope, TrackService) {
+    'TrackNotificationService',
+    function ($scope, TrackService, TrackNotificationService) {
 
       let self = this;
 
@@ -35,56 +36,56 @@
 
       self.tracks = [];
 
-      self.fetchAllTracks = function() {
+      self.fetchAllTracks = function () {
         TrackService.fetchAllTracks().then(
-          function(response) {
+          function (response) {
             self.tracks = response;
           },
-          function() {
+          function () {
             console.error('Error while fetching Tracks.');
           },
         );
       };
 
-      self.fetchTrackByName = function(trackName) {
+      self.fetchTrackByName = function (trackName) {
         TrackService.fetchTrackByName(trackName).then(
-          function(response) {
+          function (response) {
             self.tracks = response;
           },
-          function() {
+          function () {
             console.error('Error while fetching Tracks.');
           },
         );
       };
 
-      self.createTrack = function(track) {
+      self.createTrack = function (track) {
         TrackService.createTrack(track).then(
-          function() {
+          function () {
             self.fetchAllTracks();
             self.reset();
           },
-          function(errResponse) {
+          function (errResponse) {
             self.handleErrorResponse(errResponse, 'Error while creating Track.');
           },
         );
       };
 
-      self.updateTrack = function(track, id) {
+      self.updateTrack = function (track, id) {
         TrackService.updateTrack(track, id).then(
-          function() {
+          function () {
             self.fetchAllTracks();
             self.reset();
           },
-          function(errResponse) {
+          function (errResponse) {
             self.handleErrorResponse(errResponse, 'Error while updating Track.');
           },
         );
       };
 
-      self.deleteTrack = function(id) {
+      self.deleteTrack = function (id) {
         TrackService.deleteTrack(id).then(
           self.fetchAllTracks,
-          function() {
+          function () {
             console.error('Error while deleting Track.');
           },
         );
@@ -93,7 +94,7 @@
       // Form Operations
 
       /** @namespace errResponse.data.validationMessages */
-      self.handleErrorResponse = function(errResponse, errMsg) {
+      self.handleErrorResponse = function (errResponse, errMsg) {
         console.error(errMsg);
         if (typeof (errResponse.data.validationMessages) !== 'undefined') {
           self.addValidationErrorMessages(errResponse.data.validationMessages);
@@ -102,36 +103,39 @@
         }
       };
 
-      self.addErrorMessage = function(message) {
+      self.addErrorMessage = function (message) {
         $('#errorsContainer').show();
-        $('<li/>').html(message).appendTo('#errors');
+        $('<li/>').html(message.trim()).appendTo('#errors');
       };
 
-      self.addValidationErrorMessages = function(messages) {
+      self.addValidationErrorMessages = function (messages) {
         $('#errorsContainer').show();
         for (let i = 0; i < messages.length; i++) {
-          const input = messages[i].split(':')[0];
-          const message = messages[i].split(':')[1];
-          $('<li/>')
-            .wrapInner(
-              $('<a/>')
-                .attr('href', 'javascript: void(0);')
-                .html(message)
-                .on('click', function() {
-                  // Focus on the invalid field
-                  $('input[name=\'' + input + '\']').focus();
-                }),
-            )
-            .appendTo('#errors');
+          const msgParts = messages[i].trim().split(':');
+
+          const input = msgParts[0];
+          const inputParts = input.split('.');
+          const inputName = inputParts[inputParts.length - 1]
+
+          const message = msgParts[1];
+          $('<li/>').wrapInner(
+            $('<a/>')
+              .attr('href', 'javascript: void(0);')
+              .html(message)
+              .on('click', function () {
+                // Focus on the invalid field.
+                $('input[name=\'' + inputName + '\']').focus();
+              })
+          ).appendTo('#errors');
         }
       };
 
-      self.clearErrorMessages = function() {
+      self.clearErrorMessages = function () {
         $('#errorsContainer').hide();
         $('#errors').html('');
       };
 
-      self.submit = function() {
+      self.submit = function () {
         self.clearErrorMessages();
         if (self.track.id === null) {
           console.log('Saving new Track', self.track);
@@ -142,7 +146,7 @@
         }
       };
 
-      self.reset = function() {
+      self.reset = function () {
         self.track = {
           id: null,
           trackName: null,
@@ -155,7 +159,7 @@
 
       // Grid Operations
 
-      self.filter = function() {
+      self.filter = function () {
         if (self.filterByTrackName === null) {
           self.fetchAllTracks();
         } else {
@@ -163,7 +167,7 @@
         }
       };
 
-      self.edit = function(id) {
+      self.edit = function (id) {
         console.log('Track to be edited: ', id);
         for (let i = 0; i < self.tracks.length; i++) {
           if (self.tracks[i].id === id) {
@@ -173,7 +177,7 @@
         }
       };
 
-      self.remove = function(id) {
+      self.remove = function (id) {
         console.log('Track to be deleted: ', id);
         if (self.track.id === id) {
           self.reset();
@@ -181,10 +185,21 @@
         self.deleteTrack(id);
       };
 
-      // Execute After Start Up
+      // Execute after startup.
       self.clearErrorMessages();
       self.fetchAllTracks();
-    }],
+
+      // Initialize the notification service.
+      TrackNotificationService.initialize(msg => {
+        if (msg.startsWith('Constraint Violations:')) {
+          self.addValidationErrorMessages(msg.replace('Constraint Violations:', '').trim().split('\n'));
+        } else {
+          self.addErrorMessage(msg);
+        }
+
+        self.fetchAllTracks();
+      });
+    }]
   );
 
 })(app);

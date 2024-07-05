@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ~ Copyright (c) 2023 - Felipe Desiderati
+  ~ Copyright (c) 2024 - Felipe Desiderati
   ~
   ~ Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
   ~ associated documentation files (the "Software"), to deal in the Software without restriction,
@@ -24,7 +24,7 @@
     <parent>
         <groupId>io.herd.common</groupId>
         <artifactId>common-parent-static</artifactId>
-        <version>3.3.0.RC1</version>
+        <version>3.3.0.RC3</version>
         <relativePath>../../../commons/common-parent-static</relativePath>
     </parent>
     <groupId>br.tech.desiderati.sample</groupId>
@@ -33,8 +33,8 @@
     <packaging>pom</packaging>
 
     <properties>
-        <node.version>v12.18.2</node.version>
-        <npm.version>6.14.5</npm.version>
+        <node.version>v12.22.12</node.version>
+        <npm.version>6.14.16</npm.version>
     </properties>
 
     <build>

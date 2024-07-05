@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ~ Copyright (c) 2023 - Felipe Desiderati
+  ~ Copyright (c) 2024 - Felipe Desiderati
   ~
   ~ Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
   ~ associated documentation files (the "Software"), to deal in the Software without restriction,
@@ -24,7 +24,7 @@
     <parent>
         <groupId>io.herd.common</groupId>
         <artifactId>common-parent-info</artifactId>
-        <version>3.3.0.RC1</version>
+        <version>3.3.0.RC3</version>
         <relativePath>../../commons/common-parent-info</relativePath>
     </parent>
     <groupId>br.tech.desiderati.sample</groupId>
@@ -33,8 +33,10 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>./sample-jpa-hibernate-domain</module>
         <module>./sample-jpa-hibernate-server</module>
         <module>./sample-jpa-hibernate-static</module>
+        <module>./sample-jpa-hibernate-worker</module>
     </modules>
 
 </project>

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 - Felipe Desiderati
+ * Copyright (c) 2024 - Felipe Desiderati
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
  * associated documentation files (the "Software"), to deal in the Software without restriction,
@@ -49,7 +49,7 @@ public class UploadController {
      * I decided to deal with Data Streaming directly. See the reason below:
      * <pre>
      * <i>"The traditional API assumes that file items must be stored somewhere
-     * before they are actually accessable by the user. Spring Boot's default
+     * before they are actually accessible by the user. Spring Boot's default
      * {@link org.springframework.web.multipart.MultipartResolver} interface
      * handles the uploading of multipart files by storing them on the local
      * file system. Before the controller method is entered, the entire
@@ -66,7 +66,7 @@ public class UploadController {
 
     @PostMapping("{fileId}/right")
     public void right(HttpServletRequest request, @PathVariable @Positive @NotNull Long fileId) throws IOException {
-        FileMetadata fileMetadata = new FileMetadata(fileId, FileMetadata.SIDE.RIGTH);
+        FileMetadata fileMetadata = new FileMetadata(fileId, FileMetadata.SIDE.RIGHT);
         storageService.store(fileMetadata, request.getInputStream());
     }
 

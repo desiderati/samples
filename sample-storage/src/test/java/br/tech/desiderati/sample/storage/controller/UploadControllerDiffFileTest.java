@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 - Felipe Desiderati
+ * Copyright (c) 2024 - Felipe Desiderati
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
  * associated documentation files (the "Software"), to deal in the Software without restriction,
@@ -39,22 +39,22 @@ class UploadControllerDiffFileTest extends AbstractUploadControllerTest {
     @Test
     void diffFileShouldReturnSameFileEvenIfEmptyContent() throws Exception {
         mockMvc.perform(
-            post(API_BASE_PATH + "/v1/diff/1/left")
-                .contentType("application/txt")
-                .content(""))
+                post(API_BASE_PATH + "/v1/diff/1/left")
+                    .contentType("application/txt")
+                    .content(""))
             .andExpect(status().isOk())
             .andReturn();
 
         mockMvc.perform(
-            post(API_BASE_PATH + "/v1/diff/1/right")
-                .contentType("application/txt")
-                .content(""))
+                post(API_BASE_PATH + "/v1/diff/1/right")
+                    .contentType("application/txt")
+                    .content(""))
             .andExpect(status().isOk())
             .andReturn();
 
         MvcResult diffResult =
             mockMvc.perform(
-                get(API_BASE_PATH + "/v1/diff/1"))
+                    get(API_BASE_PATH + "/v1/diff/1"))
                 .andExpect(status().isOk())
                 .andReturn();
 
@@ -66,22 +66,22 @@ class UploadControllerDiffFileTest extends AbstractUploadControllerTest {
     @Test
     void diffFileShouldReturnSameFile() throws Exception {
         mockMvc.perform(
-            post(API_BASE_PATH + "/v1/diff/2/left")
-                .contentType("application/txt")
-                .content("123456"))
+                post(API_BASE_PATH + "/v1/diff/2/left")
+                    .contentType("application/txt")
+                    .content("123456"))
             .andExpect(status().isOk())
             .andReturn();
 
         mockMvc.perform(
-            post(API_BASE_PATH + "/v1/diff/2/right")
-                .contentType("application/txt")
-                .content("123456"))
+                post(API_BASE_PATH + "/v1/diff/2/right")
+                    .contentType("application/txt")
+                    .content("123456"))
             .andExpect(status().isOk())
             .andReturn();
 
         MvcResult diffResult =
             mockMvc.perform(
-                get(API_BASE_PATH + "/v1/diff/2"))
+                    get(API_BASE_PATH + "/v1/diff/2"))
                 .andExpect(status().isOk())
                 .andReturn();
 
@@ -93,22 +93,22 @@ class UploadControllerDiffFileTest extends AbstractUploadControllerTest {
     @Test
     void diffFileShouldReturnDiffSizeEvenIfLeftEmptyContent() throws Exception {
         mockMvc.perform(
-            post(API_BASE_PATH + "/v1/diff/3/left")
-                .contentType("application/txt")
-                .content(""))
+                post(API_BASE_PATH + "/v1/diff/3/left")
+                    .contentType("application/txt")
+                    .content(""))
             .andExpect(status().isOk())
             .andReturn();
 
         mockMvc.perform(
-            post(API_BASE_PATH + "/v1/diff/3/right")
-                .contentType("application/txt")
-                .content("123456"))
+                post(API_BASE_PATH + "/v1/diff/3/right")
+                    .contentType("application/txt")
+                    .content("123456"))
             .andExpect(status().isOk())
             .andReturn();
 
         MvcResult diffResult =
             mockMvc.perform(
-                get(API_BASE_PATH + "/v1/diff/3"))
+                    get(API_BASE_PATH + "/v1/diff/3"))
                 .andExpect(status().isOk())
                 .andReturn();
 
@@ -118,24 +118,24 @@ class UploadControllerDiffFileTest extends AbstractUploadControllerTest {
     }
 
     @Test
-    void diffFileShouldReturnDiffSizeEvenIfRigthEmptyContent() throws Exception {
+    void diffFileShouldReturnDiffSizeEvenIfRightEmptyContent() throws Exception {
         mockMvc.perform(
-            post(API_BASE_PATH + "/v1/diff/4/left")
-                .contentType("application/txt")
-                .content("123456"))
+                post(API_BASE_PATH + "/v1/diff/4/left")
+                    .contentType("application/txt")
+                    .content("123456"))
             .andExpect(status().isOk())
             .andReturn();
 
         mockMvc.perform(
-            post(API_BASE_PATH + "/v1/diff/4/right")
-                .contentType("application/txt")
-                .content(""))
+                post(API_BASE_PATH + "/v1/diff/4/right")
+                    .contentType("application/txt")
+                    .content(""))
             .andExpect(status().isOk())
             .andReturn();
 
         MvcResult diffResult =
             mockMvc.perform(
-                get(API_BASE_PATH + "/v1/diff/4"))
+                    get(API_BASE_PATH + "/v1/diff/4"))
                 .andExpect(status().isOk())
                 .andReturn();
 
@@ -147,22 +147,22 @@ class UploadControllerDiffFileTest extends AbstractUploadControllerTest {
     @Test
     void diffFileShouldReturnDiffSize() throws Exception {
         mockMvc.perform(
-            post(API_BASE_PATH + "/v1/diff/5/left")
-                .contentType("application/txt")
-                .content("123456"))
+                post(API_BASE_PATH + "/v1/diff/5/left")
+                    .contentType("application/txt")
+                    .content("123456"))
             .andExpect(status().isOk())
             .andReturn();
 
         mockMvc.perform(
-            post(API_BASE_PATH + "/v1/diff/5/right")
-                .contentType("application/txt")
-                .content("1234567"))
+                post(API_BASE_PATH + "/v1/diff/5/right")
+                    .contentType("application/txt")
+                    .content("1234567"))
             .andExpect(status().isOk())
             .andReturn();
 
         MvcResult diffResult =
             mockMvc.perform(
-                get(API_BASE_PATH + "/v1/diff/5"))
+                    get(API_BASE_PATH + "/v1/diff/5"))
                 .andExpect(status().isOk())
                 .andReturn();
 
@@ -174,28 +174,28 @@ class UploadControllerDiffFileTest extends AbstractUploadControllerTest {
     @Test
     void diffFileShouldReturnDifference() throws Exception {
         mockMvc.perform(
-            post(API_BASE_PATH + "/v1/diff/6/left")
-                .contentType("application/txt")
-                .content("123456789"))
+                post(API_BASE_PATH + "/v1/diff/6/left")
+                    .contentType("application/txt")
+                    .content("123456789"))
             .andExpect(status().isOk())
             .andReturn();
 
         mockMvc.perform(
-            post(API_BASE_PATH + "/v1/diff/6/right")
-                .contentType("application/txt")
-                .content("12ab56cde"))
+                post(API_BASE_PATH + "/v1/diff/6/right")
+                    .contentType("application/txt")
+                    .content("12ab56cde"))
             .andExpect(status().isOk())
             .andReturn();
 
         MvcResult diffResult =
             mockMvc.perform(
-                get(API_BASE_PATH + "/v1/diff/6"))
+                    get(API_BASE_PATH + "/v1/diff/6"))
                 .andExpect(status().isOk())
                 .andReturn();
 
         Diff diff =
             mapper.readValue(diffResult.getResponse().getContentAsString(), Diff.class);
-        Offset offset1 = diff.getOffsets().get(0);
+        Offset offset1 = diff.getOffsets().getFirst();
         assertEquals(2, offset1.getPosition());
         assertEquals(2, offset1.getLength());
 

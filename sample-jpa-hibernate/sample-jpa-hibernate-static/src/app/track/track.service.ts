@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 - Felipe Desiderati
+ * Copyright (c) 2024 - Felipe Desiderati
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
  * associated documentation files (the "Software"), to deal in the Software without restriction,
@@ -16,15 +16,15 @@
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 
-import { throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import {throwError} from 'rxjs';
+import {catchError} from 'rxjs/operators';
 
-import { Track } from './track';
+import {Track} from './track';
 
-import { environment } from '../../environments/environment';
+import {environment} from '../../environments/environment';
 
 const apiUrl = environment.apiUrl;
 

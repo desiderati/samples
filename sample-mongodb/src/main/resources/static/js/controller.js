@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 - Felipe Desiderati
+ * Copyright (c) 2024 - Felipe Desiderati
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
  * associated documentation files (the "Software"), to deal in the Software without restriction,
@@ -16,15 +16,15 @@
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-(function(app) {
+(function (app) {
   'use strict';
 
   app.controller('QRCodeController', [
-    function() {
+    function () {
 
       let self = this;
 
-      self.generate = function() {
+      self.generate = function () {
         console.log('Generating QR Code...');
         $('#qrCodeImage').html(
           '<img alt=\'QR Code\' src=\'' + document.location.toString() + 'api/v1/qrcode/generate?t=' + new Date().getTime() + '\'/>');

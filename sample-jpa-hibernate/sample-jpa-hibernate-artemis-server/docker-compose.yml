@@ -1,0 +1,7 @@
+services:
+  artemis-server:
+    image: apache/activemq-artemis:latest-alpine
+    container_name: artemis-server
+    ports:
+      - "61616:61616"
+      - "8161:8161"

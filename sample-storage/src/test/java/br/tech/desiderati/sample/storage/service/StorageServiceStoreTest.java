@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 - Felipe Desiderati
+ * Copyright (c) 2024 - Felipe Desiderati
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
  * associated documentation files (the "Software"), to deal in the Software without restriction,
@@ -53,12 +53,12 @@ class StorageServiceStoreTest extends AbstractStorageServiceTest {
             storageService.diff(1L);
             fail("diffShouldThrowExceptionBecauseNoLeftSide");
         } catch (ResourceNotFoundApplicationException ex) {
-            assertEquals("left_side_not_found_excpetion", ex.getMessage());
+            assertEquals("left_side_not_found_exception", ex.getMessage());
         }
     }
 
     @Test
-    void diffShouldThrowExceptionBecauseNoRigthSide() throws IOException {
+    void diffShouldThrowExceptionBecauseNoRightSide() throws IOException {
         FileMetadata leftFileMetadata = Fixtures.validFileMetadata123456;
         when(fileMetadataRepositoryMock.findFirstByFileIdAndSide(anyLong(), any()))
             .thenReturn(Optional.of(leftFileMetadata))
@@ -66,9 +66,9 @@ class StorageServiceStoreTest extends AbstractStorageServiceTest {
 
         try {
             storageService.diff(1L);
-            fail("diffShouldThrowExceptionBecauseNoRigthSide");
+            fail("diffShouldThrowExceptionBecauseNoRightSide");
         } catch (ResourceNotFoundApplicationException ex) {
-            assertEquals("right_side_not_found_excpetion", ex.getMessage());
+            assertEquals("right_side_not_found_exception", ex.getMessage());
         }
     }
 

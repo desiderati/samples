@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 - Felipe Desiderati
+ * Copyright (c) 2024 - Felipe Desiderati
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
  * associated documentation files (the "Software"), to deal in the Software without restriction,
@@ -26,14 +26,10 @@ import br.tech.desiderati.sample.storage.repository.FileMetadataRepository;
 import io.herd.common.exception.IllegalArgumentApplicationException;
 import io.herd.common.exception.ResourceNotFoundApplicationException;
 import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Hex;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.annotation.Validated;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -50,7 +46,6 @@ import static io.herd.common.exception.ThrowingRunnable.silently;
 
 @Slf4j
 @Service
-@Validated
 public class StorageServiceImpl implements StorageService {
 
     private static final int BUFFER_SIZE = 8192;
@@ -75,7 +70,7 @@ public class StorageServiceImpl implements StorageService {
 
     @Override
     @Transactional
-    public void store(@Valid FileMetadata fileMetadata, @NotNull InputStream inputStream) {
+    public void store(FileMetadata fileMetadata, InputStream inputStream) {
         FileMetadata newFileMetadata =
             fileMetadataRepository.findFirstByFileIdAndSide(fileMetadata.getFileId(), fileMetadata.getSide())
                 .orElse(null);
@@ -98,7 +93,7 @@ public class StorageServiceImpl implements StorageService {
 
     private void validateFileAlreadyUploaded(FileMetadata fileMetadata) {
         if (fileMetadata != null && fileMetadata.getCompleted()) {
-            throw new IllegalArgumentApplicationException("file_already_uploaded_excpetion");
+            throw new IllegalArgumentApplicationException("file_already_uploaded_exception");
         }
     }
 
@@ -133,18 +128,18 @@ public class StorageServiceImpl implements StorageService {
         String sha1 = writeFile(inputStream, outputStream, digest);
         fileMetadata.setSha1(sha1);
 
-        fileMetadataRepository.findFirstFileMetadaWithSameSha1ButDiffFileIdOrSide(
+        fileMetadataRepository.findFirstFileMetadataWithSameSha1ButDiffFileIdOrSide(
             sha1,
             fileMetadata.getFileId(),
             fileMetadata.getSide()
         ).ifPresentOrElse(
             silently(sha1FileMetadata -> {
-                // If file is duplicated, don't store it. Just use the same reference. (Save space on disk)
+                // If the file is duplicated, don't store it. Use the same reference. (Save space on disk)
                 fileMetadata.replaceLocalFilenameWith(sha1FileMetadata);
                 Files.deleteIfExists(tmpLocalFilePath);
             }),
             silently(() -> {
-                // Moves from temp folder to the destination folter.
+                // Moves from temp folder to the destination folder.
                 Path localFilePath = rootLocation.resolve(fileMetadata.getLocalFilename());
                 Files.createDirectories(localFilePath.getParent());
                 Files.move(tmpLocalFilePath, localFilePath, StandardCopyOption.REPLACE_EXISTING);
@@ -172,14 +167,14 @@ public class StorageServiceImpl implements StorageService {
 
     @Override
     @Transactional
-    public Diff diff(@Positive @NotNull Long fileId) throws IOException {
+    public Diff diff(Long fileId) throws IOException {
         FileMetadata leftFileMetadata =
             fileMetadataRepository.findFirstByFileIdAndSide(fileId, FileMetadata.SIDE.LEFT)
-                .orElseThrow(() -> new ResourceNotFoundApplicationException("left_side_not_found_excpetion"));
+                .orElseThrow(() -> new ResourceNotFoundApplicationException("left_side_not_found_exception"));
 
         FileMetadata rightFileMetadata =
-            fileMetadataRepository.findFirstByFileIdAndSide(fileId, FileMetadata.SIDE.RIGTH)
-                .orElseThrow(() -> new ResourceNotFoundApplicationException("right_side_not_found_excpetion"));
+            fileMetadataRepository.findFirstByFileIdAndSide(fileId, FileMetadata.SIDE.RIGHT)
+                .orElseThrow(() -> new ResourceNotFoundApplicationException("right_side_not_found_exception"));
 
         Diff diff = new Diff();
         if (leftFileMetadata.getSha1().equalsIgnoreCase(rightFileMetadata.getSha1())) {

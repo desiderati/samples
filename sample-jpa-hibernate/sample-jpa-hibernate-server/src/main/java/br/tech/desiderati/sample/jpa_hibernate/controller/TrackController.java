@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 - Felipe Desiderati
+ * Copyright (c) 2024 - Felipe Desiderati
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
  * associated documentation files (the "Software"), to deal in the Software without restriction,
@@ -21,13 +21,14 @@ package br.tech.desiderati.sample.jpa_hibernate.controller;
 import br.tech.desiderati.sample.jpa_hibernate.controller.dto.TrackDTO;
 import br.tech.desiderati.sample.jpa_hibernate.domain.Track;
 import br.tech.desiderati.sample.jpa_hibernate.service.TrackService;
+import io.herd.common.jms.AsyncMessagePublisher;
 import io.herd.common.web.rest.exception.NotFoundRestApiException;
-import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -35,19 +36,26 @@ import java.util.Collections;
 import java.util.List;
 
 @Slf4j
+@Validated
 @RestController
 @RequestMapping("/v1/track")
 public class TrackController {
 
-    @Resource(name = "trackServiceJpa")
     private final TrackService trackService;
 
     private final ModelMapper modelMapper;
 
+    private final AsyncMessagePublisher trackMessagePublisher;
+
     @Autowired
-    public TrackController(TrackService trackService, ModelMapper modelMapper) {
+    public TrackController(
+        AsyncMessagePublisher trackMessagePublisher,
+        TrackService trackService,
+        ModelMapper modelMapper
+    ) {
         this.trackService = trackService;
         this.modelMapper = modelMapper;
+        this.trackMessagePublisher = trackMessagePublisher;
     }
 
     @GetMapping
@@ -75,20 +83,21 @@ public class TrackController {
         return trackDTOs;
     }
 
-
     @PostMapping
     public void createTrack(@RequestBody @Valid TrackDTO trackDTO) {
-        log.info("Creating Track " + trackDTO.getTrackName());
-        trackService.saveTrack(modelMapper.map(trackDTO, Track.class));
+        log.info("Creating Track '{}'", trackDTO.getTrackName());
+
+        // Send the message to the queue.
+        trackMessagePublisher.publish(modelMapper.map(trackDTO, Track.class));
     }
 
     @PutMapping(value = "/{id}")
     public TrackDTO updateTrack(@PathVariable("id") Long id, @RequestBody @Valid TrackDTO trackDTO) {
-        log.info("Updating Track with id " + id);
+        log.info("Updating Track with id '{}'", id);
 
         Track currentTrack = trackService.findById(id);
         if (currentTrack == null) {
-            log.error("Track with id " + id + " not found");
+            log.error("Track with id '{}' not found", id);
             throw new NotFoundRestApiException("track_not_found_exception", id);
         }
 
@@ -99,11 +108,11 @@ public class TrackController {
 
     @DeleteMapping(value = "/{id}")
     public void deleteTrack(@PathVariable("id") long id) {
-        log.info("Fetching & Deleting Track with id " + id);
+        log.info("Fetching & Deleting Track with id {}", id);
 
         Track track = trackService.findById(id);
         if (track == null) {
-            log.error("Unable to delete. Track with id " + id + " not found");
+            log.error("Unable to delete. Track with id {} not found", id);
             throw new NotFoundRestApiException("track_not_found_exception", id);
         }
 

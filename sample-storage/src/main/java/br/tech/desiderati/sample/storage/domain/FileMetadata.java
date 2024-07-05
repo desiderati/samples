@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 - Felipe Desiderati
+ * Copyright (c) 2024 - Felipe Desiderati
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
  * associated documentation files (the "Software"), to deal in the Software without restriction,
@@ -35,7 +35,6 @@ import java.io.File;
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@SuppressWarnings({"com.haulmont.jpb.LombokEqualsAndHashCodeInspection", "JpaDataSourceORMInspection"})
 @EqualsAndHashCode(of = {"fileId", "side"}, callSuper = true)
 
 @Builder
@@ -46,13 +45,14 @@ import java.io.File;
     uniqueConstraints = @UniqueConstraint(columnNames = {"fileId", "side"}),
     indexes = @Index(columnList = "sha1")
 )
+
+@SuppressWarnings({"JpaDataSourceORMInspection", "com.intellij.jpb.LombokEqualsAndHashCodeInspection"})
 public class FileMetadata extends AbstractPersistable<Long> {
 
     public enum SIDE {
-        LEFT, RIGTH
+        LEFT, RIGHT
     }
 
-    @SuppressWarnings("squid:S2637") // "@NonNull" values should not be set to null
     public FileMetadata(Long fileId, SIDE side) {
         setFileId(fileId);
         setSide(side);
