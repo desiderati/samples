@@ -20,9 +20,7 @@ package br.tech.desiderati.sample.jpa_hibernate.domain;
 
 import io.herd.common.data.jpa.AbstractPersistableIdentity;
 import io.herd.common.jms.AsyncMessage;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Transient;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -37,6 +35,9 @@ import java.util.UUID;
 @ToString
 
 @Entity
+@Table(name = "track", indexes = {
+    @Index(columnList = "ID", name = "pk_track", unique = true)
+})
 @SuppressWarnings("JpaDataSourceORMInspection")
 public class Track extends AbstractPersistableIdentity<Long> implements AsyncMessage {
 
