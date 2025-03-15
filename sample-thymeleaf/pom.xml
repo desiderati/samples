@@ -24,7 +24,7 @@
     <parent>
         <groupId>io.herd.common</groupId>
         <artifactId>common-starter-web</artifactId>
-        <version>4.0.0.RC1</version>
+        <version>4.0.0.RC2</version>
         <!--suppress MavenModelInspection-->
         <relativePath>../../commons/common-starter-web</relativePath>
     </parent>
