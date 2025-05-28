@@ -64,25 +64,23 @@ export class AppComponent {
 
     initialize() {
         this.atmosphereService.connect(
-            notificationUrl + 'notification/' + this.notification.user,
+            notificationUrl + this.notification.user,
             {
-                logLevel: 'debug'
-            },
-            AppComponent.printErrorMessage
+                logLevel: 'debug',
+                logFunction: AppComponent.printErrorMessage
+            }
         ).subscribe({
-            next: (msg: string) => {
-                AppComponent.printMessage(msg);
-            },
-            error: (errMsg: string) => AppComponent.printErrorMessage(errMsg)
+            next: AppComponent.printMessage,
+            error: AppComponent.printErrorMessage
         });
     }
 
-    sendMessage() {
-        console.log('Sending message \'' + this.notification.message + '\' to server!');
+    sendNotification() {
+        console.log('Sending message \'' + this.notification.payload + '\' to server!');
         if (!this.atmosphereService.isInitialized()) {
             AppComponent.printErrorMessage('Notification Service not initialized!');
             return;
         }
-        this.atmosphereService.sendMessage(this.notification.message);
+        this.atmosphereService.sendNotification(this.notification);
     }
 }

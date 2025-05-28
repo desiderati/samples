@@ -40,12 +40,12 @@
     </div>
 </form>
 
-<form class="form-horizontal my-3" (ngSubmit)="sendMessage()" #atmosphereForm="ngForm">
+<form class="form-horizontal my-3" (ngSubmit)="sendNotification()" #atmosphereForm="ngForm">
     <div class="form-group row my-3">
         <label class="col-sm-2 col-form-label text-end" for="message">Message</label>
         <div class="col-sm-5">
             <input class="form-control" type="text" id="message" name="message" title="message" required
-                   [(ngModel)]="notification.message" #message="ngModel"/>
+                   [(ngModel)]="notification.payload" #message="ngModel"/>
             <div *ngIf="message.invalid && (message.dirty || message.touched) && message.errors?.['required']">
                 This is a required field
             </div>

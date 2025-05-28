@@ -1,75 +1,27 @@
-<!--
-  ~ Copyright (c) 2025 - Felipe Desiderati
-  ~
-  ~ Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
-  ~ associated documentation files (the "Software"), to deal in the Software without restriction,
-  ~ including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
-  ~ and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so,
-  ~ subject to the following conditions:
-  ~
-  ~ The above copyright notice and this permission notice shall be included in all copies or substantial
-  ~ portions of the Software.
-  ~
-  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
-  ~ LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-  ~ IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
-  ~ WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
-  ~ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-  -->
-
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="samples [clean, install]" type="MavenRunConfiguration" factoryName="Maven">
     <MavenSettings>
-      <option name="myGeneralSettings">
-        <MavenGeneralSettings>
-          <option name="alwaysUpdateSnapshots" value="false" />
-          <option name="checksumPolicy" value="NOT_SET" />
-          <option name="failureBehavior" value="NOT_SET" />
-          <option name="localRepository" value="" />
-          <option name="mavenHome" value="/opt/apache-maven" />
-          <option name="nonRecursive" value="false" />
-          <option name="outputLevel" value="INFO" />
-          <option name="pluginUpdatePolicy" value="DEFAULT" />
-          <option name="printErrorStackTraces" value="false" />
-          <option name="showDialogWithAdvancedSettings" value="false" />
-          <option name="threads" />
-          <option name="useMavenConfig" value="true" />
-          <option name="usePluginRegistry" value="false" />
-          <option name="userSettingsFile" value="" />
-          <option name="workOffline" value="false" />
-        </MavenGeneralSettings>
-      </option>
-      <option name="myRunnerSettings">
-        <MavenRunnerSettings>
-          <option name="delegateBuildToMaven" value="false" />
-          <option name="environmentProperties">
-            <map />
-          </option>
-          <option name="jreName" value="#USE_PROJECT_JDK" />
-          <option name="mavenProperties">
-            <map />
-          </option>
-          <option name="passParentEnv" value="true" />
-          <option name="runMavenInBackground" value="true" />
-          <option name="skipTests" value="false" />
-          <option name="vmOptions" value="" />
-        </MavenRunnerSettings>
-      </option>
+      <option name="myGeneralSettings" />
+      <option name="myRunnerSettings" />
       <option name="myRunnerParameters">
         <MavenRunnerParameters>
+          <option name="cmdOptions" />
           <option name="profiles">
             <set />
           </option>
           <option name="goals">
             <list>
+              <option value="clean" />
               <option value="install" />
             </list>
           </option>
+          <option name="multimoduleDir" />
           <option name="pomFileName" value="pom.xml" />
           <option name="profilesMap">
-            <map>
-              <entry key="generate-openapi-sources" value="true" />
-            </map>
+            <map />
+          </option>
+          <option name="projectsCmdOptionValues">
+            <list />
           </option>
           <option name="resolveToWorkspace" value="false" />
           <option name="workingDirPath" value="$PROJECT_DIR$/samples" />

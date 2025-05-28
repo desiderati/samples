@@ -19,10 +19,10 @@
 export class Notification {
 
     user: string;
-    message: string;
+    payload: string;
 
-    constructor(user: string, message: string) {
+    constructor(user: string, payload: string) {
         this.user = user;
-        this.message = message;
+        this.payload = payload;
     }
 }

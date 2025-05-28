@@ -89,15 +89,19 @@
                         ],
                         "tsConfig": "tsconfig.spec.json",
                         "assets": [
-                            {
-                                "glob": "**/*",
-                                "input": "public"
-                            }
+                            "src/assets"
                         ],
                         "styles": [
+                            "node_modules/main.css/dist/main.css",
+                            "node_modules/normalize.css/normalize.css",
+                            "node_modules/bootstrap/dist/css/bootstrap.min.css",
                             "src/styles.css"
                         ],
-                        "scripts": [],
+                        "scripts": [
+                            "node_modules/jquery/dist/jquery.min.js",
+                            "node_modules/@popperjs/core/dist/umd/popper.min.js",
+                            "node_modules/bootstrap/dist/js/bootstrap.min.js"
+                        ],
                         "karmaConfig": "karma.conf.js"
                     }
                 }

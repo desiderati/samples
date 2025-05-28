@@ -22,6 +22,6 @@ POST {{url}}/sample-atmosphere/{{path}}/broadcast
 Content-Type: application/json
 
 {
-  "resourceId": "ffcd9064-837b-437e-b4cf-c199f792b628",
+  "resourceId": "efe7c201-87df-40bb-964b-b97e8f8d0d8f",
   "payload": "Teste de envio a um recurso específico!"
 }
