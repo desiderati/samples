@@ -20,6 +20,6 @@ import {Notification} from './notification';
 
 describe('Notification', () => {
     it('should create an instance', () => {
-        expect(new Notification(null, null)).toBeTruthy();
+        expect(new Notification('user', 'message')).toBeTruthy();
     });
 });

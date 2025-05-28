@@ -16,60 +16,73 @@
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-import {Component, OnDestroy, ViewChild} from '@angular/core';
-import {NgForm} from '@angular/forms';
+import {Component, ViewChild} from '@angular/core';
+import {FormsModule, NgForm} from '@angular/forms';
 
 import {Notification} from './notification';
-import {NotificationService} from './notification.service';
+import {AtmosphereService} from './atmosphere.service';
 
 import {environment} from '../environments/environment';
 
-import * as $ from 'jquery';
+import $ from 'jquery';
+import {CommonModule} from '@angular/common';
 
-const apiUrl = environment.apiUrl;
+const notificationUrl = environment.notificationUrl;
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
+    imports: [
+        FormsModule,
+        CommonModule
+    ],
     styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnDestroy {
+export class AppComponent {
 
+    title = 'sample-atmosphere-static';
     notification = new Notification('desiderati', 'Testing message sending via Angular!');
 
-    private notificationService: NotificationService =
-        new NotificationService(AppComponent.printMessage, AppComponent.printErrorMessage);
+    @ViewChild('atmosphereInitializationForm', {static: false})
+    atmosphereInitializationForm!: NgForm;
 
-    @ViewChild('atmosphereInitializationForm', {static: false}) atmosphereInitializationForm: NgForm;
-    @ViewChild('atmosphereForm', {static: false}) atmosphereForm: NgForm;
+    @ViewChild('atmosphereForm', {static: false})
+    atmosphereForm!: NgForm;
 
-    constructor() {
+    constructor(private atmosphereService: AtmosphereService) {
     }
 
-    static printMessage(message) {
+    static printMessage(message: string) {
         $('#notificationContainer').show();
         $('<div/>', {class: 'alert alert-success'}).text(message).appendTo('#notificationBoard');
     }
 
-    static printErrorMessage(message) {
+    static printErrorMessage(message: string) {
         $('#notificationContainer').show();
         $('<div/>', {class: 'alert alert-warning'}).text(message).appendTo('#notificationBoard');
     }
 
     initialize() {
-        this.notificationService.subscribe(apiUrl + 'notification/' + this.notification.user);
+        this.atmosphereService.connect(
+            notificationUrl + 'notification/' + this.notification.user,
+            {
+                logLevel: 'debug'
+            },
+            AppComponent.printErrorMessage
+        ).subscribe({
+            next: (msg: string) => {
+                AppComponent.printMessage(msg);
+            },
+            error: (errMsg: string) => AppComponent.printErrorMessage(errMsg)
+        });
     }
 
     sendMessage() {
         console.log('Sending message \'' + this.notification.message + '\' to server!');
-        if (!this.notificationService.isInitialized()) {
+        if (!this.atmosphereService.isInitialized()) {
             AppComponent.printErrorMessage('Notification Service not initialized!');
             return;
         }
-        this.notificationService.push(this.notification.message);
-    }
-
-    ngOnDestroy(): void {
-        this.notificationService.unsubscribe();
+        this.atmosphereService.sendMessage(this.notification.message);
     }
 }

@@ -16,9 +16,10 @@
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+// noinspection JSUnusedGlobalSymbols
 export class Util {
 
-    static isJson(obj) {
+    static isJson(obj: any) {
         if (!obj || !Util.isObject(obj)) {
             return false;
         }
@@ -32,7 +33,7 @@ export class Util {
         }
     }
 
-    static isObject(obj) {
+    static isObject(obj: any) {
         return Object.prototype.toString.call(obj) === '[object Object]';
     }
 }

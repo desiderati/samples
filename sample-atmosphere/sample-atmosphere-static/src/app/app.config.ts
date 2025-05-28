@@ -16,15 +16,12 @@
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-import {browser, by, element} from 'protractor';
 
-export class AppPage {
+import {ApplicationConfig, provideZoneChangeDetection} from '@angular/core';
+import {provideRouter} from '@angular/router';
 
-    navigateTo() {
-        return browser.get(browser.baseUrl) as Promise<any>;
-    }
+import {routes} from './app.routes';
 
-    getTitleText() {
-        return element(by.css('app-root h1')).getText() as Promise<string>;
-    }
-}
+export const appConfig: ApplicationConfig = {
+    providers: [provideZoneChangeDetection({eventCoalescing: true}), provideRouter(routes)]
+};

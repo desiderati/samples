@@ -16,34 +16,33 @@
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-import {async, TestBed} from '@angular/core/testing';
+
+import {TestBed} from '@angular/core/testing';
 import {AppComponent} from './app.component';
 
 describe('AppComponent', () => {
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            declarations: [
-                AppComponent
-            ],
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+            imports: [AppComponent],
         }).compileComponents();
-    }));
+    });
 
     it('should create the app', () => {
         const fixture = TestBed.createComponent(AppComponent);
-        const app = fixture.debugElement.componentInstance;
+        const app = fixture.componentInstance;
         expect(app).toBeTruthy();
     });
 
-    it(`should have as title 'sample-atmosphere-static'`, () => {
+    it(`should have the 'sample-atmosphere-static' title`, () => {
         const fixture = TestBed.createComponent(AppComponent);
-        const app = fixture.debugElement.componentInstance;
+        const app = fixture.componentInstance;
         expect(app.title).toEqual('sample-atmosphere-static');
     });
 
-    it('should render title in a h1 tag', () => {
+    it('should render title', () => {
         const fixture = TestBed.createComponent(AppComponent);
         fixture.detectChanges();
-        const compiled = fixture.debugElement.nativeElement;
-        expect(compiled.querySelector('h1').textContent).toContain('Welcome to sample-atmosphere-static!');
+        const compiled = fixture.nativeElement as HTMLElement;
+        expect(compiled.querySelector('h1')?.textContent).toContain('Hello, sample-atmosphere-static');
     });
 });

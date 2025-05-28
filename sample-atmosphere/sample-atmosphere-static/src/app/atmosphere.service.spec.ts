@@ -16,15 +16,20 @@
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+
 import {TestBed} from '@angular/core/testing';
 
-import {NotificationService} from './notification.service';
+import {AtmosphereService} from './atmosphere.service';
 
-describe('NotificationService', () => {
-    beforeEach(() => TestBed.configureTestingModule({}));
+describe('AtmosphereService', () => {
+    let service: AtmosphereService;
+
+    beforeEach(() => {
+        TestBed.configureTestingModule({});
+        service = TestBed.inject(AtmosphereService);
+    });
 
     it('should be created', () => {
-        const service: NotificationService = TestBed.get(NotificationService);
         expect(service).toBeTruthy();
     });
 });
