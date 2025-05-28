@@ -35,7 +35,6 @@
     <modules>
         <module>./sample-jpa-hibernate-domain</module>
         <module>./sample-jpa-hibernate-server</module>
-        <module>./sample-jpa-hibernate-static</module>
         <module>./sample-jpa-hibernate-worker</module>
     </modules>
 
