@@ -19,29 +19,55 @@
 (function (app) {
   'use strict';
 
-  app.factory('TrackService', ['$http', '$q', function ($http, $q) {
+  const apiUrl = 'http://localhost:9090/sample-jpa-hibernate/'
+
+  app.factory('CsrfService', ['$http', '$q', function ($http, $q) {
     return {
-      fetchAllTracks: function () {
-        return $http.get(document.location.toString() + 'api/v1/track').then(
+      /**
+       * When logging in for the first time using form-based authentication,
+       * the CSRF cookie is not set upon redirection to the main page.
+       * This happens because Spring Security hasn’t had the chance to include
+       * the CSRF token in a response body (HTML or JSON).
+       * The token is only sent in responses with a body—not in 302 Found redirects.
+       * By doing this, we force the CSRF token to be set right after login.
+       */
+      getCsrfToken: function () {
+        return $http.get(apiUrl + 'csrf').then(
           function (response) {
             return response.data;
           },
           function (errResponse) {
-            console.error('Error while fetching Tracks.');
-            return $q.reject(errResponse);
+            console.error('Error while fetching CSRF Token.', errResponse);
+            return $q.reject(errResponse.data);
+          },
+        );
+      }
+    }
+  }]);
+
+  app.factory('TrackService', ['$http', '$q', function ($http, $q) {
+    return {
+      fetchAllTracks: function () {
+        return $http.get(apiUrl + 'api/v1/track').then(
+          function (response) {
+            return response.data;
+          },
+          function (errResponse) {
+            console.error('Error while fetching Tracks.', errResponse);
+            return $q.reject(errResponse.data);
           },
         );
       },
 
       fetchTrackByName: function (trackName) {
         if (!!trackName) {
-          return $http.get(document.location.toString() + 'api/v1/track/' + trackName).then(
+          return $http.get(apiUrl + 'api/v1/track/' + trackName).then(
             function (response) {
               return response.data;
             },
             function (errResponse) {
-              console.error('Error while fetching Tracks.');
-              return $q.reject(errResponse);
+              console.error('Error while fetching Tracks.', errResponse);
+              return $q.reject(errResponse.data);
             },
           );
         } else {
@@ -50,37 +76,37 @@
       },
 
       createTrack: function (track) {
-        return $http.post(document.location.toString() + 'api/v1/track', track).then(
+        return $http.post(apiUrl + 'api/v1/track', track).then(
           function (response) {
             return response.data;
           },
           function (errResponse) {
-            console.error('Error while creating Track.');
-            return $q.reject(errResponse);
+            console.error('Error while creating Track.', errResponse);
+            return $q.reject(errResponse.data);
           },
         );
       },
 
       updateTrack: function (track, id) {
-        return $http.put(document.location.toString() + 'api/v1/track/' + id, track).then(
+        return $http.put(apiUrl + 'api/v1/track/' + id, track).then(
           function (response) {
             return response.data;
           },
           function (errResponse) {
-            console.error('Error while updating Track.');
-            return $q.reject(errResponse);
+            console.error('Error while updating Track.', errResponse);
+            return $q.reject(errResponse.data);
           },
         );
       },
 
       deleteTrack: function (id) {
-        return $http.delete(document.location.toString() + 'api/v1/track/' + id).then(
+        return $http.delete(apiUrl + 'api/v1/track/' + id).then(
           function (response) {
             return response.data;
           },
           function (errResponse) {
-            console.error('Error while deleting Track.');
-            return $q.reject(errResponse);
+            console.error('Error while deleting Track.', errResponse);
+            return $q.reject(errResponse.data);
           },
         );
       },
@@ -89,7 +115,7 @@
 
   app.factory('TrackNotificationService', ['$rootScope', function ($rootScope) {
     // Link: https://github.com/Atmosphere/atmosphere/wiki/atmosphere.js-API
-    function AtmosphereRequest(url, subscription, notificationHandler, notificationConsole) {
+    function AtmosphereRequest(url, notificationHandler) {
 
       this['url'] = url;
       this['contentType'] = 'application/json';
@@ -103,7 +129,7 @@
       this['onOpen'] = function (response) {
         let msg = 'Atmosphere connected using ' + response.transport + '!';
         console.log(msg);
-        notificationConsole(msg);
+        notificationHandler(msg);
 
         // Carry the UUID. This is required if you want to call
         // subscribe(request) again.
@@ -113,7 +139,7 @@
       this['onReopen'] = function (response) {
         let msg = 'Atmosphere reconnected using ' + response.transport + '!';
         console.log(msg);
-        notificationConsole(msg);
+        notificationHandler(msg);
       };
 
       this['onMessage'] = function (response) {
@@ -126,25 +152,26 @@
           return;
         }
 
-        console.log('Response JSON:', json);
+        // noinspection JSUnresolvedReference
         notificationHandler(json.payload);
+        console.log('Response JSON:', json);
       };
 
       this['onClose'] = function () {
         let msg = 'Atmosphere connection was closed!';
         console.log(msg);
-        notificationConsole(msg);
+        notificationHandler(msg);
       };
 
       this['onError'] = function (response) {
         console.log('Response Error:', response);
-        notificationConsole('Sorry, but there\'s some problem with your socket ' +
+        notificationHandler('Sorry, but there\'s some problem with your socket ' +
           'or the server is down!');
       };
 
       this['onTransportFailure'] = function (errorMsg, request) {
         console.log('Request Error:', request);
-        notificationConsole('Sorry, but the selected transport method is not available! ' +
+        notificationHandler('Sorry, but the selected transport method is not available! ' +
           'Falling back to the alternate one.');
 
         request.fallbackTransport = 'long-polling';
@@ -155,7 +182,7 @@
           'Trying to reconnect in ' + request.reconnectInterval + 'ms.';
 
         console.log(msg);
-        notificationConsole(msg);
+        notificationHandler(msg);
       };
 
       this['onClientTimeout'] = function (request) {
@@ -163,16 +190,15 @@
           'Reconnecting in ' + request.reconnectInterval + 'ms.';
 
         console.log(msg);
-        notificationConsole(msg);
+        notificationHandler(msg);
 
         setTimeout(function () {
-          subscription = socket.subscribe(request);
+          socket.subscribe(request);
         }, request.reconnectInterval);
       };
     }
 
     let atmosphereRequest = null;
-    let subscription = null;
     let socket = atmosphere;
     let self = this;
 
@@ -183,21 +209,17 @@
     self.initialize = function (onMessageReceive) {
       if (atmosphereRequest != null) {
         socket.unsubscribeUrl(atmosphereRequest.url);
-        subscription = '';
       }
 
       atmosphereRequest = new AtmosphereRequest(
-        document.location.toString() + 'notification/' + self.notification.user,
-        subscription,
-        onMessageReceive,
+        apiUrl + 'atm/notification/' + self.notification.user,
         onMessageReceive
       );
 
-      subscription = socket.subscribe(atmosphereRequest);
+      socket.subscribe(atmosphereRequest);
 
       $rootScope.$on('$destroy', function () {
         socket.unsubscribeUrl(atmosphereRequest.url);
-        subscription = '';
       });
     };
 

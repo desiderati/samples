@@ -21,12 +21,12 @@
 
   app.controller('TrackController', [
     '$scope',
+    'CsrfService',
     'TrackService',
     'TrackNotificationService',
-    function ($scope, TrackService, TrackNotificationService) {
+    function ($scope, CsrfService, TrackService, TrackNotificationService) {
 
       let self = this;
-
       self.track = {
         id: null,
         trackName: null,
@@ -40,10 +40,7 @@
         TrackService.fetchAllTracks().then(
           function (response) {
             self.tracks = response;
-          },
-          function () {
-            console.error('Error while fetching Tracks.');
-          },
+          }
         );
       };
 
@@ -51,10 +48,7 @@
         TrackService.fetchTrackByName(trackName).then(
           function (response) {
             self.tracks = response;
-          },
-          function () {
-            console.error('Error while fetching Tracks.');
-          },
+          }
         );
       };
 
@@ -65,7 +59,7 @@
             self.reset();
           },
           function (errResponse) {
-            self.handleErrorResponse(errResponse, 'Error while creating Track.');
+            self.handleErrorResponse('Error while creating Track.', errResponse);
           },
         );
       };
@@ -77,29 +71,23 @@
             self.reset();
           },
           function (errResponse) {
-            self.handleErrorResponse(errResponse, 'Error while updating Track.');
+            self.handleErrorResponse('Error while updating Track.', errResponse);
           },
         );
       };
 
       self.deleteTrack = function (id) {
-        TrackService.deleteTrack(id).then(
-          self.fetchAllTracks,
-          function () {
-            console.error('Error while deleting Track.');
-          },
-        );
+        TrackService.deleteTrack(id).then(self.fetchAllTracks);
       };
 
       // Form Operations
 
       /** @namespace errResponse.data.validationMessages */
-      self.handleErrorResponse = function (errResponse, errMsg) {
-        console.error(errMsg);
-        if (typeof (errResponse.data.validationMessages) !== 'undefined') {
-          self.addValidationErrorMessages(errResponse.data.validationMessages);
+      self.handleErrorResponse = function (errMsg, errResponse) {
+        if (typeof (errResponse.validationMessages) !== 'undefined') {
+          self.addValidationErrorMessages(errResponse.validationMessages);
         } else {
-          self.addErrorMessage(errResponse.data.message);
+          self.addErrorMessage(errResponse.message || errMsg);
         }
       };
 
@@ -138,7 +126,7 @@
       self.submit = function () {
         self.clearErrorMessages();
         if (self.track.id === null) {
-          console.log('Saving new Track', self.track);
+          console.log('Saving new Track...', self.track);
           self.createTrack(self.track);
         } else {
           self.updateTrack(self.track, self.track.id);
@@ -188,6 +176,10 @@
       // Execute after startup.
       self.clearErrorMessages();
       self.fetchAllTracks();
+
+      CsrfService.getCsrfToken().then(
+        () => console.log('CSRF Token fetched with success!')
+      )
 
       // Initialize the notification service.
       TrackNotificationService.initialize(msg => {
