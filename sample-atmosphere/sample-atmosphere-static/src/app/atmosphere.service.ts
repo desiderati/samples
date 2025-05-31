@@ -34,9 +34,13 @@ export class AtmosphereService {
     private socket: any = null;
 
     // noinspection JSUnusedGlobalSymbols
-    connect(url: string, customAtmosphereRequest?: CustomAtmosphereRequest): Observable<string> {
+    connect(
+        url: string,
+        customAtmosphereRequest?: CustomAtmosphereRequest
+    ): Observable<string> {
 
         let self = this;
+
         function subscribe(atmosphereRequest: {}) {
             if (Atmosphere && Atmosphere.subscribe) {
                 self.socket = Atmosphere.subscribe(atmosphereRequest);
@@ -55,7 +59,6 @@ export class AtmosphereService {
         }
 
         return new Observable<string>((observer: Observer<string>) => {
-
             function debugMsgIfEnabled(msg: string) {
                 if (customAtmosphereRequest?.logLevel === 'debug') {
                     if (customAtmosphereRequest?.logFunction !== undefined) {
@@ -81,7 +84,6 @@ export class AtmosphereService {
                 enableProtocol: true,
                 logLevel: 'info',
                 uuid: 0,
-                felipe: true,
 
                 // Operations.
                 onOpen: (response: any) => {
@@ -149,7 +151,7 @@ export class AtmosphereService {
             if (customAtmosphereRequest !== undefined) {
                 subscribe({...atmosphereRequest, ...customAtmosphereRequest});
             } else {
-                subscribe(atmosphereRequest)
+                subscribe(atmosphereRequest);
             }
 
             return () => unsubscribe();

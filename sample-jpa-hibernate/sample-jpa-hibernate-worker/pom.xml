@@ -24,7 +24,7 @@
     <parent>
         <groupId>io.herd.common</groupId>
         <artifactId>common-starter</artifactId>
-        <version>4.0.0.RC4</version>
+        <version>4.0.0.RC5</version>
         <!--suppress MavenModelInspection-->
         <relativePath>../../../commons/common-starter</relativePath>
     </parent>
@@ -33,6 +33,12 @@
     <version>0.0.1-SNAPSHOT</version>
 
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
         <dependency>
             <groupId>io.herd.common</groupId>
             <artifactId>common-web-notification-client</artifactId>

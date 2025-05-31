@@ -19,11 +19,13 @@
 (function (app) {
   'use strict';
 
+  const apiUrl = 'http://localhost:9090/sample-atmosphere/'
+
   app.controller('AtmosphereController', ['$scope',
     function ($scope) {
 
       // Link: https://github.com/Atmosphere/atmosphere/wiki/atmosphere.js-API
-      function AtmosphereRequest(url, subscription, notificationHandler, notificationConsole) {
+      function AtmosphereRequest(url, subscription, notificationHandler) {
 
         this['url'] = url;
         this['contentType'] = 'application/json';
@@ -37,7 +39,7 @@
         this['onOpen'] = function (response) {
           let msg = 'Atmosphere connected using ' + response.transport + '!';
           console.log(msg);
-          notificationConsole(msg);
+          notificationHandler(msg);
 
           // Carry the UUID. This is required if you want to call
           // subscribe(request) again.
@@ -47,7 +49,7 @@
         this['onReopen'] = function (response) {
           let msg = 'Atmosphere reconnected using ' + response.transport + '!';
           console.log(msg);
-          notificationConsole(msg);
+          notificationHandler(msg);
         };
 
         this['onMessage'] = function (response) {
@@ -60,25 +62,26 @@
             return;
           }
 
-          console.log('Response JSON:', json);
+          // noinspection JSUnresolvedReference
           notificationHandler(json.payload);
+          console.log('Response JSON:', json);
         };
 
         this['onClose'] = function () {
           let msg = 'Atmosphere connection was closed!';
           console.log(msg);
-          notificationConsole(msg);
+          notificationHandler(msg);
         };
 
         this['onError'] = function (response) {
           console.log('Response Error:', response);
-          notificationConsole('Sorry, but there\'s some problem with your socket ' +
+          notificationHandler('Sorry, but there\'s some problem with your socket ' +
             'or the server is down!');
         };
 
         this['onTransportFailure'] = function (errorMsg, request) {
           console.log('Request Error:', request);
-          notificationConsole('Sorry, but the selected transport method is not available! ' +
+          notificationHandler('Sorry, but the selected transport method is not available! ' +
             'Falling back to the alternate one.');
 
           request.fallbackTransport = 'long-polling';
@@ -89,7 +92,7 @@
             'Trying to reconnect in ' + request.reconnectInterval + 'ms.';
 
           console.log(msg);
-          notificationConsole(msg);
+          notificationHandler(msg);
         };
 
         this['onClientTimeout'] = function (request) {
@@ -97,7 +100,7 @@
             'Reconnecting in ' + request.reconnectInterval + 'ms.';
 
           console.log(msg);
-          notificationConsole(msg);
+          notificationHandler(msg);
 
           setTimeout(function () {
             subscription = socket.subscribe(request);
@@ -115,21 +118,17 @@
         message: 'Testing message sending via Pure Javascript!',
       };
 
-      self.initialize = function () {
+      self.initialize = function (onMessageReceive) {
         if (atmosphereRequest != null) {
           socket.unsubscribeUrl(atmosphereRequest.url);
           subscription = '';
         }
 
         atmosphereRequest = new AtmosphereRequest(
-          document.location.toString() + 'notification/' + self.notification.user,
+          apiUrl + 'atm/notification/' + self.notification.user,
           subscription,
-          function (msg) {
-            self.printMessage(msg);
-          },
-          function (msg) {
-            self.printMessage(msg);
-          });
+          onMessageReceive
+        );
 
         subscription = socket.subscribe(atmosphereRequest);
 
