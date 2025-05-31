@@ -84,10 +84,9 @@
 
             <div class="form-group row">
                 <div class="col-sm-offset-2 col-sm-5">
-                    <input class="btn btn-primary" type="submit" value="{{!ctrl.track.id ? 'Add' : 'Update'}}"
+                    <input class="btn btn-primary" style="width: 85px" type="submit" value="{{!ctrl.track.id ? 'Add' : 'Update'}}"
                            ng-disabled="trackForm.$invalid">
-                    <button class="btn" type="button" ng-click="ctrl.reset()"
-                            ng-disabled="trackForm.$pristine">Reset</button>
+                    <button class="btn" style="width: 85px" type="button" ng-click="ctrl.reset()">Reset</button>
                 </div>
             </div>
         </form>
@@ -105,7 +104,7 @@
 
             <div class="form-group row">
                 <div class="col-sm-offset-2 col-sm-5">
-                    <button class="btn btn-primary" type="button" ng-click="ctrl.filter()">Filter</button>
+                    <button class="btn btn-primary" style="width: 85px" type="button" ng-click="ctrl.filter()">Filter</button>
                     <span>Leave empty to retrieve all!</span>
                 </div>
             </div>
@@ -128,8 +127,8 @@
                     <td><span ng-bind="track.author"></span></td>
                     <td><span ng-bind="track.duration"></span></td>
                     <td>
-                        <button type="button" ng-click="ctrl.edit(track.id)">Update</button>
-                        <button type="button" ng-click="ctrl.remove(track.id)">Remove</button>
+                        <button type="button" class="btn btn-primary" style="width: 85px" ng-click="ctrl.edit(track.id)">Update</button>
+                        <button type="button" class="btn btn-primary" style="width: 85px" ng-click="ctrl.remove(track.id)">Remove</button>
                     </td>
                 </tr>
             </tbody>

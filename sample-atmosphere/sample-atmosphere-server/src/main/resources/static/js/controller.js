@@ -118,7 +118,7 @@
         message: 'Testing message sending via Pure Javascript!',
       };
 
-      self.initialize = function (onMessageReceive) {
+      self.initialize = function () {
         if (atmosphereRequest != null) {
           socket.unsubscribeUrl(atmosphereRequest.url);
           subscription = '';
@@ -127,7 +127,7 @@
         atmosphereRequest = new AtmosphereRequest(
           apiUrl + 'atm/notification/' + self.notification.user,
           subscription,
-          onMessageReceive
+          msg => self.printMessage(msg)
         );
 
         subscription = socket.subscribe(atmosphereRequest);

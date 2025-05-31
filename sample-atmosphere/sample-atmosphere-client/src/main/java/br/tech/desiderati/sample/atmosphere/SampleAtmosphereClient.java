@@ -17,7 +17,7 @@ public class SampleAtmosphereClient {
         BroadcastMessageObject broadcastMessage = new BroadcastMessageObject();
 
         // Replace it with a valid client ID!
-        broadcastMessage.setResourceId("efe7c201-87df-40bb-964b-b97e8f8d0d8f");
+        broadcastMessage.setResourceId("d7fd3629-57d9-44cd-ab06-05eb495e4e1a");
         broadcastMessage.setPayload("Hello World!");
 
         try {

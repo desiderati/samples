@@ -23,7 +23,7 @@
 
 export const environment = {
     production: false,
-    notificationUrl: 'http://localhost:9090/sample-atmosphere/notification/',
+    notificationUrl: 'http://localhost:9090/sample-atmosphere/atm/notification/',
 };
 
 /*
