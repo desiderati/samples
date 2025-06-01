@@ -19,7 +19,7 @@
 package br.tech.desiderati.sample.mongodb.configuration;
 
 import br.tech.desiderati.sample.mongodb.WebApplication;
-import io.herd.common.web.configuration.AbstractWebApplicationInitializer;
+import dev.springbloom.web.configuration.AbstractWebApplicationInitializer;
 
 public class WebApplicationInitializer extends AbstractWebApplicationInitializer {
 

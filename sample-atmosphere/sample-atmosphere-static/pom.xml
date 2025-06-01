@@ -22,10 +22,10 @@
 
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>io.herd.common</groupId>
-        <artifactId>common-parent-static</artifactId>
-        <version>4.0.0.RC5</version>
-        <relativePath>../../../commons/common-parent-static</relativePath>
+        <groupId>dev.springbloom</groupId>
+        <artifactId>springbloom-parent-static</artifactId>
+        <version>4.0.0.RC6</version>
+        <relativePath>../../../springbloom/springbloom-parent-static</relativePath>
     </parent>
     <groupId>br.tech.desiderati.sample</groupId>
     <artifactId>sample-atmosphere-static</artifactId>

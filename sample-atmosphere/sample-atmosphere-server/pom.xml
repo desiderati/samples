@@ -22,11 +22,11 @@
 
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>io.herd.common</groupId>
-        <artifactId>common-starter-web</artifactId>
-        <version>4.0.0.RC5</version>
+        <groupId>dev.springbloom</groupId>
+        <artifactId>springbloom-starter-web</artifactId>
+        <version>4.0.0.RC6</version>
         <!--suppress MavenModelInspection-->
-        <relativePath>../../../commons/common-starter-web</relativePath>
+        <relativePath>../../../springbloom/springbloom-starter-web</relativePath>
     </parent>
     <groupId>br.tech.desiderati.sample</groupId>
     <artifactId>sample-atmosphere-server</artifactId>
@@ -34,8 +34,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>io.herd.common</groupId>
-            <artifactId>common-web-notification</artifactId>
+            <groupId>dev.springbloom</groupId>
+            <artifactId>springbloom-web-notification</artifactId>
         </dependency>
     </dependencies>
 

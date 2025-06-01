@@ -22,10 +22,10 @@
 
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>io.herd.common</groupId>
-        <artifactId>common-parent</artifactId>
-        <version>4.0.0.RC5</version>
-        <relativePath>../../../commons/common-parent</relativePath>
+        <groupId>dev.springbloom</groupId>
+        <artifactId>springbloom-parent</artifactId>
+        <version>4.0.0.RC6</version>
+        <relativePath>../../../springbloom/springbloom-parent</relativePath>
     </parent>
     <groupId>br.tech.desiderati.sample</groupId>
     <artifactId>sample-atmosphere-client</artifactId>
@@ -33,8 +33,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>io.herd.common</groupId>
-            <artifactId>common-web-notification-client</artifactId>
+            <groupId>dev.springbloom</groupId>
+            <artifactId>springbloom-web-notification-client</artifactId>
         </dependency>
     </dependencies>
 

@@ -18,8 +18,8 @@
  */
 package br.tech.desiderati.sample.jpa_hibernate.listener;
 
-import io.herd.common.jms.JmsErrorHandler;
-import io.herd.common.web.notification.client.NotificationClient;
+import dev.springbloom.jms.JmsErrorHandler;
+import dev.springbloom.web.notification.client.NotificationClient;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;

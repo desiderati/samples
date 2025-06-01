@@ -23,8 +23,8 @@ import br.tech.desiderati.sample.storage.domain.Diff;
 import br.tech.desiderati.sample.storage.domain.FileMetadata;
 import br.tech.desiderati.sample.storage.domain.Offset;
 import br.tech.desiderati.sample.storage.repository.FileMetadataRepository;
-import io.herd.common.exception.IllegalArgumentApplicationException;
-import io.herd.common.exception.ResourceNotFoundApplicationException;
+import dev.springbloom.core.exception.IllegalArgumentApplicationException;
+import dev.springbloom.core.exception.ResourceNotFoundApplicationException;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Hex;
@@ -41,8 +41,8 @@ import java.nio.file.*;
 import java.security.DigestOutputStream;
 import java.security.MessageDigest;
 
-import static io.herd.common.exception.ThrowingConsumer.silently;
-import static io.herd.common.exception.ThrowingRunnable.silently;
+import static dev.springbloom.core.exception.ThrowingConsumer.silently;
+import static dev.springbloom.core.exception.ThrowingRunnable.silently;
 
 @Slf4j
 @Service

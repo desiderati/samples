@@ -20,10 +20,10 @@ package br.tech.desiderati.sample.jpa_hibernate.listener;
 
 import br.tech.desiderati.sample.jpa_hibernate.domain.Track;
 import br.tech.desiderati.sample.jpa_hibernate.service.TrackService;
-import io.herd.common.exception.ApplicationException;
-import io.herd.common.exception.IllegalArgumentApplicationException;
-import io.herd.common.jms.AbstractAsyncMessageListener;
-import io.herd.common.web.notification.client.NotificationClient;
+import dev.springbloom.core.exception.ApplicationException;
+import dev.springbloom.core.exception.IllegalArgumentApplicationException;
+import dev.springbloom.jms.AbstractAsyncMessageListener;
+import dev.springbloom.web.notification.client.NotificationClient;
 import jakarta.jms.Message;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;

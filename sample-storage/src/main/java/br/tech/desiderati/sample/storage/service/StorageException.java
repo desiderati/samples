@@ -18,7 +18,7 @@
  */
 package br.tech.desiderati.sample.storage.service;
 
-import io.herd.common.exception.ApplicationException;
+import dev.springbloom.core.exception.ApplicationException;
 
 import java.io.Serial;
 

@@ -18,7 +18,7 @@
  */
 package br.tech.desiderati.sample.mongodb.repository;
 
-import io.herd.common.scanner.QRCode;
+import dev.springbloom.scanner.QRCode;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.UUID;

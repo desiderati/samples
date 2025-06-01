@@ -23,11 +23,11 @@
 
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>io.herd.common</groupId>
-        <artifactId>common-starter</artifactId>
-        <version>4.0.0.RC5</version>
+        <groupId>dev.springbloom</groupId>
+        <artifactId>springbloom-starter</artifactId>
+        <version>4.0.0.RC6</version>
         <!--suppress MavenModelInspection-->
-        <relativePath>../../../commons/common-starter</relativePath>
+        <relativePath>../../../springbloom/springbloom-starter</relativePath>
     </parent>
     <groupId>br.tech.desiderati.sample</groupId>
     <artifactId>sample-scheduler</artifactId>

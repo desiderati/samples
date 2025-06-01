@@ -19,8 +19,8 @@
 package br.tech.desiderati.sample.mongodb.service;
 
 import br.tech.desiderati.sample.mongodb.repository.QRCodeRepository;
-import io.herd.common.scanner.QRCode;
-import io.herd.common.scanner.QRCodeBuilder;
+import dev.springbloom.scanner.QRCode;
+import dev.springbloom.scanner.QRCodeBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

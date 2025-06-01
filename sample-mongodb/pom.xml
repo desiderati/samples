@@ -22,11 +22,11 @@
 
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>io.herd.common</groupId>
-        <artifactId>common-starter-web</artifactId>
-        <version>4.0.0.RC5</version>
+        <groupId>dev.springbloom</groupId>
+        <artifactId>springbloom-starter-web</artifactId>
+        <version>4.0.0.RC6</version>
         <!--suppress MavenModelInspection-->
-        <relativePath>../../commons/common-starter-web</relativePath>
+        <relativePath>../../springbloom/springbloom-starter-web</relativePath>
     </parent>
     <groupId>br.tech.desiderati.sample</groupId>
     <artifactId>sample-mongodb</artifactId>
@@ -34,12 +34,12 @@
 
     <dependencies>
         <dependency>
-            <groupId>io.herd.common</groupId>
-            <artifactId>common-data-mongodb</artifactId>
+            <groupId>dev.springbloom</groupId>
+            <artifactId>springbloom-data-mongodb</artifactId>
         </dependency>
         <dependency>
-            <groupId>io.herd.common</groupId>
-            <artifactId>common-scanner</artifactId>
+            <groupId>dev.springbloom</groupId>
+            <artifactId>springbloom-scanner</artifactId>
         </dependency>
 
         <!-- Fake MongoDB -->

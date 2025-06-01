@@ -18,9 +18,9 @@
  */
 package br.tech.desiderati.sample.mongodb.repository;
 
-import io.herd.common.exception.ApplicationException;
-import io.herd.common.scanner.QRCode;
-import io.herd.common.scanner.QRCodeBuilder;
+import dev.springbloom.core.exception.ApplicationException;
+import dev.springbloom.scanner.QRCode;
+import dev.springbloom.scanner.QRCodeBuilder;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

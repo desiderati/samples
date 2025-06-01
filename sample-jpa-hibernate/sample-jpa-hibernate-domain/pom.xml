@@ -22,11 +22,11 @@
 
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>io.herd.common</groupId>
-        <artifactId>common-parent</artifactId>
-        <version>4.0.0.RC5</version>
+        <groupId>dev.springbloom</groupId>
+        <artifactId>springbloom-parent</artifactId>
+        <version>4.0.0.RC6</version>
         <!--suppress MavenModelInspection-->
-        <relativePath>../../../commons/common-parent</relativePath>
+        <relativePath>../../../springbloom/springbloom-parent</relativePath>
     </parent>
     <groupId>br.tech.desiderati.sample</groupId>
     <artifactId>sample-jpa-hibernate-domain</artifactId>
@@ -34,13 +34,13 @@
 
     <dependencies>
         <dependency>
-            <groupId>io.herd.common</groupId>
-            <artifactId>common-jms</artifactId>
+            <groupId>dev.springbloom</groupId>
+            <artifactId>springbloom-jms</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>io.herd.common</groupId>
-            <artifactId>common-data-jpa</artifactId>
+            <groupId>dev.springbloom</groupId>
+            <artifactId>springbloom-data-jpa</artifactId>
         </dependency>
     </dependencies>
 
