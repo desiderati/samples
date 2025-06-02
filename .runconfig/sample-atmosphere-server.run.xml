@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="sample-atmosphere-server" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+  <configuration default="false" name="sample-atmosphere-server" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" folderName="samples">
     <module name="sample-atmosphere-server" />
     <option name="SPRING_BOOT_MAIN_CLASS" value="br.tech.desiderati.sample.atmosphere.WebApplication" />
     <extension name="net.ashald.envfile">

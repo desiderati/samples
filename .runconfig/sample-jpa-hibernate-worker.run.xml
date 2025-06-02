@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="sample-jpa-hibernate-worker" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+  <configuration default="false" name="sample-jpa-hibernate-worker" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" folderName="samples">
     <module name="sample-jpa-hibernate-worker" />
     <option name="SPRING_BOOT_MAIN_CLASS" value="br.tech.desiderati.sample.jpa_hibernate.Application" />
     <method v="2">
