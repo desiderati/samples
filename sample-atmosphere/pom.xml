@@ -27,7 +27,7 @@
         <version>4.0.0.RC7</version>
         <relativePath>../../springbloom/springbloom-parent-info</relativePath>
     </parent>
-    <groupId>br.tech.desiderati.sample</groupId>
+    <groupId>br.tech.desiderati.samples</groupId>
     <artifactId>sample-atmosphere</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>

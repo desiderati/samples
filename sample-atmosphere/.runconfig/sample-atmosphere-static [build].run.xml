@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="sample-atmosphere-static [build]" type="js.build_tools.npm" folderName="🎁 samples">
+  <configuration default="false" name="sample-atmosphere-static [build]" type="js.build_tools.npm" folderName="🧰 samples">
     <package-json value="$PROJECT_DIR$/samples/sample-atmosphere/sample-atmosphere-static/package.json" />
     <command value="run" />
     <scripts>

@@ -28,7 +28,7 @@
         <!--suppress MavenModelInspection-->
         <relativePath>../../springbloom/springbloom-starter-web</relativePath>
     </parent>
-    <groupId>br.tech.desiderati.sample</groupId>
+    <groupId>br.tech.desiderati.samples</groupId>
     <artifactId>sample-thymeleaf</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 

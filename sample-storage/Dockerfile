@@ -67,8 +67,8 @@ ENV JAVA_XMX 512m
 ENV JAVA_CPUS 1
 
 # Copy application.
-RUN mkdir -p /opt/desiderati-java-app/
-COPY target/sample-storage-0.0.1-SNAPSHOT-exec.jar /opt/desiderati-java-app/app.jar
+RUN mkdir -p /opt/java-app/
+COPY target/sample-storage-0.0.1-SNAPSHOT-exec.jar /opt/java-app/app.jar
 
 EXPOSE 9090
 
@@ -78,6 +78,6 @@ ENTRYPOINT ["/docker-entrypoint.sh"]
 
 ENV HOME /home/java/
 
-WORKDIR /opt/desiderati-java-app/
+WORKDIR /opt/java-app/
 
 CMD java $JAVA_OPTS -jar app.jar

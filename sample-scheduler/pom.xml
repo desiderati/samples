@@ -29,7 +29,7 @@
         <!--suppress MavenModelInspection-->
         <relativePath>../../../springbloom/springbloom-starter</relativePath>
     </parent>
-    <groupId>br.tech.desiderati.sample</groupId>
+    <groupId>br.tech.desiderati.samples</groupId>
     <artifactId>sample-scheduler</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 

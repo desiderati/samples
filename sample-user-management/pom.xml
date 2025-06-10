@@ -28,7 +28,7 @@
         <!--suppress MavenModelInspection-->
         <relativePath>../../springbloom/springbloom-parent-info</relativePath>
     </parent>
-    <groupId>br.tech.desiderati.sample</groupId>
+    <groupId>br.tech.desiderati.samples</groupId>
     <artifactId>sample-user-management</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
