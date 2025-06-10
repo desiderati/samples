@@ -1,0 +1,8 @@
+### User Login (Local)
+POST http://localhost:9090/sample-user-management-server/login
+Content-Type: application/json
+
+{
+  "username": "administrator",
+  "password": "**123456**"
+}

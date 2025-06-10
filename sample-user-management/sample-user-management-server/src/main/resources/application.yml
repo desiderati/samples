@@ -1,0 +1,100 @@
+server:
+  servlet:
+    # The "context-path" setting applies to the entire application.
+    # The "api-base-path" setting applies only to REST APIs.
+    context-path: /sample-user-management-server
+
+app:
+  # All REST APIs will use the prefix below.
+  # REST APIs include all classes annotated with @RestController.
+  # The Login Endpoint is not part of the REST API.
+  api-base-path: /api
+
+management:
+  endpoints:
+    web:
+      base-path: /actuator
+
+logging:
+  level:
+    # Prevents an error log from being generated when the application is not running inside GCP.
+    # This log is a false positive when running locally.
+    com.google.cloud.spring.core.DefaultCredentialsProvider: ERROR
+
+spring:
+  application:
+    name: sample-user-management-server
+  main:
+    allow-bean-definition-overriding: true
+  data:
+    jpa:
+      repositories:
+        enabled: true
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/test
+    username: test
+    password: test
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 15
+      connection-timeout: 30000
+      idle-timeout: 15000
+      validation-timeout: 5000
+      leak-detection-threshold: 30000
+  graphql:
+    altair:
+      # Enable locally – or in DEV – to test GraphQL queries.
+      enabled: true
+      basePath: /sample-user-management-server/
+      options:
+        endpoint-url: /graphql
+    aliased-scalars:
+      BigDecimal: Number
+    extended-scalars: BigDecimal, Date, DateTime, JSON
+    schema:
+      locations: classpath:graphql/**/
+    security:
+      # Marked as unauthenticated to allow access to Voyager and Schema Download without requiring authentication.
+      # However, using the application still requires the Authorization header,
+      # even when authentication is disabled locally.
+      enabled: false
+    voyager:
+      # Enable locally – or in DEV – to visualize the GraphQL schema.
+      enabled: true
+      endpoint: /graphql
+      basePath: /sample-user-management-server/
+      displayOptions:
+        rootType: Query
+  jpa:
+    generate-ddl: false
+    show-sql: true
+    open-in-view: true
+    hibernate:
+      ddl-auto: none
+      naming:
+        implicit-strategy: dev.springbloom.data.jpa.DefaultImplicitNamingStrategy
+        physical-strategy: dev.springbloom.data.jpa.DefaultPhysicalNamingStrategy
+    properties:
+      hibernate.format_sql: true
+      hibernate.jdbc.batch_size: 100
+      hibernate.dialect.storage_engine: innodb
+      hibernate.query.plan_cache_max_size: 16
+      hibernate.query.plan_parameter_metadata_max_size: 128
+      hibernate.jdbc.time_zone: UTC
+  liquibase:
+    enabled: true
+  mvc:
+    async:
+      # Defines whether to expose [LocaleContext] and [RequestAttributes] as inheritable
+      # for child threads using [InheritableThreadLocal].
+      context-propagation-mode: NON_INHERITABLE
+      delegate-security-context: true
+      request-timeout: 30s
+  web:
+    security:
+      jwt:
+        authentication:
+          enabled: false
+        authorization:
+          enabled: false

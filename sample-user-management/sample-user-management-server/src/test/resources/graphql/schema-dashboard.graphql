@@ -1,0 +1,25 @@
+# {
+#   "pageable": {
+#     "pageNumber": 0,
+#     "pageSize": 25
+#   }
+# }
+query getDashboard($pageable: PageableInput) {
+    getDashboard(pageable: $pageable) {
+        loggedUserGroups {
+            totalElements
+        }
+    }
+}
+
+query getDashboard($pageable: PageableInput) {
+    dashboard: getDashboard(pageable: $pageable) {
+        loggedUserGroups {
+            totalElements
+            groups: content {
+                id
+                name
+            }
+        }
+    }
+}

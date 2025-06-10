@@ -1,0 +1,8 @@
+extend type Query {
+    getDashboard(pageable: PageableInput): Dashboard!
+    getLoggedUserGroups: Pageable! @content(for: "Group")
+
+    findAllUsers(pageable: PageableInput): Pageable! @content(for: "User")
+    findAllGroups(pageable: PageableInput): Pageable! @content(for: "Group")
+    findAllRoles(pageable: PageableInput): Pageable! @content(for: "Role")
+}

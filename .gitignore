@@ -197,6 +197,43 @@ allure-report/
 allure-results/
 *.pug
 
+### Gradle ###
+HELP.md
+.gradle
+build/
+!**/gradle/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### STS ###
+.apt_generated
+.factorypath
+.springBeans
+.sts4-cache
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+
+### IntelliJ IDEA ###
+*.ipr
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
+/generated-sources/
+/src/test/resources/graphql/schema.json
+
+/logs
+/.kotlin/
+
 ### Others ###
 distro/
 target/

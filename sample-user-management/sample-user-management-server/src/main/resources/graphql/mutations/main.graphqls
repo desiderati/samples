@@ -1,0 +1,22 @@
+extend type Mutation {
+    createUser(userInput: UserInput!): User!
+    updateUser(userInput: UserInput!): User!
+    deleteUser(id: ID!): Boolean!
+
+    createGroup(groupInput: GroupInput!): Group!
+    updateGroup(groupInput: GroupInput!): Group!
+    deleteGroup(id: ID!): Boolean!
+
+    createRole(roleInput: RoleInput!): Role!
+    updateRole(roleInput: RoleInput!): Role!
+    deleteRole(id: ID!): Boolean!
+
+    createPermission(permissionInput: PermissionInput!): Permission!
+    updatePermission(permissionInput: PermissionInput!): Permission!
+    deletePermission(id: ID!): Boolean!
+
+    allocateRoleOnGroup(roleId: ID!, groupId: ID!): Void
+    #deallocateRoleFromGroup(roleId: ID!, groupId: ID!): Void
+    #assignUserToAllocation(userId: ID!, allocationId: ID!): Void
+    #unassignUserFromAllocation(userId: ID!, allocationId: ID!): Void
+}

@@ -1,0 +1,23 @@
+query isAdministrator {
+    isAdministrator
+}
+
+# {
+#   "messageId": "processDefinition.alias.notBlank"
+# }
+query getInternationalizedMessage($messageId: String!) {
+    getInternationalizedMessage(messageId: $messageId)
+}
+
+query getSimpleSuspendInternationalizedMessage($messageId: String!) {
+    getSimpleSuspendInternationalizedMessage(messageId: $messageId)
+}
+
+query getNestedSuspendInternationalizedMessage($messageId: String!) {
+    getSimpleSuspendInternationalizedMessage(messageId: $messageId)
+}
+
+
+query getNestedSuspendInternationalizedMessage($messageId: String!) {
+    getAsyncInternationalizedMessage(messageId: $messageId)
+}

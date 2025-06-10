@@ -1,0 +1,11 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="sample-user-management-db: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" folderName="🐋 samples" server-name="Docker">
+    <deployment type="docker-compose.yml">
+      <settings>
+        <option name="envFilePath" value="" />
+        <option name="sourceFilePath" value="samples/sample-user-management/sample-user-management-db/docker-compose.yml" />
+      </settings>
+    </deployment>
+    <method v="2" />
+  </configuration>
+</component>

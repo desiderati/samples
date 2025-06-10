@@ -1,0 +1,387 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<!--
+  ~ Copyright (c) 2025 - Felipe Desiderati
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
+  ~ associated documentation files (the "Software"), to deal in the Software without restriction,
+  ~ including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
+  ~ and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so,
+  ~ subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in all copies or substantial
+  ~ portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
+  ~ LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+  ~ IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+  ~ WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+  ~ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+  -->
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+      _   _ ___  ___ _ __
+     | | | / __|/ _ \ '__|
+     | |_| \__ \  __/ |
+      \__,_|___/\___|_|
+    -->
+
+    <changeSet author="Felipe Desiderati" id="1749095068507-1">
+        <createTable tableName="sampl_usr_mgmt_usr">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_usr_mgmt_usr"/>
+            </column>
+            <column name="login" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="system_admin" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="Felipe Desiderati" id="1749095068507-2">
+        <createSequence cacheSize="1" cycle="false" dataType="bigint" incrementBy="1" maxValue="9223372036854775807"
+                        minValue="1" sequenceName="sampl_usr_mgmt_usr_id" startValue="1"/>
+    </changeSet>
+
+    <changeSet author="Felipe Desiderati" id="1749095068507-3">
+        <createIndex indexName="ix_8529225507495" tableName="sampl_usr_mgmt_usr" unique="true">
+            <column name="login"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Felipe Desiderati" id="1749095068507-4">
+        <createIndex indexName="ix_1608702675545" tableName="sampl_usr_mgmt_usr">
+            <column name="name"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Felipe Desiderati" id="1749095068507-5">
+        <createIndex indexName="ix_7182051351795" tableName="sampl_usr_mgmt_usr" unique="true">
+            <column name="email"/>
+        </createIndex>
+    </changeSet>
+
+    <!--
+       __ _ _ __ ___  _   _ _ __
+      / _` | '__/ _ \| | | | '_ \
+     | (_| | | | (_) | |_| | |_) |
+      \__, |_|  \___/ \__,_| .__/
+      |___/                |_|
+    -->
+
+    <changeSet author="Felipe Desiderati" id="1749095068507-6">
+        <createTable tableName="sampl_usr_mgmt_grp">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_usr_mgmt_grp"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" type="VARCHAR(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="id_parent" type="BIGINT"/>
+            <column name="order_as_division" type="INTEGER"/>
+            <column name="order_as_workgroup" type="INTEGER"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="Felipe Desiderati" id="1749095068507-7">
+        <createSequence cacheSize="1" cycle="false" dataType="bigint" incrementBy="1" maxValue="9223372036854775807"
+                        minValue="1" sequenceName="sampl_usr_mgmt_grp_id" startValue="1"/>
+    </changeSet>
+
+    <changeSet author="Felipe Desiderati" id="1749095068507-8">
+        <createIndex indexName="ix_7990449681202" tableName="sampl_usr_mgmt_grp" unique="true">
+            <column name="name"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Felipe Desiderati" id="1749095068507-9">
+        <createIndex indexName="ix_4658608158463" tableName="sampl_usr_mgmt_grp">
+            <column name="type"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Felipe Desiderati" id="1749095068507-10">
+        <createIndex indexName="ix_2908844054053" tableName="sampl_usr_mgmt_grp">
+            <column name="id_parent"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet author="Felipe Desiderati" id="1749095068507-11">
+        <preConditions onFail="HALT">
+            <and>
+                <columnExists tableName="sampl_usr_mgmt_grp" columnName="type"/>
+                <columnExists tableName="sampl_usr_mgmt_grp" columnName="order_as_workgroup"/>
+            </and>
+        </preConditions>
+
+        <sql>
+            ALTER TABLE sampl_usr_mgmt_grp ADD CONSTRAINT ck_8259589038886
+                CHECK ((order_as_workgroup IS NOT NULL AND "type" = 'W')
+                    OR (order_as_workgroup IS NULL AND "type" = 'D'));
+        </sql>
+
+        <sql>
+            COMMENT ON CONSTRAINT ck_8259589038886 ON sampl_usr_mgmt_grp
+                IS 'Ensures that each Workgroup has a defined position among all Workgroups.';
+        </sql>
+    </changeSet>
+
+    <changeSet author="Felipe Desiderati" id="1749095068507-12">
+        <preConditions onFail="HALT">
+            <and>
+                <columnExists tableName="sampl_usr_mgmt_grp" columnName="type"/>
+                <columnExists tableName="sampl_usr_mgmt_grp" columnName="order_as_division"/>
+            </and>
+        </preConditions>
+
+        <sql>
+            ALTER TABLE sampl_usr_mgmt_grp ADD CONSTRAINT ck_0820956533965
+                CHECK ((order_as_division IS NOT NULL AND "type" = 'D')
+                    OR (order_as_division IS NULL AND ("type" = 'D' OR "type" = 'W')));
+        </sql>
+
+        <sql>
+            COMMENT ON CONSTRAINT ck_0820956533965 ON sampl_usr_mgmt_grp
+                IS 'Ensures that no Workgroup has the column ''order_as_division'' set, since Workgroups cannot have child Workgroups. Also ensures that any Division may or may not have the column ''order_as_division'' set, as the Root Division is not a child of any other.';
+        </sql>
+    </changeSet>
+
+    <changeSet author="Felipe Desiderati" id="1749095068507-13">
+        <preConditions onFail="HALT">
+            <and>
+                <columnExists tableName="sampl_usr_mgmt_grp" columnName="type"/>
+                <columnExists tableName="sampl_usr_mgmt_grp" columnName="order_as_division"/>
+                <columnExists tableName="sampl_usr_mgmt_grp" columnName="order_as_workgroup"/>
+            </and>
+        </preConditions>
+
+        <sql>
+            ALTER TABLE sampl_usr_mgmt_grp ADD CONSTRAINT ck_7497298037201
+                CHECK ((order_as_division IS NULL AND type = 'W')
+                    OR (order_as_workgroup IS NULL AND type = 'D'));
+        </sql>
+
+        <sql>
+            COMMENT ON CONSTRAINT ck_7497298037201 ON sampl_usr_mgmt_grp
+                IS 'Ensures that no Division has the column ''order_as_workgroup'' set.';
+        </sql>
+
+    </changeSet>
+
+    <!--        _
+      _ __ ___ | | ___
+     | '__/ _ \| |/ _ \
+     | | | (_) | |  __/
+     |_|  \___/|_|\___|
+    -->
+
+    <changeSet author="Felipe Desiderati" id="1749095068507-14">
+        <createTable tableName="sampl_usr_mgmt_role">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_usr_mgmt_role"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="Felipe Desiderati" id="1749095068507-15">
+        <createSequence cacheSize="1" cycle="false" dataType="bigint" incrementBy="1" maxValue="9223372036854775807"
+                        minValue="1" sequenceName="sampl_usr_mgmt_role_id" startValue="1"/>
+    </changeSet>
+
+    <changeSet author="Felipe Desiderati" id="1749095068507-16">
+        <createIndex indexName="uk_8243155004116" tableName="sampl_usr_mgmt_role" unique="true">
+            <column name="name"/>
+        </createIndex>
+    </changeSet>
+
+    <!--    _ _                 _   _
+       __ _| | | ___   ___ __ _| |_(_) ___  _ __
+      / _` | | |/ _ \ / __/ _` | __| |/ _ \| '_ \
+     | (_| | | | (_) | (_| (_| | |_| | (_) | | | |
+      \__,_|_|_|\___/ \___\__,_|\__|_|\___/|_| |_|
+    -->
+
+    <changeSet author="Felipe Desiderati" id="1749095068507-17">
+        <createTable tableName="sampl_usr_mgmt_alloc">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_usr_mgmt_alloc"/>
+            </column>
+            <column name="id_role" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="id_group" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="Felipe Desiderati" id="1749095068507-18">
+        <createSequence cacheSize="1" cycle="false" dataType="bigint" incrementBy="1" maxValue="9223372036854775807"
+                        minValue="1" sequenceName="sampl_usr_mgmt_alloc_id" startValue="1"/>
+    </changeSet>
+
+    <changeSet author="Felipe Desiderati" id="1749095068507-19">
+        <createIndex indexName="uk_2767503729067" tableName="sampl_usr_mgmt_alloc" unique="true">
+            <column name="id_role"/>
+            <column name="id_group"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Felipe Desiderati" id="1749095068507-20">
+        <createIndex indexName="ix_1007206330876" tableName="sampl_usr_mgmt_alloc">
+            <column name="id_role"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Felipe Desiderati" id="1749095068507-21">
+        <createIndex indexName="ix_4184040953257" tableName="sampl_usr_mgmt_alloc">
+            <column name="id_group"/>
+        </createIndex>
+    </changeSet>
+
+    <!--                        _         _
+      _ __   ___ _ __ _ __ ___ (_)___ ___(_) ___  _ __
+     | '_ \ / _ \ '__| '_ ` _ \| / __/ __| |/ _ \| '_ \
+     | |_) |  __/ |  | | | | | | \__ \__ \ | (_) | | | |
+     | .__/ \___|_|  |_| |_| |_|_|___/___/_|\___/|_| |_|
+     |_|
+    -->
+
+    <changeSet author="Felipe Desiderati" id="1749095068507-22">
+        <createTable tableName="sampl_usr_mgmt_alloc_perm">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_usr_mgmt_alloc_perm"/>
+            </column>
+            <column name="credential" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="id_allocation" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="Felipe Desiderati" id="1749095068507-23">
+        <createSequence cacheSize="1" cycle="false" dataType="bigint" incrementBy="1" maxValue="9223372036854775807"
+                        minValue="1" sequenceName="sampl_usr_mgmt_alloc_perm_id" startValue="1"/>
+    </changeSet>
+
+    <changeSet author="Felipe Desiderati" id="1749095068507-24">
+        <createIndex indexName="uk_9224734396155" tableName="sampl_usr_mgmt_alloc_perm" unique="true">
+            <column name="type"/>
+            <column name="credential"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet author="Felipe Desiderati" id="1749095068507-25">
+        <createIndex indexName="ix_0920405635557" tableName="sampl_usr_mgmt_alloc_perm">
+            <column name="id_allocation"/>
+        </createIndex>
+    </changeSet>
+
+    <!--            _
+       __ _ ___ ___(_) __ _ _ __
+      / _` / __/ __| |/ _` | '_ \
+     | (_| \__ \__ \ | (_| | | | |
+      \__,_|___/___/_|\__, |_| |_|
+                      |___/
+    -->
+
+    <changeSet author="Felipe Desiderati" id="1749095068507-26">
+        <createTable tableName="sampl_usr_mgmt_assign">
+            <column name="id_user" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_usr_mgmt_assign"/>
+            </column>
+            <column name="id_allocation" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_usr_mgmt_assign"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="Felipe Desiderati" id="1749095068507-27">
+        <createIndex indexName="uk_1618421164015" tableName="sampl_usr_mgmt_assign" unique="true">
+            <column name="id_user"/>
+            <column name="id_allocation"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Felipe Desiderati" id="1749095068507-28">
+        <createIndex indexName="ix_9428693570054" tableName="sampl_usr_mgmt_assign">
+            <column name="id_user"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Felipe Desiderati" id="1749095068507-29">
+        <createIndex indexName="ix_5724899800483" tableName="sampl_usr_mgmt_assign">
+            <column name="id_allocation"/>
+        </createIndex>
+    </changeSet>
+
+    <!--       _       _   _                 _     _
+      _ __ ___| | __ _| |_(_) ___  _ __  ___| |__ (_)_ __  ___
+     | '__/ _ \ |/ _` | __| |/ _ \| '_ \/ __| '_ \| | '_ \/ __|
+     | | |  __/ | (_| | |_| | (_) | | | \__ \ | | | | |_) \__ \
+     |_|  \___|_|\__,_|\__|_|\___/|_| |_|___/_| |_|_| .__/|___/
+     |_|
+    -->
+
+    <changeSet author="Felipe Desiderati" id="1749095068507-30">
+        <addForeignKeyConstraint baseColumnNames="id_parent" baseTableName="sampl_usr_mgmt_grp"
+                                 constraintName="fk_0536454726380" deferrable="false" initiallyDeferred="false"
+                                 onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id"
+                                 referencedTableName="sampl_usr_mgmt_grp" validate="true"/>
+    </changeSet>
+
+    <changeSet author="Felipe Desiderati" id="1749095068507-31">
+        <addForeignKeyConstraint baseColumnNames="id_group" baseTableName="sampl_usr_mgmt_alloc"
+                                 constraintName="fk_8640060518689" deferrable="false" initiallyDeferred="false"
+                                 onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id"
+                                 referencedTableName="sampl_usr_mgmt_grp" validate="true"/>
+    </changeSet>
+
+    <changeSet author="Felipe Desiderati" id="1749095068507-32">
+        <addForeignKeyConstraint baseColumnNames="id_role" baseTableName="sampl_usr_mgmt_alloc"
+                                 constraintName="fk_3678049921968" deferrable="false" initiallyDeferred="false"
+                                 onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id"
+                                 referencedTableName="sampl_usr_mgmt_role" validate="true"/>
+    </changeSet>
+
+    <changeSet author="Felipe Desiderati" id="1749095068507-33">
+        <addForeignKeyConstraint baseColumnNames="id_allocation" baseTableName="sampl_usr_mgmt_alloc_perm"
+                                 constraintName="fk_8858052901694" deferrable="false" initiallyDeferred="false"
+                                 onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id"
+                                 referencedTableName="sampl_usr_mgmt_alloc" validate="true"/>
+    </changeSet>
+
+    <changeSet author="Felipe Desiderati" id="1749095068507-34">
+        <addForeignKeyConstraint baseColumnNames="id_user" baseTableName="sampl_usr_mgmt_assign"
+                                 constraintName="fk_7328988666102" deferrable="false" initiallyDeferred="false"
+                                 onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id"
+                                 referencedTableName="sampl_usr_mgmt_usr" validate="true"/>
+    </changeSet>
+
+    <changeSet author="Felipe Desiderati" id="1749095068507-35">
+        <addForeignKeyConstraint baseColumnNames="id_allocation" baseTableName="sampl_usr_mgmt_assign"
+                                 constraintName="fk_0851628829305" deferrable="false" initiallyDeferred="false"
+                                 onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id"
+                                 referencedTableName="sampl_usr_mgmt_alloc" validate="true"/>
+    </changeSet>
+
+    <changeSet author="Felipe Desiderati" id="1749095068507-36">
+        <sqlFile path="../test-initial-data.sql" relativeToChangelogFile="true" splitStatements="true"
+                 stripComments="true"/>
+    </changeSet>
+
+</databaseChangeLog>

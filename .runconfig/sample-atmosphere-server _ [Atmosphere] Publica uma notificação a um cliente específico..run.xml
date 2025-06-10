@@ -1,5 +1,0 @@
-<component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="sample-atmosphere-server | [Atmosphere] Publica uma notificação a um cliente específico." type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" folderName="sample-atmosphere-server" nameIsGenerated="true" path="$PROJECT_DIR$/samples/sample-atmosphere/sample-atmosphere-server/sample-atmosphere-server.http" index="2" runType="Run single request">
-    <method v="2" />
-  </configuration>
-</component>

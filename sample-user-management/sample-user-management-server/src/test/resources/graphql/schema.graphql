@@ -1,0 +1,11 @@
+# Allocate a role to a specific group.
+# {
+#   "groupId": 1,
+#   "roleId": 1
+# }
+mutation allocateRoleOnGroup($groupId: ID!, $roleId: ID!) {
+    allocateRoleOnGroup(
+        groupId: $groupId,
+        roleId: $roleId
+    )
+}

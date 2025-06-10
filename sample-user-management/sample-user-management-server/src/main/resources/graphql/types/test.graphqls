@@ -1,0 +1,4 @@
+type TestObject {
+    name: String!
+    cellphone: String!
+}

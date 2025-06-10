@@ -1,0 +1,23 @@
+input UserInput {
+    id: ID
+    login: String!
+    name: String!
+    email: String!
+}
+
+input GroupInput {
+    id: ID
+    name: String!
+}
+
+input RoleInput {
+    id: ID
+    name: String!
+}
+
+input PermissionInput {
+    id: ID
+    type: PermissionType!
+    credential: String!
+    allocationId: ID!
+}

@@ -1,0 +1,17 @@
+extend type Query {
+    isAdministrator: Boolean!
+
+    getAuthenticatedUsernameIfPresent: String!
+
+    getInternationalizedMessage(messageId: String!): String
+    getSimpleSuspendInternationalizedMessage(messageId: String!): String
+    getNestedSuspendInternationalizedMessage(messageId: String!): String
+    getAsyncInternationalizedMessage(messageId: String!): String
+
+    getPaginatedResponse: Pageable! @content(for: "String")
+
+    throwException: Void
+    throwThrowable: Void
+    throwUndeclaredThrowableException: Void
+    throwApplicationException: Void
+}

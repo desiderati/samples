@@ -1,0 +1,5 @@
+extend type Mutation {
+    createTestObjectWithoutValidation(testObject: TestObjectInput!): TestObject!
+    validateInputTestObject(testObject: TestObjectInput!): TestObject!
+    validateInputAndReturnTestObject(testObject: TestObjectInput!): TestObject!
+}

@@ -1,0 +1,32 @@
+services:
+  postgres:
+    container_name: postgres
+    image: 'api.repoflow.io/desiderati/docker/library/postgres:17'
+    user: 1000:1000
+    ports:
+      - '5432:5432'
+    command: postgres -c config_file=/etc/postgresql/postgresql.conf
+    environment:
+      # If no database is specified, the PostgreSQL Docker Image will create a default one
+      # using the $POSTGRES_USER variable.
+      - POSTGRES_DB=test
+      - POSTGRES_USER=test
+      - POSTGRES_PASSWORD=test
+
+    volumes:
+      # To allow the Postgres Docker Image to identify the user configured in the "user: xxxx:xxxx" parameter.
+      - /etc/passwd:/etc/passwd:ro
+      - ./data:/var/lib/postgresql/data
+      - ./logs:/var/log/postgresql
+      - ./scripts:/scripts
+
+      # Uncomment the line below if you want to modify any PostgreSQL configuration parameter.
+      # Use the file located at /etc/postgresql/postgresql.conf inside the image as a reference.
+      #- ./postgresql.conf:/etc/postgresql/postgresql.conf
+
+    networks:
+      - postgres-net
+
+networks:
+  postgres-net:
+    driver: bridge

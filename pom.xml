@@ -24,7 +24,7 @@
     <parent>
         <groupId>dev.springbloom</groupId>
         <artifactId>springbloom-parent-info</artifactId>
-        <version>4.0.0.RC6</version>
+        <version>4.0.0.RC7</version>
         <relativePath>../springbloom/springbloom-parent-info</relativePath>
     </parent>
     <groupId>br.tech.desiderati.sample</groupId>
@@ -40,11 +40,11 @@
 
     <modules>
         <module>./sample-atmosphere</module>
-        <module>./sample-jpa-hibernate</module>
         <module>./sample-mongodb</module>
         <module>./sample-scheduler</module>
         <module>./sample-storage</module>
         <module>./sample-thymeleaf</module>
+        <module>./sample-user-management</module>
     </modules>
 
 </project>

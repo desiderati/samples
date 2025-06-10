@@ -1,0 +1,50 @@
+type User {
+    id: ID!
+    login: String!
+    name: String!
+    email: String!
+    allocations: [Allocation!]
+    groups: [Allocation!]
+}
+
+type Group {
+    id: ID!
+    name: String!
+    allocations: [Allocation!]
+}
+
+type Division {
+    id: ID!
+    name: String!
+    allocations: [Allocation!]
+    ancestrals: [Division!]
+}
+
+type Workgroup {
+    id: ID!
+    name: String!
+    allocations: [Allocation!]
+}
+
+type Role {
+    id: ID!
+    name: String!
+}
+
+type Allocation {
+    id: ID!
+    role: Role!
+    group: Group!
+    usersAllocated: [User!]
+    permissions: [Permission!]
+}
+
+type Permission {
+    id: ID!
+    type: PermissionType!
+    credential: String!
+}
+
+enum PermissionType {
+    GRANT, DENY
+}

@@ -1,0 +1,10 @@
+schema: schema.json
+extensions:
+  endpoints:
+    Local GraphQL Endpoint:
+      url: http://localhost:9090/sample-user-management-server/graphql
+      headers:
+        accept-language: pt-BR,pt;q=0.5
+        user-agent: Console Intellij GraphQL
+        authorization: Bearer eyJhbGciOiJSUzUxMiJ9.eyJzdWIiOiJBZG1pbmlzdHJhdG9yIiwiYXV0aG9yaXRpZXMiOlsiQURNSU5JU1RSQVRPUl9DUkVERU5USUFMIl0sImV4cCI6MTc0MTk5MzQwNX0.fucMWgv-asYYN9ElVy4T0-lCEU_HB0LyzVMD9E3ZY1KyyFjoR8Ed_66DC29dvLkj4UBCgBEJfrxS9_L2G5ysXhjs0XobH7_BWg8CCh37S4_ndvlZBQ1Jz0UrswosdAhTfSHhRDbim2juZwLtxjYTS0oa8Pdt04FiWoKnC0c4QG-DowK4mNQgMgffu92QIo23_ePNeMMK6QjcFk5jRxuxy3lJABFOXgBDwjphVlOPatJts54VlDUVfEMQ6y_rHOG52yi7OS1Fz3LGKpUVdN3b6lYHYW9yfrk1AaPZOoJiOKxJpuFTR8vabHZdWiXE46QMBGsX_6gwQmC-LivvGu3UvvwyvaseZ1DeW14EUiF0Nyjsf5ZTXcDOYjq6gn80_hEueQxVPNx2JZpZ4KY3m4if4h3uI2JZP-TLO6oDJgBEqqoSTOPwlmVI6LRvE94d3VDGaD5OBwns5DSonU9vvPbaQrrjP5EVcRl2YaJ-G_Kjy3rKs16_jdJXYoBToXt_pSLXbc9jaw5jyWrzp1tWjxGnyULbnsZyTmfvflvuDO6TqqdgoGzOdo6-n7RjEOH0ZBls34sZCmC1gYxCdq2ohp7zRHE3YPqw06m2525_HxvFWA620rGVTIVBwrhTWWM8OpW0hapnXmEA1WRADHhsYjLhQ2TquGzMSA06UxNpHIODHmw
+      introspect: false

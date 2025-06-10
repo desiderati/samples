@@ -1,5 +1,0 @@
-<component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="sample-storage | [Storage] Add file to rigth side" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" folderName="sample-storage" nameIsGenerated="true" path="$PROJECT_DIR$/samples/sample-storage/sample-storage.http" index="2" runType="Run single request">
-    <method v="2" />
-  </configuration>
-</component>

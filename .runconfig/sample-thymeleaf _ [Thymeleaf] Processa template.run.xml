@@ -1,5 +1,0 @@
-<component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="sample-thymeleaf | [Thymeleaf] Processa template" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" folderName="sample-thymeleaf" nameIsGenerated="true" path="$PROJECT_DIR$/samples/sample-thymeleaf/sample-thymeleaf.http" runType="Run single request">
-    <method v="2" />
-  </configuration>
-</component>
