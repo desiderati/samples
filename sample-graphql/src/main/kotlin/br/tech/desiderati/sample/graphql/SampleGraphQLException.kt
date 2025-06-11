@@ -17,21 +17,13 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-pluginManagement {
-    repositories {
-        gradlePluginPortal()
-        mavenCentral()
-        mavenLocal()
-        maven { url = uri("https://repo.spring.io/milestone") }
+package br.tech.desiderati.sample.graphql
 
-        maven {
-            url = uri("https://maven.pkg.github.com/desiderati/springbloom")
-            credentials {
-                username = "$github_user"
-                password = "$github_token"
-            }
-        }
-    }
-}
+import dev.springbloom.core.exception.ApplicationException
+import java.io.Serializable
 
-rootProject.name = 'sample-user-management-server'
+@Suppress("unused")
+class SampleGraphQLException(
+    message: String,
+    vararg args: Serializable
+) : ApplicationException(message, args)

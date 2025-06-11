@@ -1,3 +1,5 @@
+#!/bin/bash
+
 #
 # Copyright (c) 2025 - Felipe Desiderati
 #
@@ -17,18 +19,8 @@
 # SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
-kapt.include.compile.classpath=false
-
-# Access to the remote repositories.
-github_user=<Enter Your User>
-github_token=<Enter Your Password>
-nexus_user=<Enter Your User>
-nexus_password=<Enter Your Password>
-
-# Ensure that the Liquibase Gradle Tasks will be prefixed.
-liquibaseTaskPrefix=liquibase
-
-# Uncomment when starting to use Sonarqube.
-#systemProp.sonar.host.url=
-#systemProp.sonar.login=
-#systemProp.sonar.projectKey=p2f-sample-graphql
+./gradlew downloadApolloSchema \
+  --endpoint="http://localhost:9090/sample-graphql/graphql" \
+  --schema="src/test/resources/graphql/schema.json"
+  # There is no need to inform the JWT token when executed locally.
+  # --header="Authorization: Bearer $TOKEN"

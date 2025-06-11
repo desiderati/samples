@@ -17,21 +17,35 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-pluginManagement {
-    repositories {
-        gradlePluginPortal()
-        mavenCentral()
-        mavenLocal()
-        maven { url = uri("https://repo.spring.io/milestone") }
+package br.tech.desiderati.sample.graphql.domain
 
-        maven {
-            url = uri("https://maven.pkg.github.com/desiderati/springbloom")
-            credentials {
-                username = "$github_user"
-                password = "$github_token"
-            }
-        }
+import arrow.core.*
+import au.com.console.kassava.kotlinEquals
+import au.com.console.kassava.kotlinHashCode
+import au.com.console.kassava.kotlinToString
+import dev.springbloom.core.validation.*
+
+data class TestObject(
+    var name: String,
+    val cellphone: String
+) : TypedValidationEntity {
+
+    companion object {
+        private val equalsAndHashCodeProperties = arrayOf(TestObject::name)
+        private val toStringProperties = arrayOf(TestObject::name)
     }
-}
 
-rootProject.name = 'sample-user-management-server'
+    override fun isValid(): Either<TypedValidationException, Unit> =
+        ensure {
+            all(
+                { isValid(name == "Test") { "TestObject.invalidName" } },
+                { isValid(name.length == 4) { "TestObject.invalidNameLength" } }
+            )
+        }
+
+    override fun equals(other: Any?) = kotlinEquals(other, equalsAndHashCodeProperties)
+
+    override fun hashCode() = kotlinHashCode(equalsAndHashCodeProperties)
+
+    override fun toString() = kotlinToString(toStringProperties)
+}

@@ -17,21 +17,11 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-pluginManagement {
-    repositories {
-        gradlePluginPortal()
-        mavenCentral()
-        mavenLocal()
-        maven { url = uri("https://repo.spring.io/milestone") }
+package br.tech.desiderati.sample.graphql.domain.credentials
 
-        maven {
-            url = uri("https://maven.pkg.github.com/desiderati/springbloom")
-            credentials {
-                username = "$github_user"
-                password = "$github_token"
-            }
-        }
-    }
-}
+import org.springframework.security.access.prepost.PreAuthorize
 
-rootProject.name = 'sample-user-management-server'
+@Target(AnnotationTarget.FUNCTION, AnnotationTarget.CLASS)
+@Retention(AnnotationRetention.RUNTIME)
+@PreAuthorize("isAdministrator()")
+annotation class IsAdministrator

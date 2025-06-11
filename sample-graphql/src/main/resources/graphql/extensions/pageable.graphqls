@@ -1,0 +1,20 @@
+input PageableInput {
+    pageNumber: Int = 0
+    pageSize: Int = 25
+    sort: PageableSortInput
+}
+
+input PageableSortInput {
+    direction: String = "ASC"
+    properties: [String!]! = ["id"]
+}
+
+type Pageable {
+    totalElements: Int!
+    totalPages: Int!
+    content: [Void!]!
+}
+
+directive @content(
+    for: String!
+) on FIELD_DEFINITION

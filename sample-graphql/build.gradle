@@ -17,12 +17,8 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import java.text.SimpleDateFormat
-
 buildscript {
     ext {
-        buildTimestamp = new SimpleDateFormat("yyyyMMdd-HHmmss").format(new Date())
-
         // Only change to Kotlin version 1.6.0 and above if the bug below has been fixed!
         // https://github.com/mapstruct/mapstruct/discussions/3030 -> FIXED! Kept for documentation purposes.
         kotlin_version = "2.0.0"
@@ -30,31 +26,13 @@ buildscript {
         // Do not change the versions below without absolute certainty!!!
         apollo_version = "4.1.1"
         graphql_java_version = "21.0"
-        hamkrest_version = "1.8.0.1"
-        html_unit_version = "4.10.0"
-        jacoco_version = "0.8.13"
-        jupiter_version = "5.10.3"
-        okhttp3_mock_webserver_version = "4.12.0"
         kassava_version = "2.1.0"
-        liquibase_version = "4.29.2"
-        lombok_version = "1.18.34"
-        lombok_mapstruct_binding_version = "0.2.0"
         mapstruct_version = "1.5.5.Final"
-        picocli_version = "4.7.6"
-        posgtresql_driver_version = "42.7.3"
-        spek_version = "2.0.19"
         springbloom_version = "4.0.0.RC8"
         spring_boot_version = "3.3.1"
-        test_containers_version = "1.20.0"
 
         // Defines the suffix for the Spring Boot executable JAR.
         exec_jar_classifier = "exec"
-    }
-
-    // The Liquibase plugin will need to be able to find Liquibase on the classpath when it is applied,
-    // and again when it runs a task. At apply time, the plugin only needs to be able to see Liquibase itself.
-    dependencies {
-        classpath "org.liquibase:liquibase-core:$liquibase_version"
     }
 }
 
@@ -64,7 +42,6 @@ plugins {
     id "idea"
 
     id "java"
-    id "jacoco"
     id "maven-publish"
 
     // Adds support for Kotlin.
@@ -77,36 +54,12 @@ plugins {
     // Ref.: https://kotlinlang.org/docs/all-open-plugin.html#spring-support
     id "org.jetbrains.kotlin.plugin.spring" version "$kotlin_version"
 
-    // Ensures that all classes marked with JPA annotations will be open and will have
-    // the default empty constructor defined.
-    // Ref.: https://kotlinlang.org/docs/no-arg-plugin.html#jpa-support
-    id "org.jetbrains.kotlin.plugin.jpa" version "$kotlin_version"
-
-    // Lombok support added only after Kotlin version 1.5.20!
-    id "org.jetbrains.kotlin.plugin.lombok" version "$kotlin_version"
-
-    // FIXME Felipe Desiderati: Supposedly this Plugin should be sufficient for Lombok to work.
-    //  That is, it would automatically add the necessary Annotation Processors.
-    //  Since it's not doing that, we manually add the Annotation Processors.
-    //  Ref.: https://docs.freefair.io/gradle-plugins/8.6/reference/#_io_freefair_lombok
-    id "io.freefair.lombok" version "8.13"
-
     id "org.jmailen.kotlinter" version "5.0.1"
-    id "com.adarshr.test-logger" version "4.0.0"
     id "org.springframework.boot" version "$spring_boot_version"
     id "io.spring.dependency-management" version "1.1.7"
 
     // TODO Felipe Desiderati: Uncomment when using SonarQube.
     // id "org.sonarqube" version "6.0.1.5171"
-
-    // Support for integration tests.
-    id "com.netflix.nebula.integtest" version "11.0.0"
-
-    // We are using this plugin to extract the database structure
-    // to be used during tests.
-    // Ref.: https://github.com/liquibase/liquibase-gradle-plugin/blob/master/doc/usage.md
-    // Ref.: https://github.com/stevesaliman/liquibase-workshop/blob/master/build.gradle
-    id "org.liquibase.gradle" version "3.0.2"
 
     // The Apollo Gradle Plugin is used here, only to generate the `schema.json` file,
     // which will be used by the Frontend client.
@@ -135,7 +88,7 @@ repositories {
     }
 }
 
-group = "br.tech.desiderati.sample.user_management"
+group = "br.tech.desiderati.sample.graphql"
 version = "0.0.1-SNAPSHOT"
 
 idea {
@@ -148,17 +101,9 @@ java {
     withSourcesJar()
 }
 
-allOpen {
-    annotations(
-        "jakarta.persistence.Entity",
-        "jakarta.persistence.Embeddable",
-        "jakarta.persistence.MappedSuperclass"
-    )
-}
-
 apollo {
-    service("SampleUserMgmt") {
-        packageName.set("br.tech.desiderati.sample.user_management.graphql")
+    service("SampleGraphQL") {
+        packageName.set("br.tech.desiderati.sample.graphql")
         srcDir("src/main/resources/graphql")
 
         // TODO Felipe Desiderati: Access to files inside JARs should work.
@@ -175,10 +120,6 @@ kapt {
     // By default, kapt runs all annotation processors and disables annotation processing by javac.
     // However, you may need some of javac's annotation processors working (for example, Lombok).
     keepJavacAnnotationProcessors = true
-}
-
-kotlinLombok {
-    lombokConfigurationFile(file("lombok.config"))
 }
 
 kotlinter {
@@ -208,82 +149,6 @@ compileKotlin {
     }
 }
 
-liquibase {
-    activities {
-        // Task: liquibaseGenerateChangelog
-        // Modify these settings according to the need to test the desired repositories.
-        extract_database_for_testing {
-            logLevel "debug"
-            url "jdbc:postgresql://localhost:5432/test"
-            driver "org.postgresql.Driver"
-            username "test"
-            password "test"
-            author "Thin-Layer Tester"
-            changelogFile "src/test/resources/db/changelog/$buildTimestamp-initial-schema.xml"
-            overwriteOutputFile "true"
-            includeObjects "table:sampl_.*,sequence:sampl_.*"
-        }
-    }
-    // Uncomment when generating the ChangeLog.
-    //runList = 'extract_database_for_testing'
-}
-
-jacoco {
-    toolVersion = jacoco_version
-}
-
-jacocoTestReport {
-    dependsOn test, integrationTest
-    reports {
-        html.required = true
-        csv.required = false
-        xml.required = true
-    }
-}
-
-jacocoTestCoverageVerification {
-    dependsOn jacocoTestReport
-    executionData fileTree(
-        dir: layout.buildDirectory.dir("jacoco").get().asFile,
-        includes: [
-            "test.exec",
-            "integrationTest.exec"
-        ]
-    )
-    sourceSets sourceSets.main
-}
-
-// Force that Jacoco rules are enforced.
-check.dependsOn jacocoTestCoverageVerification
-
-test {
-    useJUnitPlatform {
-        includeEngines("junit-jupiter", "spek2")
-    }
-    jvmArgs("--add-opens", "java.base/java.lang=ALL-UNNAMED")
-
-    // After completing the test execution, the report is generated based on coverage data.
-    finalizedBy jacocoTestReport
-}
-
-testlogger {
-    theme = "plain-parallel"
-    showExceptions = true
-    showStackTraces = true
-    showFullStackTraces = false
-    showCauses = true
-    slowThreshold = 1000
-    showSummary = true
-    showSimpleNames = false
-    showPassed = true
-    showSkipped = true
-    showFailed = true
-    showStandardStreams = false
-    showPassedStandardStreams = true
-    showSkippedStandardStreams = true
-    showFailedStandardStreams = true
-    logLevel = "lifecycle"
-}
 
 jar {
     // To prevent generating a JAR containing ONLY the classes of this library.
@@ -331,13 +196,6 @@ dependencies {
     kapt "org.springframework.boot:spring-boot-configuration-processor"
     kapt "org.mapstruct:mapstruct-processor:$mapstruct_version"
 
-    // FIXME Felipe Desiderati: Supposedly the "io.freefair.lombok" Plugin should be sufficient for
-    //  Lombok to work. That is, it would automatically add the necessary Annotation Processors.
-    //  Since it's not doing that, we manually add the Annotation Processors.
-    //  Remove the two lines below when the Plugin works correctly.
-    kapt "org.projectlombok:lombok:$lombok_version"
-    kapt "org.projectlombok:lombok-mapstruct-binding:$lombok_mapstruct_binding_version"
-
     // Since Lombok (after numerous configuration attempts) did not work, we chose to use this approach.
     // Ref.: https://github.com/consoleau/kassava
     implementation "au.com.console:kassava:$kassava_version"
@@ -346,7 +204,6 @@ dependencies {
     runtimeOnly "org.springframework.boot:spring-boot-devtools"
     implementation "org.springframework.boot:spring-boot-starter-undertow"
     implementation "org.springframework.boot:spring-boot-starter-actuator"
-    implementation "org.springframework.boot:spring-boot-starter-oauth2-client"
     implementation "org.springframework.boot:spring-boot-starter-oauth2-resource-server"
     implementation "org.springframework.boot:spring-boot-starter-webflux"
 
@@ -357,46 +214,4 @@ dependencies {
     // These libraries will insert all other dependencies necessary for application execution.
     implementation "dev.springbloom:springbloom-web-security:$springbloom_version"
     kapt "dev.springbloom:springbloom-web-security:$springbloom_version"
-
-    // Database support.
-    runtimeOnly "org.postgresql:postgresql:$posgtresql_driver_version"
-
-    //
-    // Dependencies for using Liquibase.
-    liquibaseRuntime "org.liquibase:liquibase-core:$liquibase_version"
-    liquibaseRuntime "info.picocli:picocli:$picocli_version"
-
-    // Necessary to make a comparison between Hibernate entities and the database.
-    liquibaseRuntime "org.liquibase.ext:liquibase-hibernate6:$liquibase_version"
-    liquibaseRuntime sourceSets.main.runtimeClasspath
-
-    //
-    // Dependencies for tests.
-    testImplementation "dev.springbloom:springbloom-test:$springbloom_version"
-
-    // JUnit Jupiter
-    testImplementation "org.junit.jupiter:junit-jupiter:$jupiter_version"
-    testRuntimeOnly "org.junit.platform:junit-platform-launcher"
-
-    // Spring Boot Test + Test Containers
-    testImplementation "org.springframework.boot:spring-boot-starter-test"
-    testImplementation "org.springframework.security:spring-security-test"
-    testImplementation "org.testcontainers:testcontainers:$test_containers_version"
-    testImplementation "org.testcontainers:postgresql:$test_containers_version"
-    testImplementation "org.testcontainers:localstack:$test_containers_version"
-    testImplementation "org.testcontainers:mongodb:$test_containers_version"
-    testImplementation "org.testcontainers:junit-jupiter:$test_containers_version"
-    testImplementation "com.squareup.okhttp3:mockwebserver:$okhttp3_mock_webserver_version"
-
-    // Spek DSL.
-    // Ref.: https://github.com/npryce/hamkrest
-    testImplementation "com.natpryce:hamkrest:$hamkrest_version"
-    testImplementation "org.spekframework.spek2:spek-dsl-jvm:$spek_version"
-    testRuntimeOnly "org.spekframework.spek2:spek-runner-junit5:$spek_version"
-
-    // Spek requires kotlin-reflect, can be omitted if already in the classpath.
-    testRuntimeOnly "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
-
-    // Support for integration tests.
-    integTestImplementation "org.htmlunit:htmlunit:$html_unit_version"
 }

@@ -1,0 +1,9 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="sample-graphql" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" folderName="🌱 samples">
+    <module name="sample-graphql.main" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="br.tech.desiderati.sample.graphql.SampleGraphQLApplication" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

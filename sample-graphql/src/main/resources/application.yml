@@ -1,0 +1,66 @@
+server:
+  servlet:
+    # The "context-path" setting applies to the entire application.
+    # The "api-base-path" setting applies only to REST APIs.
+    context-path: /sample-graphql
+
+app:
+  # All REST APIs will use the prefix below.
+  # REST APIs include all classes annotated with @RestController.
+  # The Login Endpoint is not part of the REST API.
+  api-base-path: /api
+
+management:
+  endpoints:
+    web:
+      base-path: /actuator
+
+logging:
+  level:
+    # Prevents an error log from being generated when the application is not running inside GCP.
+    # This log is a false positive when running locally.
+    com.google.cloud.spring.core.DefaultCredentialsProvider: ERROR
+
+spring:
+  application:
+    name: sample-graphql
+  main:
+    allow-bean-definition-overriding: true
+  graphql:
+    altair:
+      # Enable locally – or in DEV – to test GraphQL queries.
+      enabled: true
+      basePath: /sample-graphql/
+      options:
+        endpoint-url: /graphql
+    aliased-scalars:
+      BigDecimal: Number
+    extended-scalars: BigDecimal, Date, DateTime, JSON
+    schema:
+      locations: classpath:graphql/**/
+    security:
+      # Marked as unauthenticated to allow access to Voyager and Schema Download without requiring authentication.
+      # However, using the application still requires the Authorization header,
+      # even when authentication is disabled locally.
+      enabled: false
+    voyager:
+      # Enable locally – or in DEV – to visualize the GraphQL schema.
+      enabled: true
+      endpoint: /graphql
+      basePath: /sample-graphql/
+      displayOptions:
+        rootType: Query
+  mvc:
+    async:
+      # Defines whether to expose [LocaleContext] and [RequestAttributes] as inheritable
+      # for child threads using [InheritableThreadLocal].
+      context-propagation-mode: NON_INHERITABLE
+      delegate-security-context: true
+      request-timeout: 30s
+  web:
+    security:
+      jwt:
+        authentication:
+          enabled: false
+        authorization:
+          enabled: false

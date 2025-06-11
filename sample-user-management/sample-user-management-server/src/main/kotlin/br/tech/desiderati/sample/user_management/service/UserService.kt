@@ -46,7 +46,7 @@ class UserService(
             throw SampleUserMgmtException("user.loginAlreadyExists", user.login)
         }
 
-        // TODO Felipe Desiderati: See UserService_README.md for further information.
+        // TODO Felipe Desiderati: See README.md for further information.
         return userRepository.save(user)
     }
 

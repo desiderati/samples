@@ -1,0 +1,13 @@
+scalar BigDecimal
+scalar Date
+scalar DateTime
+scalar JSON
+scalar Number
+
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+type Query
+type Mutation

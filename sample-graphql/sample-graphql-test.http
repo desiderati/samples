@@ -1,5 +1,5 @@
 ### Verify if the user is authenticated and is the administrator
-GRAPHQL http://localhost:9090/sample-user-management-server/graphql
+GRAPHQL http://localhost:9090/sample-graphql/graphql
 Authorization: Bearer eyJhbGciOiJSUzUxMiJ9.eyJzdWIiOiJBZG1pbmlzdHJhdG9yIiwiYXV0aG9yaXRpZXMiOlsiQURNSU5JU1RSQVRPUl9DUkVERU5USUFMIl0sImV4cCI6MTc0MjM5NTExNn0.Nn2UrkJBfPAukGCiqn6aubvweqS6F506CnFWo-5BruQhcdlSQzYNi0j4qBERFbPtoLY9QwLQI2sg_ZwD9Dkxfuric8coNDCtaEKj9_-BJ2RKo7Hp_FNAF_5-nvLqv1PFD2Cu9V1iZADJ0VQvTCe4XHffTqOCcX_Rvm5jQyGQMsDH5YAmDjgClfC2Ky3JsRjnk-xFn61DpMCJsQfKCPfYhxkzc8RlI4nGArlq4cVTMGBKOBpHDS-Yv5_GRShyA-VNlBizMX5Ue8ANx23z-9n45ERrcPLFLZyHjFbFqaEobcXS0A610DN5ShVAz0zFrIoFG0hsIiP41AtcuDzD7dZknH5_7BhNRAuY6t8kx91m79bmH5Y6ULKVlwk6Xhn3gwzM6A6s96IPv6fhFgxkgxSxfy3ehON4F6tTdFP-xNbbpF3taG8K1DYJg5eGWmtVCGzr5GYINiZ0wNAT_Mj-37rMpx3eTAr-qS4IssdtxLov2tYmD5CsDL9teVEgqUO-xiK87NcXKnxSaEuYb41S7Qbb6IJKExy66mUux_4gRLHSk_eGdNFmyIHZ0IE5_jwa0xlbfM1nERhdV2Xg7G4vmWI6eaiWzUT6nEsNUHVVZcY3GEQIeeIzof7ldBFWCQoI1HW120FoxhuFKKofgRbkhs_CpD6Uc69WQbSCsc6ZlavqHlw
 
 query isAdministrator {
@@ -9,7 +9,7 @@ query isAdministrator {
 ## ################################################################################################################# ##
 
 ### Retrieve Internationalized Message (Bloqueante)
-GRAPHQL http://localhost:9090/sample-user-management-server/graphql
+GRAPHQL http://localhost:9090/sample-graphql/graphql
 Accept-Language: pt-BR,pt;q=0.5
 Authorization: Bearer eyJhbGciOiJSUzUxMiJ9.eyJzdWIiOiJBZG1pbmlzdHJhdG9yIiwiYXV0aG9yaXRpZXMiOlsiQURNSU5JU1RSQVRPUl9DUkVERU5USUFMIl0sImV4cCI6MTc0MjM5NTExNn0.Nn2UrkJBfPAukGCiqn6aubvweqS6F506CnFWo-5BruQhcdlSQzYNi0j4qBERFbPtoLY9QwLQI2sg_ZwD9Dkxfuric8coNDCtaEKj9_-BJ2RKo7Hp_FNAF_5-nvLqv1PFD2Cu9V1iZADJ0VQvTCe4XHffTqOCcX_Rvm5jQyGQMsDH5YAmDjgClfC2Ky3JsRjnk-xFn61DpMCJsQfKCPfYhxkzc8RlI4nGArlq4cVTMGBKOBpHDS-Yv5_GRShyA-VNlBizMX5Ue8ANx23z-9n45ERrcPLFLZyHjFbFqaEobcXS0A610DN5ShVAz0zFrIoFG0hsIiP41AtcuDzD7dZknH5_7BhNRAuY6t8kx91m79bmH5Y6ULKVlwk6Xhn3gwzM6A6s96IPv6fhFgxkgxSxfy3ehON4F6tTdFP-xNbbpF3taG8K1DYJg5eGWmtVCGzr5GYINiZ0wNAT_Mj-37rMpx3eTAr-qS4IssdtxLov2tYmD5CsDL9teVEgqUO-xiK87NcXKnxSaEuYb41S7Qbb6IJKExy66mUux_4gRLHSk_eGdNFmyIHZ0IE5_jwa0xlbfM1nERhdV2Xg7G4vmWI6eaiWzUT6nEsNUHVVZcY3GEQIeeIzof7ldBFWCQoI1HW120FoxhuFKKofgRbkhs_CpD6Uc69WQbSCsc6ZlavqHlw
 
@@ -18,7 +18,7 @@ query getAuthenticatedUsernameIfPresent {
 }
 
 ### Retrieve Internationalized Message (Bloqueante)
-GRAPHQL http://localhost:9090/sample-user-management-server/graphql
+GRAPHQL http://localhost:9090/sample-graphql/graphql
 Accept-Language: pt-BR,pt;q=0.5
 
 query getInternationalizedMessage($messageId: String!) {
@@ -30,7 +30,7 @@ query getInternationalizedMessage($messageId: String!) {
 }
 
 ### Retrieve Internationalized Message (Simple Suspended)
-GRAPHQL http://localhost:9090/sample-user-management-server/graphql
+GRAPHQL http://localhost:9090/sample-graphql/graphql
 Accept-Language: pt-BR,pt;q=0.5
 
 query getSimpleSuspendInternationalizedMessage($messageId: String!) {
@@ -42,7 +42,7 @@ query getSimpleSuspendInternationalizedMessage($messageId: String!) {
 }
 
 ### Retrieve Internationalized Message (Nested Suspended)
-GRAPHQL http://localhost:9090/sample-user-management-server/graphql
+GRAPHQL http://localhost:9090/sample-graphql/graphql
 Accept-Language: pt-BR,pt;q=0.5
 
 query getNestedSuspendInternationalizedMessage($messageId: String!) {
@@ -54,7 +54,7 @@ query getNestedSuspendInternationalizedMessage($messageId: String!) {
 }
 
 ### Retrieve Internationalized Message (Async)
-GRAPHQL http://localhost:9090/sample-user-management-server/graphql
+GRAPHQL http://localhost:9090/sample-graphql/graphql
 Accept-Language: pt-BR,pt;q=0.5
 
 query getAsyncInternationalizedMessage($messageId: String!) {
@@ -66,7 +66,7 @@ query getAsyncInternationalizedMessage($messageId: String!) {
 }
 
 ### Retrieve Paginated Response
-GRAPHQL http://localhost:9090/sample-user-management-server/graphql
+GRAPHQL http://localhost:9090/sample-graphql/graphql
 
 query getPaginatedResponse {
     getPaginatedResponse {
@@ -79,28 +79,28 @@ query getPaginatedResponse {
 ## ################################################################################################################# ##
 
 ### Throw Exception
-GRAPHQL http://localhost:9090/sample-user-management-server/graphql
+GRAPHQL http://localhost:9090/sample-graphql/graphql
 
 query throwException {
     throwException
 }
 
 ### Throw Throwable
-GRAPHQL http://localhost:9090/sample-user-management-server/graphql
+GRAPHQL http://localhost:9090/sample-graphql/graphql
 
 query throwThrowable {
     throwThrowable
 }
 
 ### Throw Application Exception
-GRAPHQL http://localhost:9090/sample-user-management-server/graphql
+GRAPHQL http://localhost:9090/sample-graphql/graphql
 
 query throwApplicationException {
     throwApplicationException
 }
 
 ### Throw Undeclared Throwable Exception
-GRAPHQL http://localhost:9090/sample-user-management-server/graphql
+GRAPHQL http://localhost:9090/sample-graphql/graphql
 
 query throwUndeclaredThrowableException {
     throwUndeclaredThrowableException
@@ -109,7 +109,7 @@ query throwUndeclaredThrowableException {
 ## ################################################################################################################# ##
 
 ### Create test object without validation
-GRAPHQL http://localhost:9090/sample-user-management-server/graphql
+GRAPHQL http://localhost:9090/sample-graphql/graphql
 
 mutation createTestObjectWithoutValidation($testObject: TestObjectInput!) {
     createTestObjectWithoutValidation(testObject: $testObject) {
@@ -126,7 +126,7 @@ mutation createTestObjectWithoutValidation($testObject: TestObjectInput!) {
 }
 
 ### Test if typed validation on input was called automatically
-GRAPHQL http://localhost:9090/sample-user-management-server/graphql
+GRAPHQL http://localhost:9090/sample-graphql/graphql
 
 mutation validateInputTestObject($testObject: TestObjectInput!) {
     validateInputTestObject(testObject: $testObject) {
@@ -141,7 +141,7 @@ mutation validateInputTestObject($testObject: TestObjectInput!) {
 }
 
 ### Test if typed validation on return was called automatically
-GRAPHQL http://localhost:9090/sample-user-management-server/graphql
+GRAPHQL http://localhost:9090/sample-graphql/graphql
 
 mutation validateInputAndReturnTestObject($testObject: TestObjectInput!) {
     validateInputAndReturnTestObject(testObject: $testObject) {

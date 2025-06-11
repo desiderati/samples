@@ -17,21 +17,26 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-pluginManagement {
-    repositories {
-        gradlePluginPortal()
-        mavenCentral()
-        mavenLocal()
-        maven { url = uri("https://repo.spring.io/milestone") }
+package br.tech.desiderati.sample.graphql.service
 
-        maven {
-            url = uri("https://maven.pkg.github.com/desiderati/springbloom")
-            credentials {
-                username = "$github_user"
-                password = "$github_token"
-            }
+import br.tech.desiderati.sample.graphql.domain.TestObject
+import dev.springbloom.core.validation.TypedValidated
+import org.springframework.stereotype.Service
+
+@Service
+@TypedValidated
+class TestService {
+
+    fun createTestObjectWithoutValidation(testObject: TestObject): TestObject = testObject
+
+    fun validateInputTestObject(
+        @TypedValidated testObject: TestObject
+    ): TestObject = testObject
+
+    fun validateInputAndReturnTestObject(
+        @TypedValidated testObject: TestObject
+    ): @TypedValidated TestObject =
+        testObject.apply {
+            name = ""
         }
-    }
 }
-
-rootProject.name = 'sample-user-management-server'

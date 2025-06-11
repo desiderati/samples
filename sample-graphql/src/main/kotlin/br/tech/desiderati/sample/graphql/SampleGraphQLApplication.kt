@@ -17,26 +17,14 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package br.tech.desiderati.sample.user_management.service
+package br.tech.desiderati.sample.graphql
 
-import br.tech.desiderati.sample.user_management.domain.TestObject
-import dev.springbloom.core.validation.TypedValidated
-import org.springframework.stereotype.Service
+import org.springframework.boot.autoconfigure.SpringBootApplication
+import org.springframework.boot.runApplication
 
-@Service
-@TypedValidated
-class TestService {
+@SpringBootApplication
+class SampleGraphQLApplication
 
-    fun createTestObjectWithoutValidation(testObject: TestObject): TestObject = testObject
-
-    fun validateInputTestObject(
-        @TypedValidated testObject: TestObject
-    ): TestObject = testObject
-
-    fun validateInputAndReturnTestObject(
-        @TypedValidated testObject: TestObject
-    ): @TypedValidated TestObject =
-        testObject.apply {
-            name = ""
-        }
+fun main(args: Array<String>) {
+    runApplication<SampleGraphQLApplication>(*args)
 }
