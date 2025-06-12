@@ -71,7 +71,7 @@ export class AppComponent {
             {
                 logLevel: 'debug',
                 logFunction: AppComponent.printErrorMessage
-            }
+            } as any
         ).subscribe({
             next: AppComponent.printMessage,
             error: AppComponent.printErrorMessage
