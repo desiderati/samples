@@ -20,8 +20,8 @@
 import {Component, ViewChild} from '@angular/core';
 import {FormsModule, NgForm} from '@angular/forms';
 
-import {Notification} from './notification';
-import {AtmosphereService} from './atmosphere.service';
+import {Notification} from '@desiderati/atmosphere';
+import {AtmosphereService} from '@desiderati/atmosphere';
 
 import {environment} from '../environments/environment';
 
@@ -55,12 +55,14 @@ export class AppComponent {
 
     static printMessage(message: string) {
         $('#notificationContainer').show();
-        $('<div/>', {class: 'alert alert-success'}).text(message).appendTo('#notificationBoard');
+        $('<div/>', {class: 'alert alert-success'}).text(message)
+            .appendTo('#notificationBoard');
     }
 
     static printErrorMessage(message: string) {
         $('#notificationContainer').show();
-        $('<div/>', {class: 'alert alert-warning'}).text(message).appendTo('#notificationBoard');
+        $('<div/>', {class: 'alert alert-warning'}).text(message)
+            .appendTo('#notificationBoard');
     }
 
     initialize() {

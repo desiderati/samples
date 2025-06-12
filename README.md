@@ -1,4 +1,4 @@
-# Samples
+# Desiderati Samples
 
 This repository contains various sample projects showcasing different technologies and implementations.
 
@@ -15,3 +15,11 @@ The following submodules are part of this repository:
 - [sample-user-management](./sample-user-management) - Sample project demonstrating user management functionality
 
 Each submodule contains its own implementation and documentation.
+
+## Author
+
+Felipe Desiderati <felipedesiderati@springbloom.dev> (https://github.com/desiderati)
+
+## [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
