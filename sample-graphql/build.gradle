@@ -204,7 +204,7 @@ dependencies {
     runtimeOnly "org.springframework.boot:spring-boot-devtools"
     implementation "org.springframework.boot:spring-boot-starter-undertow"
     implementation "org.springframework.boot:spring-boot-starter-actuator"
-    implementation "org.springframework.boot:spring-boot-starter-oauth2-resource-server"
+    //implementation "org.springframework.boot:spring-boot-starter-oauth2-resource-server"
     implementation "org.springframework.boot:spring-boot-starter-webflux"
 
     // We need to force the GraphQL Java version, otherwise it will use a newer version

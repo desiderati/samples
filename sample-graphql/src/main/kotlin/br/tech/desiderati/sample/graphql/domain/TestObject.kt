@@ -27,7 +27,7 @@ import dev.springbloom.core.validation.*
 
 data class TestObject(
     var name: String,
-    val cellphone: String
+    val cellphone: String?
 ) : TypedValidationEntity {
 
     companion object {

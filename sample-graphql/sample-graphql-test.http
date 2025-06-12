@@ -26,7 +26,7 @@ query getInternationalizedMessage($messageId: String!) {
 }
 
 {
-  "messageId": "processDefinition.alias.notBlank"
+  "messageId": "testObject.withNullId"
 }
 
 ### Retrieve Internationalized Message (Simple Suspended)
@@ -38,7 +38,7 @@ query getSimpleSuspendInternationalizedMessage($messageId: String!) {
 }
 
 {
-  "messageId": "processDefinition.alias.notBlank"
+  "messageId": "testObject.withNullId"
 }
 
 ### Retrieve Internationalized Message (Nested Suspended)
@@ -50,7 +50,7 @@ query getNestedSuspendInternationalizedMessage($messageId: String!) {
 }
 
 {
-  "messageId": "processDefinition.alias.notBlank"
+  "messageId": "testObject.withNullId"
 }
 
 ### Retrieve Internationalized Message (Async)
@@ -62,7 +62,7 @@ query getAsyncInternationalizedMessage($messageId: String!) {
 }
 
 {
-  "messageId": "processDefinition.alias.notBlank"
+  "messageId": "testObject.withNullId"
 }
 
 ### Retrieve Paginated Response

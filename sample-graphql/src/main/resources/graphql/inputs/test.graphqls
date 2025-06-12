@@ -1,4 +1,4 @@
 input TestObjectInput {
     name: String!
-    cellphone: String!
+    cellphone: String
 }
