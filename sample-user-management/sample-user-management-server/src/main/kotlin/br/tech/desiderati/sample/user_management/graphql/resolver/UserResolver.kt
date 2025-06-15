@@ -26,7 +26,7 @@ import br.tech.desiderati.sample.user_management.domain.credentials.IsAdministra
 import br.tech.desiderati.sample.user_management.graphql.input.UserInput
 import br.tech.desiderati.sample.user_management.graphql.mapper.UserMapper
 import br.tech.desiderati.sample.user_management.service.UserService
-import dev.springbloom.web.security.support.AuthenticatedUsername
+import dev.springbloom.web.security.AuthenticatedUsername
 import jakarta.validation.Valid
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageImpl

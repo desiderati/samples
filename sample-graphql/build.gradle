@@ -28,7 +28,7 @@ buildscript {
         graphql_java_version = "21.0"
         kassava_version = "2.1.0"
         mapstruct_version = "1.5.5.Final"
-        springbloom_version = "4.0.0.RC8"
+        springbloom_version = "4.0.0.RC9"
         spring_boot_version = "3.3.1"
 
         // Defines the suffix for the Spring Boot executable JAR.
@@ -204,7 +204,7 @@ dependencies {
     runtimeOnly "org.springframework.boot:spring-boot-devtools"
     implementation "org.springframework.boot:spring-boot-starter-undertow"
     implementation "org.springframework.boot:spring-boot-starter-actuator"
-    //implementation "org.springframework.boot:spring-boot-starter-oauth2-resource-server"
+    implementation "org.springframework.boot:spring-boot-starter-oauth2-resource-server"
     implementation "org.springframework.boot:spring-boot-starter-webflux"
 
     // We need to force the GraphQL Java version, otherwise it will use a newer version

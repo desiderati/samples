@@ -21,7 +21,7 @@ package br.tech.desiderati.sample.user_management.graphql.resolver
 
 import br.tech.desiderati.sample.user_management.domain.Group
 import br.tech.desiderati.sample.user_management.graphql.projection.Dashboard
-import dev.springbloom.web.security.support.AuthenticatedUsername
+import dev.springbloom.web.security.AuthenticatedUsername
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.graphql.data.method.annotation.QueryMapping

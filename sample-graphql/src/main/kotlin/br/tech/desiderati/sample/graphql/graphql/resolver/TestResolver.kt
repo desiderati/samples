@@ -20,14 +20,14 @@
 package br.tech.desiderati.sample.graphql.graphql.resolver
 
 import br.tech.desiderati.sample.graphql.domain.TestObject
-import br.tech.desiderati.sample.graphql.domain.credentials.IsAdministrator
 import br.tech.desiderati.sample.graphql.service.TestService
 import dev.springbloom.core.exception.ApplicationException
 import dev.springbloom.web.configuration.MessageSourceContextHolder
 import dev.springbloom.web.configuration.async.launchWithContextPropagation
 import dev.springbloom.web.configuration.async.supplyAsyncWithContext
 import dev.springbloom.web.configuration.async.withContextPropagation
-import dev.springbloom.web.security.support.AuthenticatedUsername
+import dev.springbloom.web.security.IsAdministrator
+import dev.springbloom.web.security.AuthenticatedUsername
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import org.springframework.context.i18n.LocaleContextHolder

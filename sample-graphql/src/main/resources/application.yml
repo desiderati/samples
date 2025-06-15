@@ -57,10 +57,21 @@ spring:
       context-propagation-mode: NON_INHERITABLE
       delegate-security-context: true
       request-timeout: 30s
+
+  # Defines the default username/password for basic Spring Security authentication.
+  # This value is used when default authentication is enabled and no custom user has been configured.
+  security:
+    user:
+      name: administrator
+      password: 098e190d-3e10-4eec-aa4c-6c092528b15d
+      # Granted roles for the default username. It automatically prefixes each entry with "ROLE_".
+      roles: ADMINISTRATOR
   web:
     security:
       jwt:
         authentication:
-          enabled: false
+          enabled: true
+          authorities:
+            parameter-administrator: ROLE_ADMINISTRATOR
         authorization:
-          enabled: false
+          enabled: true

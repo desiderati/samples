@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonInclude
 import dev.springbloom.core.validation.constraints.DefaultEmail
 import dev.springbloom.data.jpa.AbstractIdentity
-import dev.springbloom.web.security.support.UserData
+import dev.springbloom.web.security.UserData
 import jakarta.persistence.*
 import jakarta.validation.constraints.NotBlank
 

@@ -43,7 +43,7 @@ buildscript {
         picocli_version = "4.7.6"
         posgtresql_driver_version = "42.7.3"
         spek_version = "2.0.19"
-        springbloom_version = "4.0.0.RC8"
+        springbloom_version = "4.0.0.RC9"
         spring_boot_version = "3.3.1"
         test_containers_version = "1.20.0"
 

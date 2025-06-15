@@ -21,7 +21,7 @@ package br.tech.desiderati.sample.user_management.configuration
 
 import br.tech.desiderati.sample.user_management.domain.User
 import br.tech.desiderati.sample.user_management.service.UserService
-import dev.springbloom.web.security.support.UserDataRetriever
+import dev.springbloom.web.security.UserDataRetriever
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 

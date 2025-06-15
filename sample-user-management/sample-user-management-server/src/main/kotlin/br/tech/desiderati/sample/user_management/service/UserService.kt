@@ -22,7 +22,7 @@ package br.tech.desiderati.sample.user_management.service
 import br.tech.desiderati.sample.user_management.SampleUserMgmtException
 import br.tech.desiderati.sample.user_management.domain.User
 import br.tech.desiderati.sample.user_management.repository.UserRepository
-import dev.springbloom.web.security.support.UserDataRetriever
+import dev.springbloom.web.security.UserDataRetriever
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service

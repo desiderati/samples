@@ -24,7 +24,7 @@
     <parent>
         <groupId>dev.springbloom</groupId>
         <artifactId>springbloom-parent-info</artifactId>
-        <version>4.0.0.RC8</version>
+        <version>4.0.0.RC9</version>
         <relativePath>../springbloom/springbloom-parent-info</relativePath>
     </parent>
     <groupId>br.tech.desiderati</groupId>
